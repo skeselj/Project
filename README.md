@@ -1,3 +1,3 @@
 # COS 333 Project: Mapping Crime
 
-Stefan, Kavin, Eric
+Stefan Keselj, Kavin Sivakumar, Eric He
