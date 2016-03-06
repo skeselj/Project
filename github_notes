@@ -16,6 +16,11 @@ PUSHING
 4. Push
 git push origin [name_of_remote]
 
+FETCHING
+--------
+git fetch origin
+git reset --hard origin/master
+
 
 REMOTES
 -------
