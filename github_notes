@@ -1,8 +1,21 @@
 ***************************************************************************
 *                                                                         *
 * GITHUB NOTES                                                            *
-* Most of these can be found on github, but this might be easier          *
+* Some notes I was using to remember github commands that might           *
+* be of use to others                                                     *
 ***************************************************************************
+
+PUSHING
+-------
+1. Initialize
+   git init
+2. Add
+   git add .
+3. Commit
+   git commit -m "message"
+4. Push
+git push origin [name_of_remote]
+
 
 REMOTES
 -------
