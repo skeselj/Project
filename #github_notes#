@@ -5,14 +5,21 @@
 * be of use to others                                                     *
 ***************************************************************************
 
-COMMITS
--------
+Push changes
+------------
 1. Initialize
    git init
 2. Add
    git add .
-3. Push
+3. Commit
+   git commit -m "message"
+4. Push
 git push origin [name_of_remote]
+
+Update version
+--------------
+git fetch [name_of_remote]
+git merge 
 
 
 REMOTES
@@ -30,5 +37,8 @@ View branches
    git branch
 Change branch
    git checkout -b [name_of_branch]
+Create branch
+   git checkout -b [name_of_branch]
+   git push origin [name_of_branch]
 
 
