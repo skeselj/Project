@@ -1,0 +1,34 @@
+***************************************************************************
+*                                                                         *
+* GITHUB NOTES                                                            *
+* Some notes I was using to remember github commands that might           *
+* be of use to others                                                     *
+***************************************************************************
+
+COMMITS
+-------
+1. Initialize
+   git init
+2. Add
+   git add .
+3. Push
+git push origin [name_of_remote]
+
+
+REMOTES
+-------
+View remotes
+   git remote -v
+Add remote
+   git remote add [name_of_remote] [address_of_remote]
+Remove remote
+   git remote rm [name_of_remote]
+
+BRANCHES
+--------
+View branches
+   git branch
+Change branch
+   git checkout -b [name_of_branch]
+
+
