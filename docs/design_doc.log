@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAR 2016 21:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 MAR 2016 21:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -610,26 +610,96 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--133
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
-[4] [5] (./design_doc.aux) ) 
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 161--163
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--166
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--169
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--180
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 185--189
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--193
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 194--198
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--202
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--214
+
+ []
+
+[6] (./design_doc.aux) ) 
 Here is how much of TeX's memory you used:
  5567 strings out of 493089
  81982 string characters out of 6134842
- 301880 words of memory out of 5000000
+ 300880 words of memory out of 5000000
  8927 multiletter control sequences out of 15000+600000
  68080 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 47i,10n,47p,1283b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips
-/base/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/adobe/utopia/putr8
-a.pfb>
-Output written on design_doc.pdf (5 pages, 475929 bytes).
+ 47i,11n,47p,1283b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/bas
+e/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/adobe/utopia/putr8a.pf
+b>
+Output written on design_doc.pdf (6 pages, 479269 bytes).
 PDF statistics:
- 28 PDF objects out of 1000 (max. 8388607)
- 17 compressed objects within 1 object stream
+ 31 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
