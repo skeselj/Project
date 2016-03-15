@@ -20,6 +20,8 @@
 
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
 
+\usepackage{graphicx}
+
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
@@ -96,7 +98,12 @@ SafeCity will be different from all these attempts in that it will display a lar
 
 \section{Functionality}
 
-The main focus of this application is to connect users with information about crimes happening in their cities. Each of the possible scenarios will be similar: a user will pan and select different areas on the map to the right and then interact with one of three different data representations on the control panel to the left. What differentiates these users is the type of data they will be interacting with, which comes in three forms: graphical, verbal, and quantitative.  
+The main focus of this application is to connect users with information about crimes happening in their cities. Each of the possible scenarios will be similar: a user will pan and select different areas on the map to the right and then interact with one of three different data representations on the control panel to the left. What differentiates these users is the type of data they will be interacting with, which comes in three forms: graphical, verbal, and quantitative.  \\
+
+\begin{figure}[h]
+\includegraphics[width=10cm]{mockup}
+\centering
+\end{figure}
 
 %------------------------------------------------
 
@@ -122,13 +129,26 @@ This user represents the people who are familiar to our site and come to it for 
 
 \section{Design}
 
-%------------------------------------------------
-
-\subsection{Requirements and Target Audiences}
+SafeCity will be implemented as a classic three-tier system, with the data tier (a MariaDB MySQL database with bash update scripts), logic tier (querying through PHP and Python preprocessing modules), and presentation tier (Bootstrap layout, KeenIO charts, and Google Maps API) will all be mutually independent. In general, the user will engage in a small action that prompts our business logic to request crime or user information from the database, which will be processed and then displayed for the user in a responsive format. \\
 
 %------------------------------------------------
 
-\subsubsection{Functionality}
+\subsection{Data}
+
+This is a data driven application, so the data tier is arguably the most essential to its success. These days NoSQL databases like MongoDB are incredibly popular, but we have chosen to keep it simple with MariaDB relational database because we are certain our data will have a simple and uniform structure. There will be two tables: the first will store the type, time, longitude, and latitude of each crime; the second will store the name, username, password (md5 hashed), email, and zip code of each user. We will initialize the crime tables using data dumps of historical data, and then update them every day by scraping the webpages of different police and news stations with bash scripts that use wget or possibly BeautifulSoup. The users table will start out empty but every time a user signs up a row of information will be added. No values in the database will ever be deleted. We are not worried about running out of space because each entry in our databases takes only on the order of 10 bytes.
+
+%------------------------------------------------
+
+\subsection{Logic}
+
+The role of the logic tier is to respond to requests from the presentation tier by retrieving information from the data tier and then process it before giving it to the presentation tier. A crime request will come as four floats: the minimum and maximum longitude and latitude of a rectangular area of the map. Using PHP select requests, we will query the database to find pull all crimes with longitude and latitude between the minimum and maximum (all the crimes in the area). It is not yet clear how we will make this operation quick when the amount of data we have gets very large, but for now we will likely allow the select operation to traverse all the crimes. Once these crimes are obtained, a python script will package them as a list of four-tuples (type, time, lattitude, longitude) and then send it to the presentation layer. A user request will come as a username and password pair. We will again use a PHP select statement to see if there are any users with that username and password and then return a pair to the presentation layer (username, zipcode) if the user exists and nothing otherwise. 
+
+%------------------------------------------------
+
+\subsection{Presentation}
+
+The presentation tier is where the magic happens, our quick and intuitive way of presenting information will be an important differentiator from our competition. The overall layout will be a KeenIO template for an analytics dashboard, which we chose to keep the different sections organized. KeenIO is compatible with Bootstrap (in fact it was implemented with it), which will allow us to use Bootstrap's elegant buttons, search bar, and tables. Most importantly, both Bootstrap and KeenIO are responsive frameworks, so our website can be viewed on screens of different sizes (such as phone screens, our competitors cannot do this). Finally, the driver of the application is the map, which will be a Google Maps window displaying all the crimes given to it by the logic layer. Every time the user enters a new address, pans across the map, or selects a region of it, the maps API will return the center coordinates, length, and width of the current window (we think), which will then be sent to the logic layer in four tuple form for information retrieval.
+
 
 %----------------------------------------------------------------------------------------
 % TIMELINE
@@ -138,11 +158,11 @@ This user represents the people who are familiar to our site and come to it for 
 
 %------------------------------------------------
 
-\subsection{Requirements and Target Audiences}
+\subsection{}
 
 %------------------------------------------------
 
-\subsubsection{Functionality}
+\subsubsection{}
 
 %----------------------------------------------------------------------------------------
 % RISKS AND OUTCOMES
@@ -152,16 +172,16 @@ This user represents the people who are familiar to our site and come to it for 
 
 %------------------------------------------------
 
-\subsection{Requirements and Target Audiences}
+\subsection{}
 
 %------------------------------------------------
 
-\subsubsection{Functionality}
+\subsubsection{}
 
 
 
 
-\section{Rough Drafts}
+\section{Rough Work}
 
 Most users that come to our site will be people who had a spurious interest in the crime data of a particular city or area while surfing the web. These types of users have limited patience and interest in the subject, they need information displayed clearly without effort on their part. This type of user will open up our homepage to find a large map taking up two thirds of the screen zoomed in Manhattan by default, but there will be a search bar on top for navigation. The map will display crimes as basic bubbles color coded by time, and to the left there will be the three simplest ways to summarize the data for the user: a line graph displaying the crimes in the area over time, a pie chart displaying the types of crimes in the area, and a scrollable table containing the most recent crimes in that area. \\
 
