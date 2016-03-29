@@ -1,0 +1,52 @@
+<head>
+  <title>maps</title>
+  <style>
+      #map {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+</head>
+
+<body>
+  <h1>Point Database</h1>
+
+  {{> board}}
+  <div id="map"></div>
+    <script>
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 40.6842763, lng: -74.0127941},
+          zoom: 12
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+</body>
+
+<template name="board">
+	<table>
+		<tr>
+			<th>Longitude</th>
+			<th>Latitude</th>
+		</tr>
+	{{#each point}}
+		<tr>
+			<td class="point">{{long}}</td> 
+			<td class="point">{{lat}}</td>
+		</tr>
+	{{/each}}
+	</table>
+	<input type="button" class="remove" value="Remove Point">
+	{{> addPointForm}}
+</template>
+
+<template name="addPointForm">
+	<form>
+		<input type="text" name="pointLong">
+		<input type="text" name="pointLat">
+		<input type="submit" value="Add Point">
+	</form>
+</template>
