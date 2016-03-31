@@ -144,9 +144,15 @@ function init() {
     var image = 'img/map-marker.png';
     var myLatLng = {lat: 40.714952, lng: -74.0156046}
 
-    var beachMarker = new google.maps.Marker({
+    var Marker1 = new google.maps.Marker({
         position: myLatLng,
         map: map,
         title: 'Hello world'
     });
+    var Marker2 = new google.maps.Marker({
+        position: {lat: 40.814952, lng: -74.1156046},
+        map: map,
+        title: 'Hello world'
+    });
+       
 }

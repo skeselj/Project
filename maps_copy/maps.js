@@ -1,14 +1,16 @@
+
+
 // Meteor
-Markers = new Mongo.Collection('markers');  
+PointsList = new Mongo.Collection('points')
 
 if (Meteor.isClient) {
 
-  // EXPERIMENTAL
+  /* EXPERIMENTAL
   Meteor.startup(function() {
     GoogleMaps.load();
   }); 
-  Template.map.helpers({
-    mapOptions: function() {
+  Template.body.helpers({
+    exampleMapOptions: function() {
       if (GoogleMaps.loaded()) {
         // Map initialization options
         return {
@@ -131,6 +133,44 @@ if (Meteor.isClient) {
       }
     });
 
+  Template.body.onCreated(function() {
+    // We can use the `ready` callback to interact with the map API once the map is ready.
+    GoogleMaps.ready('exampleMap', function(map) {
+      // Add a marker to the map once it's ready
+      var marker = new google.maps.Marker({
+        position: map.options.center,
+        map: map.instance
+      });
+    });
+  });*/
+  
 
-}
+  // TESTED
+  Template.board.helpers({
+    'point': function() {
+      return PointsList.find({}, {sort: {long: 1}});
+    },
+  });
 
+  Template.board.events({
+    'click .point': function() {
+      var pointId = this._id;
+      Session.set('selectedPoint', pointId);
+    },
+    'click .remove': function() {
+      var selectedPoint = Session.get('selectedPoint');
+      PointsList.remove(selectedPoint);
+    }
+  });
+
+  Template.addPointForm.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var longVar = event.target.pointLong.value;
+      var latVar = event.target.pointLat.value;
+      PointsList.insert({
+        long: longVar,
+        lat: latVar
+      });
+    }
+  });
