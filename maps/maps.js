@@ -1,6 +1,5 @@
+// Meteor
 PointsList = new Mongo.Collection('points')
-
-
 if (Meteor.isClient) {
   Template.board.helpers({
     'point': function() {
@@ -31,3 +30,13 @@ if (Meteor.isClient) {
     }
   });
 }
+
+// Google Maps
+function initMap() {
+    var mapDiv = document.getElementById('map');
+    var map = new google.maps.Map(mapDiv, {
+        center: {lat: 40.6842763, lng: -74.0127941},
+        zoom: 12
+    });
+}
+
