@@ -14,9 +14,10 @@ if (Meteor.isClient) {
         return {
           center: new google.maps.LatLng(40.7148544,-74.0166855),
           zoom: 14,
+          disableDefaultUI: true,
+          zoomControl: true,
 
-          // How you would like to style the map. 
-          // This is where you would paste any style found on Snazzy Maps.
+          // Styles found on Snazzy Maps.
           styles: [{
               "featureType": "water",
               "elementType": "geometry",
