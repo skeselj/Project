@@ -132,5 +132,45 @@ if (Meteor.isClient) {
     });
 
 
+<<<<<<< HEAD
+=======
+  Template.body.onCreated(function() {
+    // We can use the `ready` callback to interact with the map API once the map is ready.
+    GoogleMaps.ready('exampleMap', function(map) {
+      // Add a marker to the map once it's ready
+    });
+  });
+  
+
+  // TESTED
+  Template.board.helpers({
+    'point': function() {
+      return PointsList.find({}, {sort: {long: 1}});
+    },
+  });
+
+  Template.board.events({
+    'click .point': function() {
+      var pointId = this._id;
+      Session.set('selectedPoint', pointId);
+    },
+    'click .remove': function() {
+      var selectedPoint = Session.get('selectedPoint');
+      PointsList.remove(selectedPoint);
+    }
+  });
+
+  Template.addPointForm.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var longVar = event.target.pointLong.value;
+      var latVar = event.target.pointLat.value;
+      PointsList.insert({
+        long: longVar,
+        lat: latVar
+      });
+    }
+  });
+>>>>>>> 857f72c1b5434c6b8739efd7be52b96b63a3887d
 }
 

@@ -1,16 +1,14 @@
-
-
 // Meteor
-PointsList = new Mongo.Collection('points')
+Markers = new Mongo.Collection('markers');  
 
 if (Meteor.isClient) {
 
-  /* EXPERIMENTAL
+  // EXPERIMENTAL
   Meteor.startup(function() {
     GoogleMaps.load();
   }); 
-  Template.body.helpers({
-    exampleMapOptions: function() {
+  Template.map.helpers({
+    mapOptions: function() {
       if (GoogleMaps.loaded()) {
         // Map initialization options
         return {
@@ -133,16 +131,15 @@ if (Meteor.isClient) {
       }
     });
 
+
+<<<<<<< HEAD
+=======
   Template.body.onCreated(function() {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('exampleMap', function(map) {
       // Add a marker to the map once it's ready
-      var marker = new google.maps.Marker({
-        position: map.options.center,
-        map: map.instance
-      });
     });
-  });*/
+  });
   
 
   // TESTED
@@ -174,3 +171,6 @@ if (Meteor.isClient) {
       });
     }
   });
+>>>>>>> 857f72c1b5434c6b8739efd7be52b96b63a3887d
+}
+
