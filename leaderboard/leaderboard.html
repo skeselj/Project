@@ -1,0 +1,43 @@
+<head>
+  <title>maps</title>
+  <style>
+      #map {
+        width: 500px;
+        height: 400px;
+      }
+    </style>
+</head>
+
+<body>
+  <h1>Point Database</h1>
+
+  {{> board}}
+  
+  <div class="map-container">
+    {{> googleMap name="safecity" options=mapOptions}}
+  </div>
+</body>
+
+<template name="board">
+	<table>
+		<tr>
+			<th>Lat</th>
+			<th>Long</th>
+		</tr>
+	{{#each point}}
+		<tr>
+			<td class="point">{{lat}} {{long}}</td> 
+		</tr>
+	{{/each}}
+	</table>
+	<input type="button" class="remove" value="Remove Point">
+	{{> addPointForm}}
+</template>
+
+<template name="addPointForm">
+	<form>
+		<input type="text" name="pointLat">
+		<input type="text" name="pointLong">
+		<input type="submit" value="Add Point">
+	</form>
+</template>
