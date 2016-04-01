@@ -4,42 +4,50 @@
 
 <body>
 
-  <div class="container">
+    <div class="container">
+
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <a class="navbar-brand" href="#">SafeCity</a>
           </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Sign Up</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+        </div>
       </nav>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        
-        <div class="row">
-          <div class="col-sm-4">
-            Analytics
-          </div>
-          <div class="col-md-8">
-            {{> map }}
-          </div>
-        </div>
-        
-      </div>
-    </div>
-    <!-- /#page-content-wrapper -->
+      <!-- Page content -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
 
-  </div>
-  <!-- /#container -->
+            <!-- Panel --> 
+            <div class="col-sm-4">
+              <!-- 3 Tabs -->
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default">Analytics</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default">Impressions</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default">Resources</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map -->
+            <div class="col-md-8">
+              {{> map}}
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+    </div>
 
 </body>
 
