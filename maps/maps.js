@@ -52,9 +52,9 @@ if (Meteor.isClient) {
           zoomControlOptions: {
             position: google.maps.ControlPosition.LEFT_CENTER
             },
-        };
+          };
+        }
       }
-    }
   });
 }
 
