@@ -41,26 +41,32 @@
 
             <!-- Panel --> 
             <div class="col-sm-4">
-              <!-- 3 Tabs -->
-              <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default active">Analytics</button>
+              
+              <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Numbers</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Words</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">Links</a></li>
+                  </ul>
                 </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Impressions</button>
-                </div>
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Resources</button>
+                <div class="panel-body">
+                  <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">Default 1</div>
+                    <div class="tab-pane fade" id="tab2default">Default 2</div>
+                    <div class="tab-pane fade" id="tab3default">Default 3</div>
+                  </div>
                 </div>
               </div>
+
             </div>
 
             <!-- Map -->
             <div class="col-md-8">
               {{> map}}
             </div>
+
           </div>
-        
         </div>
       </div>
       <!-- /#page-content-wrapper -->

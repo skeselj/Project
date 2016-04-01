@@ -4,13 +4,56 @@ body {
 }
 .map-container {
   width: 100%;
-  max-width: 100%;
+  min-width: 40%;
   height: 500px;
 }
 .navbar {
   margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
 .navbar-btn{
     float:right;
 }
+=======
+.panel-body{
+	height: 450px;
+}
+/********************************************************************/
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+	border-bottom: none;
+	text-align:center;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+	height: 500px;
+}
+
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+	background-color: #ddd;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+	color: #555;
+	background-color: #fff;
+	border-color: #ddd;
+	border-bottom-color: transparent;
+}
+/********************************************************************/
+>>>>>>> a4539491ad5eef0fe1ac4af47ffd42db8e5fd8f0
