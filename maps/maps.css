@@ -10,15 +10,16 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
-
 .navbar-btn{
     float:right;
     background-color:#AAA;
     border-color: transparent;
 }
-
 .panel-body{
 	height: 450px;
+}
+.input-group .search-bar {
+	width:600px !important;
 }
 /********************************************************************/
 .panel.with-nav-tabs .panel-heading{

@@ -15,16 +15,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="#">SafeCity</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="col-sm-3 col-md-3">
               <form class="navbar-form" role="search">
               <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" name="q">
+                  <input type="text" class="form-control search-bar" placeholder="Search our available cities" name="q">
                   <div class="input-group-btn">
-                      <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                      <button class="btn btn-default" type="submit"></button>
                   </div>
               </div>
               </form>
@@ -55,16 +55,28 @@
               <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
                   <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1default" data-toggle="tab">Numbers</a></li>
-                    <li><a href="#tab2default" data-toggle="tab">Words</a></li>
-                    <li><a href="#tab3default" data-toggle="tab">Links</a></li>
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Analytics</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Impressions</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">Resources</a></li>
                   </ul>
                 </div>
                 <div class="panel-body">
                   <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">Default 1</div>
-                    <div class="tab-pane fade" id="tab2default">Default 2</div>
-                    <div class="tab-pane fade" id="tab3default">Default 3</div>
+                    <div class="tab-pane fade in active" id="tab1default">
+                    This is where we will put our analytics
+                    {{> analytics}}
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">This is a place where we will have testimonials/comments so there is a human factor to the data. It also gives people a chance to defend their communities if they feel they are poorly represented.</div>
+                    <div class="tab-pane fade" id="tab3default">
+                      This is where we will put some data and news resources, but temporarily here is a list of our next steps:
+                      <ul>
+                        <li> Find how to select points within a region</li>
+                        <li> Connect them to a pie chart </li>
+                        <li> Change the marker format </li>
+                        <li> Add a line graph </li>
+                        <li> Display all crimes in the area in an ordered table</li>
+                      </uL>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,6 +105,11 @@
 
 <template name="analytics">
   <div class="analytics-container">
+    <!-- /.panel -->
+    <div class="panel-body">
+      <div id="morris-donut-chart"></div>
+      <a href="#" class="btn btn-default btn-block">View Chart</a>
+    </div>
   </div>
 </template>
 
@@ -124,4 +141,6 @@
 
         </div>
       </div>
+
+      <i class="glyphicon glyphicon-search"></i>
       -->
