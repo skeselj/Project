@@ -4,7 +4,7 @@ body {
 }
 .map-container {
   width: 100%;
-  max-width: 100%;
+  min-width: 40%;
   height: 500px;
 }
 .navbar {
@@ -20,6 +20,7 @@ body {
 }
 .panel.with-nav-tabs .nav-tabs{
 	border-bottom: none;
+	text-align:center;
 }
 .panel.with-nav-tabs .nav-justified{
 	margin-bottom: -1px;
