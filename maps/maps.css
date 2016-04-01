@@ -13,6 +13,8 @@ body {
 
 .navbar-btn{
     float:right;
+    background-color:#AAA;
+    border-color: transparent;
 }
 
 .panel-body{
