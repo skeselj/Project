@@ -1,15 +1,60 @@
-// Meteor
-Markers = new Mongo.Collection('markers');  
+Markers = new Mongo.Collection('markers');
 
 if (Meteor.isClient) {
+  Template.map.onCreated(function() {
+    GoogleMaps.ready('map', function(map) {
+      google.maps.event.addListener(map.instance, 'click', function(event) {
+        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+      });
 
-  // EXPERIMENTAL
+      var markers = {};
+
+      Markers.find().observe({
+        added: function (document) {
+          var marker = new google.maps.Marker({
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(document.lat, document.lng),
+            map: map.instance,
+            id: document._id
+          });
+
+          google.maps.event.addListener(marker, 'dragend', function(event) {
+            Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+          });
+
+          markers[document._id] = marker;
+        },
+        changed: function (newDocument, oldDocument) {
+          markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
+        },
+        removed: function (oldDocument) {
+          markers[oldDocument._id].setMap(null);
+          google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
+          delete markers[oldDocument._id];
+        }
+      });
+    });
+  });
+
   Meteor.startup(function() {
     GoogleMaps.load();
-  }); 
+  });
+
   Template.map.helpers({
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
+        return {
+          center: new google.maps.LatLng(40.7148544,-74.0166855),
+          zoom: 8
+        };
+      }
+    }
+  });
+}
+
+/*
+ 
         // Map initialization options
         return {
           center: new google.maps.LatLng(40.7148544,-74.0166855),
@@ -130,47 +175,9 @@ if (Meteor.isClient) {
         }
       }
     });
-
-
-<<<<<<< HEAD
-=======
-  Template.body.onCreated(function() {
-    // We can use the `ready` callback to interact with the map API once the map is ready.
-    GoogleMaps.ready('exampleMap', function(map) {
-      // Add a marker to the map once it's ready
-    });
-  });
+*/
   
-
-  // TESTED
-  Template.board.helpers({
-    'point': function() {
-      return PointsList.find({}, {sort: {long: 1}});
-    },
-  });
-
-  Template.board.events({
-    'click .point': function() {
-      var pointId = this._id;
-      Session.set('selectedPoint', pointId);
-    },
-    'click .remove': function() {
-      var selectedPoint = Session.get('selectedPoint');
-      PointsList.remove(selectedPoint);
-    }
-  });
-
-  Template.addPointForm.events({
-    'submit form': function(event) {
-      event.preventDefault();
-      var longVar = event.target.pointLong.value;
-      var latVar = event.target.pointLat.value;
-      PointsList.insert({
-        long: longVar,
-        lat: latVar
-      });
-    }
-  });
->>>>>>> 857f72c1b5434c6b8739efd7be52b96b63a3887d
-}
+/*
+// 857f72c1b5434c6b8739efd7be52b96b63a3887d
+*/
 
