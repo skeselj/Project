@@ -3,8 +3,9 @@ Markers = new Mongo.Collection('markers');
 if (Meteor.isClient) {
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
+      // makes clicks add points - comment out to remove function
       google.maps.event.addListener(map.instance, 'click', function(event) {
-        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16"});
+        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 2});
       });
 
       var markers = {};
@@ -16,7 +17,16 @@ if (Meteor.isClient) {
             animation: google.maps.Animation.DROP,
             position: new google.maps.LatLng(document.lat, document.lng),
             map: map.instance,
-            id: document._id
+            id: document._id,
+            // icon:
+            opacity: 0.5,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 10*document.mag,
+              fillColor: "r",
+              fillColor: 'yellow',
+              strokeColor: 'gold',
+            },
           });
 
           google.maps.event.addListener(marker, 'dragend', function(event) {
@@ -34,6 +44,14 @@ if (Meteor.isClient) {
           delete markers[oldDocument._id];
         }
       });
+
+      // iterate through all our markers and plot them
+      var markerCursor = Markers.find({});
+      var markers = markerCursor.fetch();
+      for (var i=0; i<markers.length; i++) {
+        console.log( markers[i].tim );
+      }
+
     });
   });
 
