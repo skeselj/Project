@@ -13,21 +13,23 @@ if (Meteor.isClient) {
       Markers.find().observe({
         added: function (document) {
           var marker = new google.maps.Marker({
-            draggable: true,
-            animation: google.maps.Animation.DROP,
             position: new google.maps.LatLng(document.lat, document.lng),
+            animation: google.maps.Animation.DROP,
             map: map.instance,
+            draggable: true,
             id: document._id,
             // icon:
-            opacity: 0.5,
+            opacity: 0.9,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: 10*document.mag,
-              fillColor: "r",
-              fillColor: 'yellow',
-              strokeColor: 'gold',
+              scale: ((map.instance.getZoom())*(map.instance.getZoom()))/12/3*document.mag,
+              strokeColor: '#ff8000',
+              fillColor: '#ff8000',
+              fillOpacity: 1,
             },
           });
+
+          console.log( map.instance.getZoom() );
 
           google.maps.event.addListener(marker, 'dragend', function(event) {
             Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
