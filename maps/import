@@ -1,1 +1,14 @@
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file "dummy_test.csv" --headerline
+awk '
+BEGIN {
+	FS = ","
+	print("Latitude,Longitutde,Type,Time,Date,Magnitutde")
+} 
+{
+	if (NR > 1) {
+		split($3, dt, " ")
+		printf("%s,%s,%s,%s %s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),$12,dt[2],dt[3],dt[1])
+	}
+}' 'test.csv' > 'ideal.csv'
+
+
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file ideal.csv --headerline
