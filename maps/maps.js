@@ -23,7 +23,7 @@ if (Meteor.isClient) {
             mag: document.mag,
             id: document._id,
             // icon:
-            opacity: 0.9,
+            opacity: 0.7,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               scale: getScaleFactor(map.instance.getZoom())*document.mag,

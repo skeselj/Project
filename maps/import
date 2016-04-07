@@ -1,1 +1,1 @@
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file "./NYPD_7_Major_Felony_Incident_Map.csv" --headerline
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file "dummy_test.csv" --headerline
