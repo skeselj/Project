@@ -5,10 +5,13 @@ if (Meteor.isClient) {
     GoogleMaps.ready('map', function(map) {
       // makes clicks add points - comment out to remove function
       google.maps.event.addListener(map.instance, 'click', function(event) {
-        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 2});
+        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 3});
       });
 
       var markers = {};
+      function getScaleFactor(zoom) {
+            return zoom*zoom*zoom/12/12/10
+      };
 
       Markers.find().observe({
         added: function (document) {
@@ -17,22 +20,31 @@ if (Meteor.isClient) {
             animation: google.maps.Animation.DROP,
             map: map.instance,
             draggable: true,
+            mag: document.mag,
             id: document._id,
             // icon:
             opacity: 0.9,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: ((map.instance.getZoom())*(map.instance.getZoom()))/12/3*document.mag,
-              strokeColor: '#ff8000',
-              fillColor: '#ff8000',
-              fillOpacity: 1,
+              scale: getScaleFactor(map.instance.getZoom())*document.mag,
+              strokeColor: '#FF8000',
+              fillColor: '#FF8000',
+              fillOpacity: 1,  
             },
           });
-
-          console.log( map.instance.getZoom() );
-
+          // every time a point is dragged, update its position
           google.maps.event.addListener(marker, 'dragend', function(event) {
             Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+          });
+          // every time the zoom is changed, adjust marker sizes
+          google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
+            marker.setIcon({
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: getScaleFactor(map.instance.getZoom())*marker.mag,
+                strokeColor: '#FF8000',
+                fillColor: '#FF8000',
+                fillOpacity: 1,   
+            });
           });
 
           markers[document._id] = marker;
@@ -44,15 +56,15 @@ if (Meteor.isClient) {
           markers[oldDocument._id].setMap(null);
           google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
           delete markers[oldDocument._id];
-        }
+        },
       });
 
-      // iterate through all our markers and plot them
-      var markerCursor = Markers.find({});
-      var markers = markerCursor.fetch();
-      for (var i=0; i<markers.length; i++) {
-        console.log( markers[i].tim );
-      }
+      // experimental: iterate through the markers (problem)
+      //var markerCursor = Markers.find({});
+      //var markers = markerCursor.fetch();
+      //for (var i=0; i<markers.length; i++) {
+      //  console.log( markers[i].tim );
+      //}
 
     });
   });
@@ -71,7 +83,7 @@ if (Meteor.isClient) {
           zoomControl: true,
           zoomControlOptions: {
             position: google.maps.ControlPosition.LEFT_CENTER
-            },
+          },
 
           // Styles found on Snazzy Maps.
           styles: [{
@@ -189,7 +201,7 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  // Debugging helper as I figure out how to insert data points
+  // Debugging helper as we figure out how to insert data points
   Meteor.startup(function() {
     return Meteor.methods({
       removeAllMarkers: function() {
