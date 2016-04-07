@@ -1,8 +1,0 @@
-map.data.addGeoJson({ "type" : "FeatureCollection",
-	"features" : [
-		{"type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [-74.0166855,40.7148544]},
-d        "properties": {"crime": "murder"}
-   	}
-	]
-});
