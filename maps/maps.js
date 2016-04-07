@@ -66,6 +66,12 @@ if (Meteor.isClient) {
 
     });
   });
+  
+  Template.board.helpers({
+    'marker': function() {
+      return Markers.find({}, {sort: {dat: 1, tim: 1}});
+    }
+  });
 
   Meteor.startup(function() {
     GoogleMaps.load();
