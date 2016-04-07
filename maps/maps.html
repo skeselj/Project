@@ -3,7 +3,7 @@
 </head>
 
 <body>
-
+    {{> charts}}
     <div class="container">
 
       <nav class="navbar navbar-default" role="navigation">
@@ -126,6 +126,11 @@
       </tbody>
     </table>
   </div>
+</template>
+
+<template name="charts">
+  <h2>Charts</h2>
+  <div id="chart1" width="100%"></div>
 </template>
 
 
