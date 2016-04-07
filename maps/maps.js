@@ -68,7 +68,31 @@ if (Meteor.isClient) {
   });
 
   Meteor.startup(function() {
+    Meteor.startup(function() {
     GoogleMaps.load();
+    var rows = [];
+    var cursor = Markers.find({});
+
+    cursor.forEach(function(markers) {
+      rows.push([markers.typ, 1]);
+    })
+    console.log(rows);
+
+    chart = {
+      target: 'chart1',
+      type: 'PieChart',
+      columns: [
+        ['string', 'Type'],
+        ['number', 'Frequency']
+      ],
+      rows: rows,
+      options: {
+        'title':'How Much Pizza I Ate Last Night',
+      }
+    };
+
+    drawChart(chart);
+  });
   });
 
   Template.map.helpers({
