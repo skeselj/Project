@@ -1,7 +1,7 @@
 awk '
 BEGIN {
 	FS = ","
-	print("Latitude,Longitutde,Type,Time,Date,Magnitutde")
+	print("lat,lng,typ,tim,dat,mag")
 } 
 {
 	if (NR > 1) {

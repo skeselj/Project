@@ -7,23 +7,21 @@ if (Meteor.isClient) {
       google.maps.event.addListener(map.instance, 'click', function(event) {
         Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 3});
       });
-
       var markers = {};
       function getScaleFactor(zoom) {
             return zoom*zoom*zoom/12/12/10
       };
-
       Markers.find().observe({
         added: function (document) {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.lat, document.lng),
-            animation: google.maps.Animation.DROP,
+            //animation: google.maps.Animation.DROP,
             map: map.instance,
             draggable: true,
             mag: document.mag,
             id: document._id,
             // icon:
-            opacity: 0.7,
+            opacity: 0.73,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               scale: getScaleFactor(map.instance.getZoom())*document.mag,
