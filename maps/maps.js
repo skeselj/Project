@@ -14,17 +14,17 @@ if (Meteor.isClient) {
       Markers.find().observe({
         added: function (document) {
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(document.lat, document.lng),
+            position: new google.maps.LatLng(document.latitude, document.longitude),
             //animation: google.maps.Animation.DROP,
             map: map.instance,
             draggable: false,
-            mag: document.mag,
+            magnitude: document.magnitude,
             id: document._id,
             // icon:
             opacity: 0.73,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: getScaleFactor(map.instance.getZoom())*document.mag,
+              scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
               strokeColor: '#FF8000',
               fillColor: '#FF8000',
               fillOpacity: 1,  
@@ -38,7 +38,7 @@ if (Meteor.isClient) {
           google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
             marker.setIcon({
                 path: google.maps.SymbolPath.CIRCLE,
-                scale: getScaleFactor(map.instance.getZoom())*marker.mag,
+                scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
                 strokeColor: '#FF8000',
                 fillColor: '#FF8000',
                 fillOpacity: 1,   
@@ -69,7 +69,7 @@ if (Meteor.isClient) {
   
   Template.board.helpers({
     'marker': function() {
-      return Markers.find({}, {sort: {dat: 1, tim: 1}});
+      return Markers.find({}, {sort: {year:1, month:1, day:1, time:1}});
     }
   });
 
@@ -81,14 +81,14 @@ if (Meteor.isClient) {
     var cursor = Markers.find({});
 
     cursor.forEach(function(markers) {
-      if (counter[markers.typ] == undefined)
-        counter[markers.typ] = 1;
+      if (counter[markers.offense] == undefined)
+        counter[markers.offense] = 1;
       else
-        counter[markers.typ]++;
+        counter[markers.offense]++;
     })
     
-    for (var type in counter) {
-      rows.push([type, counter[type]]);
+    for (var offense in counter) {
+      rows.push([offense, counter[offense]]);
     }
 
     chart = {
