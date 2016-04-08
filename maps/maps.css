@@ -37,13 +37,14 @@ tbody{
 	min-width: 40%;
 	height: 500px;
 }
+.panel {
+	min-width: 270px;
+}
 .navbar {
 	margin-bottom: 20px;
 }
-.navbar-btn{
-    float:right;
-    background-color:#AAA;
-    border-color: transparent;
+#about{
+	margin-top: 5px;
 }
 .panel-body{
 	height: 450px;
@@ -91,6 +92,7 @@ tbody{
 .loginButtons{
 	color: #777;
 	text-align:right;
-	margin-top: 8px;
+	margin-top: 12px;
+	margin-right: 10px;
 }
 /********************************************************************/
