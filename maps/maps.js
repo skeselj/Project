@@ -99,6 +99,7 @@ if (Meteor.isClient) {
         ['number', 'Frequency']
       ],
       rows: rows,
+      options: {title: 'Crimes by Type', legend: 'none'}
     };
 
     drawChart(chart);
