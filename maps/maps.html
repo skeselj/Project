@@ -3,7 +3,6 @@
 </head>
 
 <body>
-    {{> charts}}
     <div class="container">
 
       <nav class="navbar navbar-default" role="navigation">
@@ -58,7 +57,9 @@
                     This is where we will put our analytics. Here is a table:
                     {{> board}}
                     </div>
-                    <div class="tab-pane fade" id="tab2default">This is a place where we will have testimonials/comments so there is a human factor to the data. It also gives people a chance to defend their communities if they feel they are poorly represented.</div>
+                    <div class="tab-pane fade" id="tab2default">
+                    {{> charts}}
+                    </div>
                     <div class="tab-pane fade" id="tab3default">
                       This is where we will put some data and news resources, but temporarily here is a list of our next steps:
                       <ul>
@@ -121,7 +122,6 @@
 </template>
 
 <template name="charts">
-  <h2>Charts</h2>
   <div id="chart1" width="100%"></div>
 </template>
 
