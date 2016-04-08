@@ -6,8 +6,11 @@ th {
  display: inline;
 }
 tr {
-width: 100%;
-display: inline;
+ width: 100%;
+ display: inline;
+}
+td {
+ word-break:break-all;
 }
 table{
  height:300px; 
