@@ -1,12 +1,16 @@
 awk '
 BEGIN {
 	FS = ","
-	print("lat,lng,typ,tim,dat,mag")
+	print("latitude,longitude,offense,time,day,month,year,magnitude")
 } 
 {
 	if (NR > 1) {
 		split($3, dt, " ")
-		printf("%s,%s,%s,%s %s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),$12,dt[2],dt[3],dt[1])
+		split(dt[1],date,"/")
+		split(dt[2],parts,":")
+		if (dt[3] == "PM")
+			parts[1] = (parts[1] + 12) % 24
+		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),$12,parts[1],parts[2],date[1],date[2],date[3])
 	}
 }' 'test.csv' > 'ideal.csv'
 
