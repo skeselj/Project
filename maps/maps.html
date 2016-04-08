@@ -55,8 +55,8 @@
                 <div class="panel-body">
                   <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1default">
-                    This is where we will put our analytics
-                    {{> analytics}}
+                    This is where we will put our analytics. Here is a table:
+                    {{> board}}
                     </div>
                     <div class="tab-pane fade" id="tab2default">This is a place where we will have testimonials/comments so there is a human factor to the data. It also gives people a chance to defend their communities if they feel they are poorly represented.</div>
                     <div class="tab-pane fade" id="tab3default">
@@ -96,13 +96,27 @@
   </div>
 </template>
 
-<template name="analytics">
-  <div class="analytics-container">
-    <!-- /.panel -->
-    <div class="panel-body">
-      <div id="morris-donut-chart"></div>
-      <a href="#" class="btn btn-default btn-block">View Chart</a>
-    </div>
+<template name="board">
+  <div class="board-container">
+    <!-- /.panel -->         
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Date</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each marker}}
+        <tr>
+          <td class="marker">{{tim}}</td>
+          <td class="marker">{{dat}}</td>
+          <td class="marker">{{typ}}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>
 

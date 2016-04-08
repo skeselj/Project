@@ -4,9 +4,9 @@ if (Meteor.isClient) {
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
       // makes clicks add points - comment out to remove function
-      google.maps.event.addListener(map.instance, 'click', function(event) {
-        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 3});
-      });
+      //google.maps.event.addListener(map.instance, 'click', function(event) {
+      //  Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 3});
+      //});
       var markers = {};
       function getScaleFactor(zoom) {
             return zoom*zoom*zoom/12/12/10
@@ -17,7 +17,7 @@ if (Meteor.isClient) {
             position: new google.maps.LatLng(document.lat, document.lng),
             //animation: google.maps.Animation.DROP,
             map: map.instance,
-            draggable: true,
+            draggable: false,
             mag: document.mag,
             id: document._id,
             // icon:
@@ -31,9 +31,9 @@ if (Meteor.isClient) {
             },
           });
           // every time a point is dragged, update its position
-          google.maps.event.addListener(marker, 'dragend', function(event) {
-            Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
-          });
+          //google.maps.event.addListener(marker, 'dragend', function(event) {
+          //  Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+          //});
           // every time the zoom is changed, adjust marker sizes
           google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
             marker.setIcon({
@@ -47,14 +47,14 @@ if (Meteor.isClient) {
 
           markers[document._id] = marker;
         },
-        changed: function (newDocument, oldDocument) {
-          markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
-        },
-        removed: function (oldDocument) {
-          markers[oldDocument._id].setMap(null);
-          google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
-          delete markers[oldDocument._id];
-        },
+        //changed: function (newDocument, oldDocument) {
+        //  markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
+        //},
+        //removed: function (oldDocument) {
+        //  markers[oldDocument._id].setMap(null);
+        //  google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
+        //  delete markers[oldDocument._id];
+        //},
       });
 
       // experimental: iterate through the markers (problem)
@@ -65,6 +65,12 @@ if (Meteor.isClient) {
       //}
 
     });
+  });
+  
+  Template.board.helpers({
+    'marker': function() {
+      return Markers.find({}, {sort: {dat: 1, tim: 1}});
+    }
   });
 
   Meteor.startup(function() {
