@@ -60,15 +60,24 @@
                     {{> charts}}
                     </div>
                     <div class="tab-pane fade" id="tab3default">
-                      This is where we will put some data and news resources, but temporarily here is a list of our next steps:
+                      What we did:
                       <ul>
+                        <li> Change the marker format (colored circles which resize according to zoom) </li>
                         <li> Find how to select points within a region</li>
                         <li> Connect them to a pie chart </li>
-                        <li> Change the marker format </li>
-                        <li> Add a line graph </li>
                         <li> Display all crimes in the area in an ordered table</li>
                         <li>Get started on login</li>
+                        <li>Make markers display information on click.
                       </uL>
+                      Next Steps:
+                      <ul>
+                        <li> Start impressions tab: form basic Twitter like layout. </li>
+                        <li> Format header and login button </li>
+                        <li> Center the pie chart, add at least one more analytic (maybe line graph) </li>
+                        <li> Add many (thousands) of points into the database using our script. If it is too slow, only select necessary points. </li>
+                        <li>Add searchbar functionality: list suggestions and change location on map upon enter.</li>
+                        <li>When you click on a table entry or mouse over a point, that point is highlighted</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -101,18 +110,16 @@
     <!-- /.panel -->         
     <table class="table">
       <thead>
-        <tr>
-          <th>Time</th>
-          <th>Date</th>
-          <th>Type</th>
-        </tr>
+          <th class="time">Time</th>
+          <th class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th class="offense">Type</th>
       </thead>
       <tbody>
       {{#each marker}}
         <tr>
-          <td>{{time}}</td>
-          <td>{{day}}/{{month}}/{{year}}</td>
-          <td>{{offense}}</td>
+          <td class="time">{{time}}</td>
+          <td class="date">{{day}}/{{month}}/{{year}}</td>
+          <td class="offense">{{offense}}</td>
         </tr>
       {{/each}}
       </tbody>
@@ -123,35 +130,3 @@
 <template name="charts">
   <div id="chart1" width="100%"></div>
 </template>
-
-
-      <!-- 
-      EXPERIMENT: REPLACE LOGIN
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-collapse collapse" id="navbar-footer">
-            <a class="navbar-brand" href="#">SafeCity</a>
-            
-            <div class="nav navbar-nav input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li><button type="button" class="btn btn-warning navbar-btn"><span class="glyphicon glyphicon-user"></span> Login</button></li>
-            </ul>
-          </div>
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-footer">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      <i class="glyphicon glyphicon-search"></i>
-      -->

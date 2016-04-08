@@ -23,6 +23,15 @@ tbody{
 	width: 100%;
 	position: absolute;
 }
+.time{
+	min-width: 30px;
+}
+.date{
+	min-width: 90px;
+}
+.offense{
+	min-width: 100px;
+}
 .map-container {
 	width: 100%;
 	min-width: 40%;
@@ -40,7 +49,7 @@ tbody{
 	height: 450px;
 }
 .input-group .search-bar {
-	width: 600px !important;
+	width: 400px !important;
 }
 /********************************************************************/
 .panel.with-nav-tabs .panel-heading{

@@ -3,76 +3,81 @@ Markers = new Mongo.Collection('markers');
 if (Meteor.isClient) {
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
-      // makes clicks add points - comment out to remove function
-      //google.maps.event.addListener(map.instance, 'click', function(event) {
-      //  Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), typ: "theft", tim: "21:31:54", dat: "03/31/16", mag: 3});
-      //});
       var markers = {};
       function getScaleFactor(zoom) {
-            return zoom*zoom*zoom/12/12/10
+        return zoom*zoom*zoom/12/12/10
       };
+      function getColor(offense) {
+        if (offense.localeCompare("Grand Larceny")==0) {
+          return '#FF9933'
+        }
+        if (offense.localeCompare("Motor Larceny")==0) {
+          return '#E3DA96'
+        }
+        if (offense.localeCompare("Robbery")==0) {
+          return '#ADD681'
+        }
+        if (offense.localeCompare("Burglary")==0) {
+          return '#81D6BE'
+        }
+        if (offense.localeCompare("Felony Assault")==0) {
+          return '#B781D6'
+        }
+        if (offense.localeCompare("Rape")==0) {
+          return '#D4576E'
+        }
+        return "FFFFFF"
+      }
       Markers.find().observe({
         added: function (document) {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.latitude, document.longitude),
-            //animation: google.maps.Animation.DROP,
             map: map.instance,
             draggable: false,
             magnitude: document.magnitude,
             id: document._id,
+            infowindow: new google.maps.InfoWindow({
+              content: document.offense.concat(" at ",document.time," on ",document.month,"/",document.day,"/",document.year)
+            }),
             // icon:
             opacity: 0.73,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
-              strokeColor: '#FF8000',
-              fillColor: '#FF8000',
+              strokeColor: getColor(document.offense),
+              fillColor: getColor(document.offense),
               fillOpacity: 1,  
             },
           });
-          // every time a point is dragged, update its position
-          //google.maps.event.addListener(marker, 'dragend', function(event) {
-          //  Markers.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
-          //});
           // every time the zoom is changed, adjust marker sizes
           google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
             marker.setIcon({
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
-                strokeColor: '#FF8000',
-                fillColor: '#FF8000',
+                strokeColor: getColor(document.offense),
+                fillColor: getColor(document.offense),
                 fillOpacity: 1,   
             });
+          });
+          // if a marker is clicked, display information about it
+          google.maps.event.addListener(marker, 'click', function(event) {
+            marker.infowindow.open(map.instance, marker);
           });
 
           markers[document._id] = marker;
         },
-        //changed: function (newDocument, oldDocument) {
-        //  markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
-        //},
-        //removed: function (oldDocument) {
-        //  markers[oldDocument._id].setMap(null);
-        //  google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
-        //  delete markers[oldDocument._id];
-        //},
       });
-
-      // experimental: iterate through the markers (problem)
-      //var markerCursor = Markers.find({});
-      //var markers = markerCursor.fetch();
-      //for (var i=0; i<markers.length; i++) {
-      //  console.log( markers[i].tim );
-      //}
-
     });
   });
-  
+
+  // Table
   Template.board.helpers({
     'marker': function() {
       return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
+  // Pie chart
   Meteor.startup(function() {
     Meteor.startup(function() {
     GoogleMaps.load();
@@ -106,6 +111,7 @@ if (Meteor.isClient) {
   });
   });
 
+  // Map style
   Template.map.helpers({
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
@@ -115,7 +121,7 @@ if (Meteor.isClient) {
           disableDefaultUI: true,
           zoomControl: true,
           zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_CENTER
+            position: google.maps.ControlPosition.LEFT_TOP
           },
 
           // Styles found on Snazzy Maps.
