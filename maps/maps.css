@@ -57,4 +57,10 @@ body {
 	border-color: #ddd;
 	border-bottom-color: transparent;
 }
+
+.loginButtons{
+	color: #777;
+	text-align:right;
+	margin-top: 8px;
+}
 /********************************************************************/
