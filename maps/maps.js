@@ -76,13 +76,20 @@ if (Meteor.isClient) {
   Meteor.startup(function() {
     Meteor.startup(function() {
     GoogleMaps.load();
+    var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
 
     cursor.forEach(function(markers) {
-      rows.push([markers.typ, 1]);
+      if (counter[markers.typ] == undefined)
+        counter[markers.typ] = 1;
+      else
+        counter[markers.typ]++;
     })
-    console.log(rows);
+    
+    for (var type in counter) {
+      rows.push([type, counter[type]]);
+    }
 
     chart = {
       target: 'chart1',
@@ -92,9 +99,6 @@ if (Meteor.isClient) {
         ['number', 'Frequency']
       ],
       rows: rows,
-      options: {
-        'title':'How Much Pizza I Ate Last Night',
-      }
     };
 
     drawChart(chart);
