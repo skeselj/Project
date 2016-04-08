@@ -10,7 +10,12 @@ BEGIN {
 		split(dt[2],parts,":")
 		if (dt[3] == "PM")
 			parts[1] = (parts[1] + 12) % 24
-		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),$12,parts[1],parts[2],date[1],date[2],date[3])
+		n = split($12,offense," ")
+		adjoff = ""
+		for (i = 1; i <= n; i++) {
+			adjoff = adjoff""substr(offense[i],1,1)""tolower(substr(offense[i],2))" "
+		}
+		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),substr(adjoff,1,length(adjoff)-1),parts[1],parts[2],date[1],date[2],date[3])
 	}
 }' 'test.csv' > 'ideal.csv'
 
