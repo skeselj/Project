@@ -1,33 +1,35 @@
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 th {
- display: inline;
+	width: 100%;
+	display: inline;
 }
 tr {
- width: 100%;
- display: inline;
+	width: 100%;
+	display: inline;
 }
 td {
- word-break:break-all;
 }
 table{
- height:300px; 
+	height:600px; 
+}
+thead{
 }
 tbody{
-  overflow-y: scroll;
-  height: 200px;
-  width: 100%;
-  position: absolute;
+	overflow-y: scroll;
+	height: 400px;
+	width: 100%;
+	position: absolute;
 }
 .map-container {
-  width: 100%;
-  min-width: 40%;
-  height: 500px;
+	width: 100%;
+	min-width: 40%;
+	height: 500px;
 }
 .navbar {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .navbar-btn{
     float:right;

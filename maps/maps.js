@@ -69,7 +69,7 @@ if (Meteor.isClient) {
   
   Template.board.helpers({
     'marker': function() {
-      return Markers.find({}, {sort: {year:1, month:1, day:1, time:1}});
+      return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
