@@ -1,4 +1,5 @@
 Markers = new Mongo.Collection('markers');
+query = {"year": 2006, "month": 2, "day": 22};
 
 if (Meteor.isClient) {
   Template.map.onCreated(function() {
@@ -28,7 +29,7 @@ if (Meteor.isClient) {
         }
         return "FFFFFF"
       }
-      Markers.find().observe({
+      Markers.find(query).observe({
         added: function (document) {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.latitude, document.longitude),
@@ -73,7 +74,7 @@ if (Meteor.isClient) {
   // Table
   Template.board.helpers({
     'marker': function() {
-      return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
+      return Markers.find(query, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
@@ -84,6 +85,7 @@ if (Meteor.isClient) {
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
+    
 
     cursor.forEach(function(markers) {
       if (counter[markers.offense] == undefined)
@@ -91,7 +93,7 @@ if (Meteor.isClient) {
       else
         counter[markers.offense]++;
     })
-    
+    console.log(counter);
     for (var offense in counter) {
       rows.push([offense, counter[offense]]);
     }
