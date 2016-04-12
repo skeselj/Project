@@ -1,4 +1,5 @@
 Markers = new Mongo.Collection('markers');
+var query = {"year":2006, "month":2, "day":22};
 
 if (Meteor.isClient) {
   Template.map.onCreated(function() {
@@ -16,7 +17,7 @@ if (Meteor.isClient) {
         if (offense.localeCompare("Rape")==0) {return '#D4576E'}
         return "FFFFFF"
       }
-      Markers.find().observe({
+      Markers.find(query).observe({
         added: function (document) {
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.latitude, document.longitude),
@@ -61,7 +62,7 @@ if (Meteor.isClient) {
   // Table
   Template.board.helpers({
     'marker': function() {
-      return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
+      return Markers.find(query, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
