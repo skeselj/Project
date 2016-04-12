@@ -73,6 +73,7 @@ if (Meteor.isClient) {
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
+    
 
     cursor.forEach(function(markers) {
       if (counter[markers.offense] == undefined)
@@ -80,7 +81,7 @@ if (Meteor.isClient) {
       else
         counter[markers.offense]++;
     })
-    
+    console.log(counter);
     for (var offense in counter) {
       rows.push([offense, counter[offense]]);
     }
