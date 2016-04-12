@@ -9,24 +9,12 @@ if (Meteor.isClient) {
         return zoom*zoom*zoom/12/12/10
       };
       function getColor(offense) {
-        if (offense.localeCompare("Grand Larceny")==0) {
-          return '#FF9933'
-        }
-        if (offense.localeCompare("Motor Larceny")==0) {
-          return '#E3DA96'
-        }
-        if (offense.localeCompare("Robbery")==0) {
-          return '#ADD681'
-        }
-        if (offense.localeCompare("Burglary")==0) {
-          return '#81D6BE'
-        }
-        if (offense.localeCompare("Felony Assault")==0) {
-          return '#B781D6'
-        }
-        if (offense.localeCompare("Rape")==0) {
-          return '#D4576E'
-        }
+        if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
+        if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
+        if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
+        if (offense.localeCompare("Burglary")==0) {return '#81D6BE'}
+        if (offense.localeCompare("Felony Assault")==0) {return '#B781D6'}
+        if (offense.localeCompare("Rape")==0) {return '#D4576E'}
         return "FFFFFF"
       }
       Markers.find(query).observe({

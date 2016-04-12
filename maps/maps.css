@@ -3,24 +3,19 @@ body {
 	padding-bottom: 20px;
 }
 th {
-	width: 100%;
 	display: inline;
 }
 tr {
-	width: 100%;
 	display: inline;
-}
-td {
 }
 table{
 	height:600px; 
-}
-thead{
+	width: 280px;
 }
 tbody{
 	overflow-y: scroll;
 	height: 400px;
-	width: 100%;
+	width: 280px;
 	position: absolute;
 }
 .time{
@@ -38,7 +33,7 @@ tbody{
 	height: 500px;
 }
 .panel {
-	min-width: 270px;
+	width: 280px;
 }
 .navbar {
 	margin-bottom: 20px;
@@ -47,14 +42,24 @@ tbody{
 	height: 450px;
 }
 .input-group .search-bar {
-	width: 300px !important;
-	height: 24px !important;
+	width: 380px !important;
+	height: 28px !important;
+	margin-top: 3px;
+	margin-bottom: 0px;
+}
+#search-button {
+	height: 28px;
+	width: 30px;
+	margin-top: 3px;
+	margin-bottom: 0px;
+}
+i {
+	position: absolute;
+	left: 5px;
+	bottom: 5px;
 }
 #about{
 	margin-top: 5px;
-}
-#search {
-	height: 24px;
 }
 /********************************************************************/
 .panel.with-nav-tabs .panel-heading{
