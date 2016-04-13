@@ -19,12 +19,12 @@
         <!-- collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="col-sm-3 col-md-3">
-            {{ >searchBar }}
+            {{>search}}
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li id="contact"><a href="#">Contact</a></li>
             <li id="about"><a href="#">About</a></li>
-            <button id="login" class="loginButtons">{{> loginButtons}}</button>
+            <button id="login" class="loginButtons">{{>loginButtons}}</button>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
@@ -77,7 +77,7 @@
 </body>
 
 <!-- search template -->
-<template name="searchBar">
+<template name="search">
   <form class="navbar-form" role="search">
     <div class="input-group">
       <input type="text" class="form-control search-bar" placeholder="Search our available cities" name="q">
@@ -97,7 +97,7 @@
   </div>
 </template>
 
-<!-- analytics template -->
+<!-- data template -->
 <template name="board">
   <div class="board-container">
     <!-- /.panel -->         
@@ -173,3 +173,6 @@
   </div>
 </template>
 
+<!-- home template -->
+<template name="Home">
+</template>

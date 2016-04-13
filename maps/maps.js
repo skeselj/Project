@@ -2,6 +2,10 @@ Markers = new Mongo.Collection('markers');
 var query = {"year":2006, "month":2, "day":22};
 
 if (Meteor.isClient) {
+  Router.route('/', function () {
+    // render the Home template with a custom data context
+    this.render('Home', {data: {title: 'Search'}});
+  });
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
       var markers = {};
@@ -59,14 +63,21 @@ if (Meteor.isClient) {
     });
   });
 
-  // Table
+  // Search Helpers
+  Template.search.events({
+    'submit form': function(){
+      console.log(Router.current().params.query.q);
+    }
+  });
+
+  // Table Helpers
   Template.board.helpers({
     'marker': function() {
       return Markers.find(query, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
-  // Pie chart
+  // Pie chart and stuff 
   Meteor.startup(function() {
     Meteor.startup(function() {
     GoogleMaps.load();

@@ -32,3 +32,4 @@ accounts-ui-unstyled
 less
 fortawesome:fontawesome
 mrt:googlemaps
+iron:router
