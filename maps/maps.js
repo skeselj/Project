@@ -98,7 +98,7 @@ if (Meteor.isClient) {
     };
 
     drawChart(chart);
-  });
+    });
   });
 
   // Map style
