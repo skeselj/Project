@@ -1,12 +1,12 @@
 <head>
-  <title>Bettertype</title>
+  <title>Pre-Alpha</title>
 </head>
 
 <body>
     <div class="container">
 
       <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -16,32 +16,25 @@
           </button>
           <a class="navbar-brand" href="#">SafeCity</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div class="col-sm-3 col-md-3">
-              <form class="navbar-form" role="search">
-              <div class="input-group">
-                  <input type="text" class="form-control search-bar" placeholder="Search our available cities" name="q">
-                  <div class="input-group-btn navbar-button">
-                      <button class="btn btn-default" id="search-button" type="submit">
-                        <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i></button>
-                  </div>
-              </div>
-              </form>
+            {{ >searchBar }}
           </div>
           <ul class="nav navbar-nav navbar-right">
+            <li id="contact"><a href="#">Contact</a></li>
             <li id="about"><a href="#">About</a></li>
-            <button class="loginButtons">{{> loginButtons}}</button>
+            <button id="login" class="loginButtons">{{> loginButtons}}</button>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
 
-      <!-- Page content -->
+      <!-- page content -->
       <div id="page-content-wrapper">
         <div class="container-fluid">
           <div class="row">
 
-            <!-- Panel --> 
+            <!-- panel --> 
             <div class="col-sm-4">
               
               <div class="panel with-nav-tabs panel-default">
@@ -90,7 +83,7 @@
 
             </div>
 
-            <!-- Map -->
+            <!-- map -->
             <div class="col-md-8">
               {{> map}}
             </div>
@@ -104,12 +97,28 @@
 
 </body>
 
+<!-- search template -->
+<template name="searchBar">
+  <form class="navbar-form" role="search">
+    <div class="input-group">
+      <input type="text" class="form-control search-bar" placeholder="Search our available cities" name="q">
+      <div class="input-group-btn navbar-button">
+        <button class="btn btn-default" id="search-button" type="submit">
+          <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</template>
+
+<!-- map template -->
 <template name="map">
   <div class="map-container">
     {{> googleMap name="map" options=mapOptions}}
   </div>
 </template>
 
+<!-- analytics template -->
 <template name="board">
   <div class="board-container">
     <!-- /.panel -->         
@@ -132,6 +141,7 @@
   </div>
 </template>
 
+<!-- chart template -->
 <template name="charts">
   <div id="chart1" width="100%"></div>
 </template>
