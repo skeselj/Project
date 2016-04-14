@@ -66,67 +66,6 @@ if (Meteor.isClient) {
           })
         }
       })
-      
-
-
-
-
-
-
-      /**
-      var markers = {};
-      function getScaleFactor(zoom) {
-        return zoom*zoom*zoom/12/12/10
-      };
-      function getColor(offense) {
-        if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
-        if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
-        if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
-        if (offense.localeCompare("Burglary")==0) {return '#81D6BE'}
-        if (offense.localeCompare("Felony Assault")==0) {return '#B781D6'}
-        if (offense.localeCompare("Rape")==0) {return '#D4576E'}
-        return "FFFFFF"
-      }
-      Markers.find().observe({
-        added: function (document) {
-
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(document.latitude, document.longitude),
-            map: map.instance,
-            draggable: false,
-            magnitude: document.magnitude,
-            id: document._id,
-            infowindow: new google.maps.InfoWindow({
-              content: document.offense.concat(" at ",document.time," on ",document.month,"/",document.day,"/",document.year)
-            }),
-            // icon:
-            opacity: 0.73,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
-              strokeColor: getColor(document.offense),
-              fillColor: getColor(document.offense),
-              fillOpacity: 1,  
-            },
-          });
-          // every time the zoom is changed, adjust marker sizes
-          google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
-            marker.setIcon({
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
-                strokeColor: getColor(document.offense),
-                fillColor: getColor(document.offense),
-                fillOpacity: 1,   
-            });
-          });
-          // if a marker is clicked, display information about it
-          google.maps.event.addListener(marker, 'click', function(event) {
-            marker.infowindow.open(map.instance, marker);
-          });
-
-          markers[document._id] = marker;
-        },
-      }); **/
     });
   });
 
@@ -141,7 +80,7 @@ if (Meteor.isClient) {
   Meteor.startup(function() {
   
     GoogleMaps.load();
-    /**
+    
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
@@ -153,7 +92,6 @@ if (Meteor.isClient) {
       else
         counter[markers.offense]++;
     })
-    console.log(counter);
     for (var offense in counter) {
       rows.push([offense, counter[offense]]);
     }
@@ -170,7 +108,7 @@ if (Meteor.isClient) {
     };
 
     drawChart(chart);
-    **/
+    
   });
 
   // Map style
