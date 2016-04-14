@@ -92,9 +92,13 @@
 
 <!-- map template -->
 <template name="map">
-  <div class="map-container">
-    {{> googleMap name="map" options=mapOptions}}
-  </div>
+  {{#if Template.subscriptionsReady}}
+    <div class="map-container">
+      {{> googleMap name="map" options=mapOptions}}
+    </div>
+  {{else}}
+      <p>Loading...</p>
+  {{/if}}
 </template>
 
 <!-- data template -->

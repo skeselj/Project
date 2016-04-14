@@ -1,14 +1,13 @@
 Markers = new Mongo.Collection('markers');
-var query = {"year":2006, "month":2, "day":22};
+//var query = {"year":2006, "month":2, "day":22};
+var parameters = {year: 2006, month: 2, day: 22}
 
 if (Meteor.isClient) {
-  Router.route('/', function () {
-    // render the Home template with a custom data context
-    this.render('Home', {data: {title: 'Search'}});
-  });
+
   Template.map.onCreated(function() {
+    var self = this;
+
     GoogleMaps.ready('map', function(map) {
-      var markers = {};
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
       };
@@ -21,9 +20,13 @@ if (Meteor.isClient) {
         if (offense.localeCompare("Rape")==0) {return '#D4576E'}
         return "FFFFFF"
       }
-      Markers.find(query).observe({
-        added: function (document) {
-          var marker = new google.maps.Marker({
+      self.autorun(function() {
+        var handle = Meteor.subscribe('subsets', parameters);
+        if (handle.ready()) {
+          var documents = Markers.find().fetch();
+
+          _.each(documents, function(document) {
+            var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.latitude, document.longitude),
             map: map.instance,
             draggable: false,
@@ -36,51 +39,31 @@ if (Meteor.isClient) {
             opacity: 0.73,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
+              scale: getScaleFactor(map.instance.getZoom()) * (document.magnitude),
               strokeColor: getColor(document.offense),
               fillColor: getColor(document.offense),
               fillOpacity: 1,  
             },
           });
-          // every time the zoom is changed, adjust marker sizes
-          google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
-            marker.setIcon({
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
-                strokeColor: getColor(document.offense),
-                fillColor: getColor(document.offense),
-                fillOpacity: 1,   
-            });
-          });
-          // if a marker is clicked, display information about it
-          google.maps.event.addListener(marker, 'click', function(event) {
-            marker.infowindow.open(map.instance, marker);
-          });
 
-          markers[document._id] = marker;
-        },
-      });
+          })
+        }
+      })
     });
   });
 
-  // Search Helpers
-  Template.search.events({
-    'submit form': function(){
-      console.log(Router.current().params.query.q);
-    }
-  });
-
-  // Table Helpers
+  // Table
   Template.board.helpers({
     'marker': function() {
-      return Markers.find(query, {sort: {year:-1, month:-1, day:-1, time:-1}});
+      return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
-  // Pie chart and stuff 
+  // Pie chart
   Meteor.startup(function() {
-    Meteor.startup(function() {
+  
     GoogleMaps.load();
+    /**
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
@@ -109,7 +92,7 @@ if (Meteor.isClient) {
     };
 
     drawChart(chart);
-    });
+    **/
   });
 
   // Map style
@@ -241,6 +224,28 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+   Meteor.publish('subsets', function(parameters) {
+    data = [
+      Markers.find({"year": parameters.year, "month": parameters.month, "day": parameters.day}, {
+        fields: {
+          "year": 1,
+          "month": 1,
+          "day": 1,
+          "offense": 1,
+          "latitude": 1,
+          "longitude": 1,
+          "magnitude": 1,
+          "time": 1
+        }
+      })
+    ];
+    if (data) {
+      return data;
+    }
+    return this.ready();
+  });
+
+
   // Debugging helper as we figure out how to insert data points
   Meteor.startup(function() {
     return Meteor.methods({
