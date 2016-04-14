@@ -44,15 +44,18 @@ tbody{
 	height: 380px;
 }
 .input-group .search-bar {
-	width: 380px !important;
+	width: 370px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
 }
+#search-input {
+	width: 399px;
+}
 #search-button {
-	height: 30px;
+	height: 28px;
 	width: 30px;
-	margin-top: 2px;
+	margin-top: 1px;
 	margin-bottom: 1px;
 }
 i {

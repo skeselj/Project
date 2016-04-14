@@ -80,7 +80,18 @@
 <template name="search">
   <form class="navbar-form" role="search">
     <div class="input-group">
-      <input type="text" class="form-control search-bar" placeholder="Search our available cities" name="q">
+      
+      <div class="search-bar">
+        <script type="text/javascript">
+          $(".js-example-basic-single").select2();
+        </script>
+        <select class="js-example-basic-single" id="search-input">
+          <option value="AL">New York, NY</option>
+          <option value="AL">Chicago, IL</option>
+          <option value="WY">Los Angeles, CA</option>
+        </select>
+      </div>
+
       <div class="input-group-btn navbar-button">
         <button class="btn btn-default" id="search-button" type="submit">
           <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>

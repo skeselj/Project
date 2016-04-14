@@ -66,13 +66,8 @@ if (Meteor.isClient) {
           })
         }
       })
+  
       
-
-
-
-
-
-
       /**
       var markers = {};
       function getScaleFactor(zoom) {
@@ -295,10 +290,10 @@ if (Meteor.isClient) {
                  "weight": 1.2
               }]
             }]
-          };
-        }
+        };
       }
-    });
+    }
+  });
 }
 
 if (Meteor.isServer) {
