@@ -322,6 +322,9 @@ if (Meteor.isServer) {
     return Meteor.methods({
       removeAllMarkers: function() {
         return Markers.remove({});
+      },
+      removeAllImpressions: function() {
+        return Impressions.remove({});
       }
     });
   });
