@@ -1,21 +1,19 @@
 Markers = new Mongo.Collection('markers');
-var parameters = {year: 2006, month: 2, day: 22}
+var query = {year: 2006, month: 2, day: 22}
 
-// On Client and Server
-const Players = new Mongo.Collection('players'),
-  PlayersIndex = new EasySearch.Index({
-    collection: Players,
-    fields: ['name'],
-    engine: new EasySearch.Minimongo()
-  });
+Router.route("/", {
+  name: "/",
+  template: "homepage",
+  waitOn: function(){
+    // waitOn makes sure that this publication is ready before rendering your template
+    return Meteor.subscribe("subsets", query);
+  }
+});
 
 if (Meteor.isClient) {
-
   Template.map.onCreated(function() {
-    var self = this;
-
     GoogleMaps.ready('map', function(map) {
-      var markers = {}
+      var markers = {};
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
       };
@@ -28,13 +26,9 @@ if (Meteor.isClient) {
         if (offense.localeCompare("Rape")==0) {return '#D4576E'}
         return "FFFFFF"
       }
-      self.autorun(function() {
-        var handle = Meteor.subscribe('subsets', parameters);
-        if (handle.ready()) {
-          var documents = Markers.find().fetch();
-
-          _.each(documents, function(document) {
-            var marker = new google.maps.Marker({
+      Markers.find(query).observe({
+        added: function (document) {
+          var marker = new google.maps.Marker({
             position: new google.maps.LatLng(document.latitude, document.longitude),
             map: map.instance,
             draggable: false,
@@ -47,7 +41,7 @@ if (Meteor.isClient) {
             opacity: 0.73,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: getScaleFactor(map.instance.getZoom()) * (document.magnitude),
+              scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
               strokeColor: getColor(document.offense),
               fillColor: getColor(document.offense),
               fillOpacity: 1,  
@@ -69,10 +63,21 @@ if (Meteor.isClient) {
           });
 
           markers[document._id] = marker;
+        },
 
-          })
+        changed: function(newDocument, oldDocument) {
+          markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
+        },
+
+        removed: function(oldDocument) {
+          // Remove the marker from the map
+          markers[oldDocument._id].setMap(null);
+          // Clear the event listener
+          google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
+          // Remove the reference to this marker instance
+          delete markers[oldDocument._id];
         }
-      })
+      });
     });
   });
 
@@ -93,6 +98,7 @@ if (Meteor.isClient) {
   
     GoogleMaps.load();
     
+    /**
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
@@ -120,7 +126,7 @@ if (Meteor.isClient) {
     };
 
     drawChart(chart);
-    
+    **/
   });
 
   // Map style
@@ -264,7 +270,7 @@ if (Meteor.isServer) {
           "longitude": 1,
           "magnitude": 1,
           "time": 1
-        }
+        }   
       })
     ];
     if (data) {

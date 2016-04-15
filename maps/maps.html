@@ -1,108 +1,106 @@
-<head>
-  <title>Pre-Alpha</title>
-</head>
+<template name="homepage">
+  <head>
+    <title>Pre-Alpha</title>
+  </head>
 
-<body>
-    <div class="container">
+  <body>
+      <div class="container">
 
-      <nav class="navbar navbar-default" role="navigation">
-        <!-- brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">SafeCity</a>
-        </div>
-        <!-- collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <div class="search-bar">
-            <select class="form-control" id="search-bar">
-              {{> search}}
-            </select>
-          </div>
-          <div class="input-group-btn navbar-button">
-            <button class="btn btn-default" id="search-button" type="submit">
-              <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+        <nav class="navbar navbar-default" role="navigation">
+          <!-- brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="#">SafeCity</a>
           </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li id="about"><a href="#">About</a></li>
-            <button id="login" class="loginButtons">{{>loginButtons}}</button>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </nav>
+          <!-- collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="col-sm-3 col-md-3">
+              {{>search}}
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li id="about"><a href="#">About</a></li>
+              <button id="login" class="loginButtons">{{>loginButtons}}</button>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </nav>
 
-      <!-- page content -->
-      <div id="page-content-wrapper">
-        <div class="container-fluid">
-          <div class="row">
+        <!-- page content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
 
-            <!-- panel --> 
-            <div class="col-sm-4">
-              
-              <div class="panel with-nav-tabs panel-default">
-                <div class="panel-heading">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
-                    <li><a href="#tab2default" data-toggle="tab">Analytics</a></li>
-                    <li><a href="#tab3default" data-toggle="tab">Impressions</a></li>
-                  </ul>
-                </div>
-                <div class="panel-body">
-                  <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">
-                      {{ >board }}
-                    </div>
-                    <div class="tab-pane fade" id="tab2default">
-                      {{ >charts }}
-                    </div>
-                    <div class="tab-pane fade" id="tab3default">
-                      {{ >impressions }}
+              <!-- panel --> 
+              <div class="col-sm-4">
+                
+                <div class="panel with-nav-tabs panel-default">
+                  <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
+                      <li><a href="#tab2default" data-toggle="tab">Analytics</a></li>
+                      <li><a href="#tab3default" data-toggle="tab">Impressions</a></li>
+                    </ul>
+                  </div>
+                  <div class="panel-body">
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="tab1default">
+                        {{ >board }}
+                      </div>
+                      <div class="tab-pane fade" id="tab2default">
+                        {{ >charts }}
+                      </div>
+                      <div class="tab-pane fade" id="tab3default">
+                        {{ >impressions }}
+                      </div>
                     </div>
                   </div>
                 </div>
+
+              </div>
+
+              <!-- map -->
+              <div class="col-md-8">
+                {{> map}}
               </div>
 
             </div>
-
-            <!-- map -->
-            <div class="col-md-8">
-              {{> map}}
-            </div>
-
           </div>
         </div>
+        <!-- /#page-content-wrapper -->
+
       </div>
-      <!-- /#page-content-wrapper -->
 
-    </div>
-
-</body>
+  </body>
+</template>
 
 <!-- search template -->
 <template name="search">
-    <option disabled="disabled" selected="selected">Select the closest city to you</option> 
-  {{#each availableCity}}
-    <option value="{{this}}">{{this}}</option>
-  {{/each}}
-</template>
-
-<!--<template name="search">
   <form class="navbar-form" role="search">
     <div class="input-group">
       
       <div class="search-bar">
-        <select class="form-control" id="category">
-          {{> categories}}
+        <script type="text/javascript">
+          $(".js-example-basic-single").select2();
+        </script>
+        <select class="js-example-basic-single" id="search-input">
+          <option value="AL">New York, NY</option>
+          <option value="AL">Chicago, IL</option>
+          <option value="WY">Los Angeles, CA</option>
         </select>
       </div>
 
+      <div class="input-group-btn navbar-button">
+        <button class="btn btn-default" id="search-button" type="submit">
+          <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   </form>
-</template>-->
+</template>
 
 <!-- map template -->
 <template name="map">
@@ -189,8 +187,4 @@
       </span>
     </div>
   </div>
-</template>
-
-<!-- home template -->
-<template name="Home">
 </template>

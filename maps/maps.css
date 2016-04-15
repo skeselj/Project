@@ -43,9 +43,9 @@ tbody{
 .imp-panel-body{
 	height: 380px;
 }
-.input-group .search-bar {
-	width: 200px !important;
-	height: 30px !important;
+#search-bar {
+	width: 280px !important;
+	height: 28px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
 }
