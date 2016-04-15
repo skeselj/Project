@@ -23,6 +23,7 @@
               {{>search}}
             </div>
             <ul class="nav navbar-nav navbar-right">
+              <li id="contact"><a href="#">Contact</a></li>
               <li id="about"><a href="#">About</a></li>
               <button id="login" class="loginButtons">{{>loginButtons}}</button>
             </ul>
@@ -36,7 +37,6 @@
 
               <!-- panel --> 
               <div class="col-sm-4">
-                
                 <div class="panel with-nav-tabs panel-default">
                   <div class="panel-heading">
                     <ul class="nav nav-tabs">
@@ -60,6 +60,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-md-8">
                 {{> map}}
               </div>
@@ -81,8 +82,8 @@
         <script type="text/javascript">
           $(".js-example-basic-single").select2();
         </script>
-        <select class="js-example-basic-single" name="searchinput">
-          <option value="Select your city"></option>
+        <select class="js-example-basic-single" id="searchbarid" name="searchinput">
+          <option value="" disabled selected="selected">Select the city closest to you</option>
           <option value="NewYork">New York, NY</option>
           <option value="Chicago">Chicago, IL</option>
           <option value="LosAngeles">Los Angeles, CA</option>

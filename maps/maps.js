@@ -1,10 +1,6 @@
 Markers = new Mongo.Collection('markers');
-<<<<<<< HEAD
-var query = {year: 2006, month: 2, day: 11};
-=======
 Impressions = new Mongo.Collection('impression');
-var query = {year: 2006, month: 2, day: 11}
->>>>>>> 4a71d18ae960ab1be4700bd68fa0a50902e06a44
+var query = {year: 2006, month: 2, day: 11};
 
 Router.route("/", {
   name: "/",
@@ -106,7 +102,7 @@ if (Meteor.isClient) {
   Meteor.startup(function() {
     GoogleMaps.load();
     
-    /**
+
     var counter = new Object();
     var rows = [];
     var cursor = Markers.find({});
@@ -134,7 +130,7 @@ if (Meteor.isClient) {
     };
 
     drawChart(chart);
-    **/
+    
   });
 
   // Map style
@@ -290,13 +286,13 @@ if (Meteor.isClient) {
 
 Meteor.methods({
   'createImpression': function(impVar){
-        var currentUserId = Meteor.userId();
+        var currentUser = Meteor.user().emails[0].address;
         var date = new Date();
-        if(currentUserId && impVar.replace(/\s+/, "")){
+        if(currentUser && impVar.replace(/\s+/, "")){
             Impressions.insert({
                 impsn: impVar,
                 time: date.toString().substring(4, 21),
-                createdBy: currentUserId
+                createdBy: currentUser
             });
 
         }
