@@ -18,8 +18,15 @@
         </div>
         <!-- collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <div class="col-sm-3 col-md-3">
-            {{>search}}
+          <div class="search-bar">
+            <select class="form-control" id="search-bar">
+              {{> search}}
+            </select>
+          </div>
+          <div class="input-group-btn navbar-button">
+            <button class="btn btn-default" id="search-button" type="submit">
+              <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+            </button>
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li id="about"><a href="#">About</a></li>
@@ -77,28 +84,25 @@
 
 <!-- search template -->
 <template name="search">
+    <option disabled="disabled" selected="selected">Select the closest city to you</option> 
+  {{#each availableCity}}
+    <option value="{{this}}">{{this}}</option>
+  {{/each}}
+</template>
+
+<!--<template name="search">
   <form class="navbar-form" role="search">
     <div class="input-group">
       
       <div class="search-bar">
-        <script type="text/javascript">
-          $(".js-example-basic-single").select2();
-        </script>
-        <select class="js-example-basic-single" id="search-input">
-          <option value="NY">New York, NY</option>
-          <option value="IL">Chicago, IL</option>
-          <option value="CA">Los Angeles, CA</option>
+        <select class="form-control" id="category">
+          {{> categories}}
         </select>
       </div>
 
-      <div class="input-group-btn navbar-button">
-        <button class="btn btn-default" id="search-button" type="submit">
-          <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
-        </button>
-      </div>
     </div>
   </form>
-</template>
+</template>-->
 
 <!-- map template -->
 <template name="map">
@@ -148,13 +152,13 @@
       <li class="clearfix">
         <div class="chat-body clearfix">
           <div class="header">
-            <strong class="primary-font">Jack Sparrow</strong>
+            <strong class="primary-font">Hansen</strong>
             <small class="pull-right text-muted">
               2 mins ago
             </small>
           </div>
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+          New York is such a great place, I like walking around the parks and going to shows and stuff. It is even better than Princeton, NJ.
           </p>
         </div>
       </li>
@@ -162,13 +166,13 @@
       <li class="clearfix">
         <div class="chat-body clearfix">
           <div class="header">
-            <strong class="primary-font">Jack Sparrow</strong>
+            <strong class="primary-font">Moretti</strong>
             <small class="pull-right text-muted">
               12 mins ago
             </small>
           </div>
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+          This place sucks, do not ever go here. I was just minding my own business when this thug named Hansen runs up to me and steals all my papers.
           </p>
         </div>
       </li>
@@ -177,9 +181,9 @@
   <!-- /.panel-body -->
   <div class="panel-footer">
     <div class="input-group">
-      <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+      <input id="impression-input" type="text" class="form-control input-sm" placeholder="Your impression..." />
       <span class="input-group-btn">
-        <button class="btn btn-warning btn-sm" id="btn-chat">
+        <button class="btn btn-warning btn-sm" id="impression-button">
           Send
         </button>
       </span>

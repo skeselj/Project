@@ -1,6 +1,8 @@
 accounts-base@1.2.4
 accounts-password@1.1.6
 accounts-ui-unstyled@1.1.10
+aldeed:autoform@5.8.1
+aldeed:simple-schema@1.1.0
 allow-deny@1.0.2
 autoupdate@1.2.6
 babel-compiler@6.5.2
@@ -16,6 +18,7 @@ caching-compiler@1.0.2
 caching-html-compiler@1.0.4
 callback-hook@1.0.6
 check@1.1.2
+coffeescript@1.0.15
 dburles:google-maps@1.1.5
 ddp@1.2.3
 ddp-client@1.2.3
@@ -24,6 +27,9 @@ ddp-rate-limiter@1.0.2
 ddp-server@1.2.4
 deps@1.0.10
 diff-sequence@1.0.3
+easy:search@2.0.9
+easysearch:components@2.0.9
+easysearch:core@2.0.9
 ecmascript@0.4.1
 ecmascript-runtime@0.2.8
 ejson@1.0.9
@@ -55,6 +61,7 @@ mobile-experience@1.0.2
 mobile-status-bar@1.0.10
 modules@0.5.1
 modules-runtime@0.6.1
+momentjs:moment@2.10.6
 mongo@1.1.5
 mongo-id@1.0.2
 mrt:bootstrap-3@0.3.8
@@ -64,6 +71,12 @@ npm-bcrypt@0.7.8_2
 npm-mongo@1.4.41
 observe-sequence@1.0.9
 ordered-dict@1.0.5
+peerlibrary:assert@0.2.5
+peerlibrary:base-component@0.14.0
+peerlibrary:blaze-components@0.16.2
+peerlibrary:computed-field@0.3.1
+peerlibrary:data-lookup@0.1.0
+peerlibrary:reactive-field@0.1.0
 promise@0.6.5
 rafaelhdr:google-charts@0.0.2
 random@1.0.7

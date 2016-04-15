@@ -1,6 +1,13 @@
 Markers = new Mongo.Collection('markers');
-//var query = {"year":2006, "month":2, "day":22};
 var parameters = {year: 2006, month: 2, day: 22}
+
+// On Client and Server
+const Players = new Mongo.Collection('players'),
+  PlayersIndex = new EasySearch.Index({
+    collection: Players,
+    fields: ['name'],
+    engine: new EasySearch.Minimongo()
+  });
 
 if (Meteor.isClient) {
 
@@ -67,6 +74,11 @@ if (Meteor.isClient) {
         }
       })
     });
+  });
+
+  // Experimental
+  Template.search.helpers({
+    availableCity: ["New York, NY", "Chicago, IL", "Los Angeles, CA"]
   });
 
   // Table

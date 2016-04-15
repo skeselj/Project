@@ -44,7 +44,7 @@ tbody{
 	height: 380px;
 }
 .input-group .search-bar {
-	width: 370px !important;
+	width: 200px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
@@ -69,6 +69,12 @@ i {
 }
 #login {
 	margin-right: 20px;
+}
+#impression-input {
+	height: 28px;
+}
+#impression-button {
+	height: 28px;
 }
 
 /********************************************************************/
