@@ -279,7 +279,7 @@ if (Meteor.isClient) {
 Meteor.methods({
   'createImpression': function(impVar){
         var currentUserId = Meteor.userId();
-        if(currentUserId){
+        if(currentUserId && impVar.replace(/\s+/, "")){
             Impressions.insert({
                 impsn: impVar,
                 createdBy: currentUserId
