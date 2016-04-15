@@ -1,5 +1,5 @@
 Markers = new Mongo.Collection('markers');
-var query = {year: 2006, month: 2, day: 11}
+var query = {year: 2006, month: 2, day: 11};
 
 Router.route("/", {
   name: "/",
@@ -13,6 +13,8 @@ Router.route("/", {
 if (Meteor.isClient) {
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
+      city = $("#search-input" ).val();
+      map.instance.setCenter(getCityLocation(Session.get('city')));
       var markers = {};
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
@@ -81,10 +83,12 @@ if (Meteor.isClient) {
     });
   });
 
-  // Experimental
-  Template.search.helpers({
-    availableCity: ["New York, NY", "Chicago, IL", "Los Angeles, CA"]
-  });
+  // Seach bar
+  Template.search.events({
+    'submit form': function(event) {
+      Session.setPersistent('city', event.target.searchinput.value);
+    }
+  })
 
   // Table
   Template.board.helpers({
@@ -95,7 +99,6 @@ if (Meteor.isClient) {
 
   // Pie chart
   Meteor.startup(function() {
-  
     GoogleMaps.load();
     
     /**
@@ -130,11 +133,16 @@ if (Meteor.isClient) {
   });
 
   // Map style
+  function getCityLocation(name) {
+    if (name.localeCompare("NewYork")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
+    if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
+    if (name.localeCompare("LosAngeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
+  }
   Template.map.helpers({
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
         return {
-          center: new google.maps.LatLng(40.7148544,-74.0166855),
+          center: getCityLocation("NewYork"),
           zoom: 12,
           disableDefaultUI: true,
           zoomControl: true,

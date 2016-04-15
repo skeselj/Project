@@ -59,23 +59,18 @@
                     </div>
                   </div>
                 </div>
-
               </div>
-
-              <!-- map -->
               <div class="col-md-8">
                 {{> map}}
               </div>
-
             </div>
           </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
       </div>
-
   </body>
 </template>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 <!-- search template -->
 <template name="search">
@@ -86,13 +81,13 @@
         <script type="text/javascript">
           $(".js-example-basic-single").select2();
         </script>
-        <select class="js-example-basic-single" id="search-input">
-          <option value="AL">New York, NY</option>
-          <option value="AL">Chicago, IL</option>
-          <option value="WY">Los Angeles, CA</option>
+        <select class="js-example-basic-single" name="searchinput">
+          <option value="Select your city"></option>
+          <option value="NewYork">New York, NY</option>
+          <option value="Chicago">Chicago, IL</option>
+          <option value="LosAngeles">Los Angeles, CA</option>
         </select>
       </div>
-
       <div class="input-group-btn navbar-button">
         <button class="btn btn-default" id="search-button" type="submit">
           <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
