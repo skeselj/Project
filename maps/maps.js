@@ -1,4 +1,5 @@
 Markers = new Mongo.Collection('markers');
+Impressions = new Mongo.Collection('impression');
 var query = {year: 2006, month: 2, day: 11}
 
 Router.route("/", {
@@ -255,7 +256,37 @@ if (Meteor.isClient) {
       }
     }
   });
+
+  Template.addImpressionForm.events({
+        'submit form': function(){
+            event.preventDefault();
+            var impVar = event.target.impressiontext.value;
+            Meteor.call('createImpression', impVar);
+            event.target.impressiontext.value = "";
+        }
+    });
+
+  Template.impressions.helpers({
+    'implist': function(){
+      var currentUserId = Meteor.userId();
+      return Impressions.find({});
+    }
+  });
+
+  Meteor.subscribe('theImpressions');
 }
+
+Meteor.methods({
+  'createImpression': function(impVar){
+        var currentUserId = Meteor.userId();
+        if(currentUserId){
+            Impressions.insert({
+                impsn: impVar,
+                createdBy: currentUserId
+            });
+        }
+    }
+});
 
 if (Meteor.isServer) {
    Meteor.publish('subsets', function(parameters) {
@@ -279,6 +310,11 @@ if (Meteor.isServer) {
     //console.log(this.ready());
     return this.ready();
   });
+
+   Meteor.publish('theImpressions', function(){
+        var currentUserId = this.userId;
+        return Impressions.find({});
+    });
 
 
   // Debugging helper as we figure out how to insert data points
