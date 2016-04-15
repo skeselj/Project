@@ -139,40 +139,40 @@
 <!-- impressions template -->
 <template name="impressions">
   <!-- /.panel-heading -->
-  <div class="imp-panel-body">
+    <div class="imp-panel-body">
     <ul class="chat">
       <!-- sample entry -->
+      {{#each implist}}
       <li class="clearfix">
         <div class="chat-body clearfix">
           <div class="header">
-            <strong class="primary-font">Hansen</strong>
+            <strong class="primary-font">{{createdBy}}</strong>
             <small class="pull-right text-muted">
-              2 mins ago
+              {{time}}
             </small>
           </div>
           <p>
-          New York is such a great place, I like walking around the parks and going to shows and stuff. It is even better than Princeton, NJ.
+          {{impsn}}
           </p>
         </div>
       </li>
+      {{/each}}
       <!-- end sample -->
-      <li class="clearfix">
-        <div class="chat-body clearfix">
-          <div class="header">
-            <strong class="primary-font">Moretti</strong>
-            <small class="pull-right text-muted">
-              12 mins ago
-            </small>
-          </div>
-          <p>
-          This place sucks, do not ever go here. I was just minding my own business when this thug named Hansen runs up to me and steals all my papers.
-          </p>
-        </div>
-      </li>
     </ul>
   </div>
   <!-- /.panel-body -->
-  <div class="panel-footer">
+  {{#if currentUser}}
+    {{> addImpressionForm}}
+  {{/if}}
+</template>
+
+<template name="addImpressionForm">
+  <form>
+    <input type="text" name="impressiontext">
+    <input type="submit" value="Add Impression">
+  </form>
+
+  <!-- <div class="panel-footer">
     <div class="input-group">
       <input id="impression-input" type="text" class="form-control input-sm" placeholder="Your impression..." />
       <span class="input-group-btn">
@@ -181,5 +181,5 @@
         </button>
       </span>
     </div>
-  </div>
+  </div> -->
 </template>

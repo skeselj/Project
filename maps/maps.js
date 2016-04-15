@@ -1,5 +1,10 @@
 Markers = new Mongo.Collection('markers');
+<<<<<<< HEAD
 var query = {year: 2006, month: 2, day: 11};
+=======
+Impressions = new Mongo.Collection('impression');
+var query = {year: 2006, month: 2, day: 11}
+>>>>>>> 4a71d18ae960ab1be4700bd68fa0a50902e06a44
 
 Router.route("/", {
   name: "/",
@@ -263,7 +268,40 @@ if (Meteor.isClient) {
       }
     }
   });
+
+  Template.addImpressionForm.events({
+        'submit form': function(){
+            event.preventDefault();
+            var impVar = event.target.impressiontext.value;
+            Meteor.call('createImpression', impVar);
+            event.target.impressiontext.value = "";
+        }
+    });
+
+  Template.impressions.helpers({
+    'implist': function(){
+      var currentUserId = Meteor.userId();
+      return Impressions.find({});
+    }
+  });
+
+  Meteor.subscribe('theImpressions');
 }
+
+Meteor.methods({
+  'createImpression': function(impVar){
+        var currentUserId = Meteor.userId();
+        var date = new Date();
+        if(currentUserId && impVar.replace(/\s+/, "")){
+            Impressions.insert({
+                impsn: impVar,
+                time: date.toString().substring(4, 21),
+                createdBy: currentUserId
+            });
+
+        }
+    }
+});
 
 if (Meteor.isServer) {
    Meteor.publish('subsets', function(parameters) {
@@ -288,12 +326,20 @@ if (Meteor.isServer) {
     return this.ready();
   });
 
+   Meteor.publish('theImpressions', function(){
+        var currentUserId = this.userId;
+        return Impressions.find({});
+    });
+
 
   // Debugging helper as we figure out how to insert data points
   Meteor.startup(function() {
     return Meteor.methods({
       removeAllMarkers: function() {
         return Markers.remove({});
+      },
+      removeAllImpressions: function() {
+        return Impressions.remove({});
       }
     });
   });
