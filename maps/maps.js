@@ -279,11 +279,14 @@ if (Meteor.isClient) {
 Meteor.methods({
   'createImpression': function(impVar){
         var currentUserId = Meteor.userId();
+        var date = new Date();
         if(currentUserId && impVar.replace(/\s+/, "")){
             Impressions.insert({
                 impsn: impVar,
+                time: date.toString().substring(4, 21),
                 createdBy: currentUserId
             });
+
         }
     }
 });
