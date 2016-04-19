@@ -1,4 +1,4 @@
-<template name="homepage">
+ <template name="homepage">
   <head>
     <title>Pre-Alpha</title>
   </head>
@@ -51,7 +51,7 @@
                         {{ >board }}
                       </div>
                       <div class="tab-pane fade" id="tab2default">
-                        {{ >charts }}
+                        {{ > charts}}
                       </div>
                       <div class="tab-pane fade" id="tab3default">
                         {{ >impressions }}
@@ -132,9 +132,10 @@
   </div>
 </template>
 
-<!-- chart template -->
+<!-- doughnut chart template -->
 <template name="charts">
-  <div id="chart1" width="100%"></div>
+  <h1 id= "chartTitle">Types of Crimes</h1>
+  <canvas id="doughnutChart" width='248' height='248'></canvas>
 </template>
 
 <!-- impressions template -->
