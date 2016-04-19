@@ -103,6 +103,7 @@ if (Meteor.isClient) {
   Meteor.startup(function() {
     GoogleMaps.load();
     
+    Session.setPersistent('city', 'NewYork');
 
     var counter = new Object();
     var rows = [];
