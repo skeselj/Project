@@ -1,3 +1,9 @@
+##### Script to import all Marker data #####
+
+
+### New York ###
+
+# core mechanism #
 awk '
 BEGIN {
 	FS = ","
@@ -17,8 +23,9 @@ BEGIN {
 		}
 		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),substr(adjoff,1,length(adjoff)-1),parts[1],parts[2],date[1],date[2],date[3])
 	}
-}' 'test.csv' > 'idealish.csv'
+}' 'rawNewYork.csv' > 'partialNewYork.csv'
 
+# additional formating for Motor Larceny #
 awk '
 BEGIN {
 	FS = ","
@@ -31,7 +38,16 @@ BEGIN {
 		}
 		printf("%s,%s,%s,%s,%s,%s,%s,%s\n", $1,$2,$3,$4,$5,$6,$7,$8)
 	}
-}' 'idealish.csv' > 'ideal.csv'
+}' 'partialNewYork.csv' > 'completeNewYork.csv'
+
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file completeNewYork.csv --headerline
+
+rm partialNewYork.csv completeNewYork.csv 
+
+### Chicago ###
+
+# core mechanism #
 
 
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file ideal.csv --headerline
+
+

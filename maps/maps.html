@@ -23,7 +23,7 @@
               {{>search}}
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li id="contact"><a href="#">Contact</a></li>
+              <!--<li id="contact"><a href="#">Contact</a></li> -->
               <li id="about"><a href="#">About</a></li>
               <button id="login" class="loginButtons">{{>loginButtons}}</button>
             </ul>
@@ -64,6 +64,11 @@
               <div class="col-md-8">
                 {{> map}}
               </div>
+
+              <div class="col-sm-3 col-md-3">
+                {{> dateSelect}}
+              </div>
+
             </div>
           </div>
         </div>
@@ -72,6 +77,20 @@
 </template>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!-- dateSelect template -->
+<template name="dateSelect">
+  <form class="form-inline" role="select">
+    <div class="input-group" id="dateSelect">
+      <input type="text" id="inputMonth" placeholder="month">
+      <input type="text" id="inputDay" placeholder="day">
+      <input type="text" id="inputYear" placeholder="year">
+      <button class="btn btn-default" id="date-button" type="submit">
+        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</template>
 
 <!-- search template -->
 <template name="search">
