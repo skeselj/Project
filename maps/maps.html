@@ -153,8 +153,13 @@
 
 <!-- doughnut chart template -->
 <template name="charts">
-  <h1 id= "chartTitle">Types of Crimes</h1>
-  <canvas id="doughnutChart" width='248' height='248'></canvas>
+  {{#if Template.subscriptionsReady}}
+    <h1 id= "chartTitle">Types of Crimes</h1>
+    <canvas id="doughnutChart" width='248' height='248'></canvas>
+  {{else}}
+      <p>Loading...</p>
+  {{/if}}
+
 </template>
 
 <!-- impressions template -->

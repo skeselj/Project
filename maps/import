@@ -7,7 +7,7 @@
 awk '
 BEGIN {
 	FS = ","
-	print("latitude,longitude,offense,time,day,month,year,magnitude")
+	print("latitude,longitude,offense,time,month,day,year,magnitude")
 } 
 {
 	if (NR > 1) {
@@ -21,8 +21,13 @@ BEGIN {
 		for (i = 1; i <= n; i++) {
 			adjoff = adjoff""substr(offense[i],1,1)""tolower(substr(offense[i],2))" "
 		}
-		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),substr(adjoff,1,length(adjoff)-1),parts[1],parts[2],date[1],date[2],date[3])
+		if (substr(adjoff,1,length(adjoff)-1) == "Grand Larceny Of Motor Vehicle")
+			crime = "Motor Larceny"
+		else
+			crime = substr(adjoff,1,length(adjoff)-1)
+		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
 	}
+<<<<<<< HEAD
 }' 'rawNewYork.csv' > 'partialNewYork.csv'
 
 # additional formating for Motor Larceny #
@@ -51,3 +56,8 @@ rm partialNewYork.csv completeNewYork.csv
 
 
 
+=======
+}' 'ny14-15.csv' > 'idealny14-15.csv'
+
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
+>>>>>>> 719fff0dac27aeb33ede67cd519eaaaa9b478a48
