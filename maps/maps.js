@@ -1,7 +1,6 @@
 Markers = new Mongo.Collection('markers');
 Impressions = new Mongo.Collection('impression');
-var query = {year: 2006, month: 2, day: 11};
-var query = {year: 2006, month: 2, day: 11}
+var query = {year: 2014, month: 2, day: 13};
 
 Router.route("/", {
   name: "/",
