@@ -79,7 +79,7 @@
 <template name="date">
   <form role="select">
     <div class="input-group datetimepicker" id="calendarinput1">
-      <input name="date" placeholder="crimes since" class="set-due-date form-control" type="text" color="black">
+      <input name="date" placeholder="02/12/2014 12:00 AM" class="set-due-date form-control" type="text" color="black">
       <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
     </div>
   </form>
@@ -94,7 +94,7 @@
           $(".js-example-basic-single").select2();
         </script>
         <select class="js-example-basic-single" id="searchbarid" name="city">
-          <option value="NewYork" disabled selected="selected">city closest to you</option>
+          <option color="grey" value="NewYork" disabled selected="selected">your city</option>
           <option value="NewYork">New York, NY</option>
           <option value="Chicago">Chicago, IL</option>
           <option value="LosAngeles">Los Angeles, CA</option>
@@ -189,15 +189,4 @@
     <input type="text" name="impressiontext">
     <input type="submit" value="Add Impression">
   </form>
-
-  <!-- <div class="panel-footer">
-    <div class="input-group">
-      <input id="impression-input" type="text" class="form-control input-sm" placeholder="Your impression..." />
-      <span class="input-group-btn">
-        <button class="btn btn-warning btn-sm" id="impression-button">
-          Send
-        </button>
-      </span>
-    </div>
-  </div> -->
 </template>

@@ -57,17 +57,17 @@ form input[type=text] {
 
 /* search bar */
 .search-bar {
-	width: 152px !important;
+	width: 142px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
 }
 #searchbarid {
-	width: 147px !important;
+	width: 157px !important;
 }
 #search-button {
 	height: 28px;
-	width: 28px;
+	width: 22px;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
