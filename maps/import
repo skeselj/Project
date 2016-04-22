@@ -7,7 +7,7 @@
 awk '
 BEGIN {
 	FS = ","
-	print("latitude,longitude,offense,time,month,day,year,magnitude")
+	print("latitude,longitude,offense,time,month,day,year,magnitude,city")
 } 
 {
 	if (NR > 1) {
@@ -25,7 +25,7 @@ BEGIN {
 			crime = "Motor Larceny"
 		else
 			crime = substr(adjoff,1,length(adjoff)-1)
-		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
+		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3,New York\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
 	}
 
 }' 'rawNewYork.csv' > 'processedNewYork.csv'
@@ -45,9 +45,7 @@ BEGIN {
 #	}
 #}' 'partialNewYork.csv' > 'completeNewYork.csv'
 
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file completeNewYork.csv --headerline
-
-rm partialNewYork.csv processedNewYork.csv 
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file processedNewYork.csv --headerline
 
 ### Chicago ###
 
@@ -59,4 +57,4 @@ rm partialNewYork.csv processedNewYork.csv
 
 #}' 'ny14-15.csv' > 'idealny14-15.csv'
 
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
+#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline

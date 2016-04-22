@@ -79,7 +79,7 @@
 <template name="date">
   <form role="select">
     <div class="input-group datetimepicker" id="calendarinput1">
-      <input name="date" placeholder="02/12/2014 12:00 AM" class="set-due-date form-control" type="text" color="black">
+      <input name="date" placeholder="02/13/2014 12:00 AM" class="set-due-date form-control" type="text" color="black">
       <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
     </div>
   </form>
@@ -94,10 +94,10 @@
           $(".js-example-basic-single").select2();
         </script>
         <select class="js-example-basic-single" id="searchbarid" name="city">
-          <option color="grey" value="NewYork" disabled selected="selected" id="defaultoption">your city</option>
-          <option value="NewYork">New York, NY</option>
+          <option color="grey" value="New York" disabled selected="selected" id="defaultoption">select city</option>
+          <option value="New York">New York, NY</option>
           <option value="Chicago">Chicago, IL</option>
-          <option value="LosAngeles">Los Angeles, CA</option>
+          <option value="Los Angeles">Los Angeles, CA</option>
         </select>
       </div>
       <div class="input-group-btn navbar-button">
@@ -157,7 +157,7 @@
 <!-- impressions template -->
 <template name="impressions">
   <!-- /.panel-heading -->
-    <div class="imp-panel-body">
+  <div class="imp-panel-body">
     <ul class="chat">
       <!-- sample entry -->
       {{#each implist}}
@@ -169,6 +169,9 @@
               {{time}}
             </small>
           </div>
+          <small class="pull-right text-muted">
+            {{city}}
+          </small>
           <p>
           {{impsn}}
           </p>
@@ -186,7 +189,7 @@
 
 <template name="addImpressionForm">
   <form>
-    <input type="text" name="impressiontext">
+    <input id="impressioninput" type="text" name="impressiontext">
     <button class="btn btn-default" id="impression-button" type="submit">
       <i id="plusicon" class="fa fa-plus fa-lg" aria-hidden="true"></i>
     </button>

@@ -4,8 +4,14 @@ Impressions = new Mongo.Collection('impression');
 Router.route("/", {
   name: "/",
   template: "homepage",
+  // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function(){
-    // waitOn makes sure that this publication is ready before rendering your template
+    city = Router.current().params.query.city;
+    if (city == null) {city = "New York"}
+    
+    impressionsQuery = {city: city}
+    Meteor.subscribe('subsetImpressions', impressionsQuery);
+
     date = Session.get('date');
     if (date != null) {
       dates = date.split(" ");
@@ -13,12 +19,12 @@ Router.route("/", {
       month = parseInt(date1[0]);
       day = parseInt(date1[1]);
       year = parseInt(date1[2]);
-      query = {year: year, month: month, day: day}
+      markerQuery = {year: year, month: month, day: day, city: city}
     }
     else {
-      query = {year: 2014, month: 2, day: 13}
+      markerQuery = {year: 2014, month: 2, day: 13, city: city}
     }
-    return Meteor.subscribe("subsets", query);
+    return Meteor.subscribe("subsetMarkers", markerQuery);
   }
 });
 
@@ -27,14 +33,14 @@ if (Meteor.isClient) {
   // initialization 
   Meteor.startup(function() {
     GoogleMaps.load();
-    Session.setPersistent('city', 'NewYork');
+    //Session.setPersistent('city', 'NewYork');
   });
 
   // map functionality
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
       city = Router.current().params.query.city;
-      if (city == null) {city = "NewYork"}
+      if (city == null) {city = "New York"}
       map.instance.setCenter(getCityLocation(city));
       var markers = {};
       function getScaleFactor(zoom) {
@@ -128,17 +134,20 @@ if (Meteor.isClient) {
   // data
   Template.board.helpers({
     'marker': function() {
+      //var city = Router.current().params.query.city;  
+      //if (city == null) {city = "New York"}
       return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
   // impressions
-  Meteor.subscribe('theImpressions');
   Template.addImpressionForm.events({
     'submit form': function(){
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
-        Meteor.call('createImpression', impVar);
+        var city = Router.current().params.query.city;  
+        if (city == null) {city = "New York"}
+        Meteor.call('createImpression', impVar, city);
         event.target.impressiontext.value = "";
     }
   });
@@ -151,14 +160,14 @@ if (Meteor.isClient) {
 
   // map styling
   function getCityLocation(name) {
-    if (name.localeCompare("NewYork")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
+    if (name.localeCompare("New York")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
     if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
-    if (name.localeCompare("LosAngeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
+    if (name.localeCompare("Los Angeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
   }
   Template.map.helpers({
     mapOptions: function() {
       var city = Router.current().params.query.city;  
-      if (city == null) {city = "NewYork"}
+      if (city == null) {city = "New York"}
       if (GoogleMaps.loaded()) {
         return {
           center: getCityLocation(city),
@@ -356,14 +365,15 @@ if (Meteor.isClient) {
 // ****************************************************************************************
 
 Meteor.methods({
-  'createImpression': function(impVar){
+  'createImpression': function(impVar, cityVar){
     var currentUser = Meteor.user().emails[0].address;
     var date = new Date();
     if(currentUser && impVar.replace(/\s+/, "")){
         Impressions.insert({
           impsn: impVar,
           time: date.toString().substring(4, 21),
-          createdBy: currentUser
+          createdBy: currentUser,
+          city: cityVar,
       });
     }
   }
@@ -372,7 +382,7 @@ Meteor.methods({
 // ****************************************************************************************
 
 if (Meteor.isServer) {
-   Meteor.publish('subsets', function(parameters) {
+  Meteor.publish('subsetMarkers', function(parameters) {
     data = [
       Markers.find({"year": parameters.year, "month": parameters.month, "day": parameters.day}, {
         fields: {
@@ -383,9 +393,11 @@ if (Meteor.isServer) {
           "latitude": 1,
           "longitude": 1,
           "magnitude": 1,
-          "time": 1
+          "time": 1,
+          "city": 1,
         }   
       })
+      //Markers.find({})
     ];
     if (data) {
       return data;
@@ -394,9 +406,15 @@ if (Meteor.isServer) {
     return this.ready();
   });
 
-   Meteor.publish('theImpressions', function(){
-        var currentUserId = this.userId;
-        return Impressions.find({});
+  Meteor.publish('subsetImpressions', function(parameters){
+    var currentUserId = this.userId;
+    data = [
+      Impressions.find({"city": parameters.city})
+    ];
+    if (data) {
+      return data;
+    }
+    return this.read();
     });
 
 
