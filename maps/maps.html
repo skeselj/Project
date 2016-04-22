@@ -79,7 +79,7 @@
 <template name="date">
   <form role="select">
     <div class="input-group datetimepicker" id="calendarinput1">
-      <input name="date" placeholder="02/13/2014 12:00 AM" class="set-due-date form-control" type="text" color="black">
+      <input name="date" placeholder="02/13/1914 12:00 AM" class="set-due-date form-control" type="text" color="black">
       <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
     </div>
   </form>
@@ -134,7 +134,7 @@
       {{#each marker}}
         <tr>
           <td class="time">{{time}}</td>
-          <td class="date">{{day}}/{{month}}/{{year}}</td>
+          <td class="date">{{month}}/{{day}}/{{year}}</td>
           <td class="offense">{{offense}}</td>
         </tr>
       {{/each}}

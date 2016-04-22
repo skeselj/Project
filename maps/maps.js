@@ -22,7 +22,7 @@ Router.route("/", {
       markerQuery = {year: year, month: month, day: day, city: city}
     }
     else {
-      markerQuery = {year: 2014, month: 2, day: 13, city: city}
+      markerQuery = {year: 1914, month: 2, day: 13, city: city}
     }
     return Meteor.subscribe("subsetMarkers", markerQuery);
   }
@@ -53,7 +53,7 @@ if (Meteor.isClient) {
         if (offense.localeCompare("Burglary")==0) {return '#81D6BE'}
         if (offense.localeCompare("Felony Assault")==0) {return '#B781D6'}
         if (offense.localeCompare("Rape")==0) {return '#D4576E'}
-        return "FFFFFF"
+        return "#CCFF66"
       }
       Markers.find().observe({
         added: function (document) {

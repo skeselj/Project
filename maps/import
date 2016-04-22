@@ -47,14 +47,18 @@ BEGIN {
 
 mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file processedNewYork.csv --headerline
 
+# some relics
+#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
+#}' 'ny14-15.csv' > 'idealny14-15.csv'
+
+
 ### Chicago ###
 
 # core mechanism #
+python import_chicago.py ../../rawChicago.csv > 'processedChicago.csv'
+
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file processedChicago.csv --headerline
 
 
 
 
-
-#}' 'ny14-15.csv' > 'idealny14-15.csv'
-
-#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
