@@ -76,7 +76,7 @@
   </body>
 </template>
 
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- ******************************************************************** -->
 
 <!-- dateSelect template -->
 <template name="dateSelect">
@@ -101,8 +101,8 @@
         <script type="text/javascript">
           $(".js-example-basic-single").select2();
         </script>
-        <select class="js-example-basic-single" id="searchbarid" name="searchinput">
-          <option value="" disabled selected="selected">Select the city closest to you</option>
+        <select class="js-example-basic-single" id="searchbarid" name="city">
+          <option value="NewYork" disabled selected="selected">Select the city closest to you</option>
           <option value="NewYork">New York, NY</option>
           <option value="Chicago">Chicago, IL</option>
           <option value="LosAngeles">Los Angeles, CA</option>
@@ -138,7 +138,7 @@
           <th class="date">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
           <th class="offense">Type</th>
       </thead>
-      <tbody>
+      <tbody bgcolor>
       {{#each marker}}
         <tr>
           <td class="time">{{time}}</td>

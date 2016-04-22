@@ -12,10 +12,19 @@ Router.route("/", {
 });
 
 if (Meteor.isClient) {
+
+  // initialization 
+  Meteor.startup(function() {
+    GoogleMaps.load();
+    //Session.set('city', 'NewYork');
+  });
+
+  // map functionality
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
-      city = $("#search-input" ).val();
-      map.instance.setCenter(getCityLocation(Session.get('city')));
+      city = Router.current().params.query.city;
+      if (city == null) {city = "NewYork"}
+      map.instance.setCenter(getCityLocation(city));
       var markers = {};
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
@@ -84,28 +93,39 @@ if (Meteor.isClient) {
     });
   });
 
-  // Seach bar
+  // search bar
   Template.search.events({
     'submit form': function(event) {
-      Session.setPersistent('city', event.target.searchinput.value);
+      Session.setPersistent('city', event.target.city.value);
     }
   })
 
-  // Table
+  // data
   Template.board.helpers({
     'marker': function() {
       return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
 
-  
-  Meteor.startup(function() {
-    GoogleMaps.load();
-    Session.setPersistent('city', 'NewYork');
-
+  // impressions
+  Meteor.subscribe('theImpressions');
+  Template.addImpressionForm.events({
+    'submit form': function(){
+        console.log("check");
+        event.preventDefault();
+        var impVar = event.target.impressiontext.value;
+        Meteor.call('createImpression', impVar);
+        event.target.impressiontext.value = "";
+    }
+  });
+  Template.impressions.helpers({
+    'implist': function(){
+      var currentUserId = Meteor.userId();
+      return Impressions.find({});
+    }
   });
 
-  // Map style
+  // map styling
   function getCityLocation(name) {
     if (name.localeCompare("NewYork")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
     if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
@@ -113,9 +133,11 @@ if (Meteor.isClient) {
   }
   Template.map.helpers({
     mapOptions: function() {
+      var city = Router.current().params.query.city;  
+      if (city == null) {city = "NewYork"}
       if (GoogleMaps.loaded()) {
         return {
-          center: getCityLocation("NewYork"),
+          center: getCityLocation(city),
           zoom: 12,
           disableDefaultUI: true,
           zoomControl: true,
@@ -237,24 +259,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.addImpressionForm.events({
-        'submit form': function(){
-            event.preventDefault();
-            var impVar = event.target.impressiontext.value;
-            Meteor.call('createImpression', impVar);
-            event.target.impressiontext.value = "";
-        }
-    });
-
-  Template.impressions.helpers({
-    'implist': function(){
-      var currentUserId = Meteor.userId();
-      return Impressions.find({});
-    }
-  });
-
-  Meteor.subscribe('theImpressions');
-
+  // analytics
   Template.charts.onRendered(function() {
     Tracker.autorun(function() {
       var ctx = document.getElementById("doughnutChart").getContext("2d");
@@ -324,20 +329,23 @@ if (Meteor.isClient) {
   });
 }
 
-Meteor.methods({
-  'createImpression': function(impVar){
-        var currentUser = Meteor.user().emails[0].address;
-        var date = new Date();
-        if(currentUser && impVar.replace(/\s+/, "")){
-            Impressions.insert({
-                impsn: impVar,
-                time: date.toString().substring(4, 21),
-                createdBy: currentUser
-            });
+// ****************************************************************************************
 
-        }
+  Meteor.methods({
+    'createImpression': function(impVar){
+      var currentUser = Meteor.user().emails[0].address;
+      var date = new Date();
+      if(currentUser && impVar.replace(/\s+/, "")){
+          Impressions.insert({
+            impsn: impVar,
+            time: date.toString().substring(4, 21),
+            createdBy: currentUser
+        });
+      }
     }
-});
+  });
+
+// ****************************************************************************************
 
 if (Meteor.isServer) {
    Meteor.publish('subsets', function(parameters) {

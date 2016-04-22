@@ -27,27 +27,27 @@ BEGIN {
 			crime = substr(adjoff,1,length(adjoff)-1)
 		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
 	}
-<<<<<<< HEAD
-}' 'rawNewYork.csv' > 'partialNewYork.csv'
+
+}' 'rawNewYork.csv' > 'processedNewYork.csv'
 
 # additional formating for Motor Larceny #
-awk '
-BEGIN {
-	FS = ","
-	print("latitude,longitude,offense,time,month,day,year,magnitude")
-}
-{
-	if (NR > 1) {
-		if ($3 == "Grand Larceny Of Motor Vehicle") {
-			$3 = "Motor Larceny"
-		}
-		printf("%s,%s,%s,%s,%s,%s,%s,%s\n", $1,$2,$3,$4,$5,$6,$7,$8)
-	}
-}' 'partialNewYork.csv' > 'completeNewYork.csv'
+#awk '
+#BEGIN {
+#	FS = ","
+#	print(#"latitude,longitude,offense,time,month,day,year,magnitude")
+#}
+#{
+#	if (NR > 1) {
+#		if ($3 == "Grand Larceny Of Motor Vehicle") {
+#			$3 = "Motor Larceny"
+#		}
+#		printf("%s,%s,%s,%s,%s,%s,%s,%s\n", #$1,$2,$3,$4,$5,$6,$7,$8)
+#	}
+#}' 'partialNewYork.csv' > 'completeNewYork.csv'
 
 mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file completeNewYork.csv --headerline
 
-rm partialNewYork.csv completeNewYork.csv 
+rm partialNewYork.csv processedNewYork.csv 
 
 ### Chicago ###
 
@@ -56,8 +56,7 @@ rm partialNewYork.csv completeNewYork.csv
 
 
 
-=======
-}' 'ny14-15.csv' > 'idealny14-15.csv'
+
+#}' 'ny14-15.csv' > 'idealny14-15.csv'
 
 mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
->>>>>>> 719fff0dac27aeb33ede67cd519eaaaa9b478a48
