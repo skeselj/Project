@@ -94,7 +94,7 @@
           $(".js-example-basic-single").select2();
         </script>
         <select class="js-example-basic-single" id="searchbarid" name="city">
-          <option color="grey" value="NewYork" disabled selected="selected">your city</option>
+          <option color="grey" value="NewYork" disabled selected="selected" id="defaultoption">your city</option>
           <option value="NewYork">New York, NY</option>
           <option value="Chicago">Chicago, IL</option>
           <option value="LosAngeles">Los Angeles, CA</option>
@@ -187,6 +187,8 @@
 <template name="addImpressionForm">
   <form>
     <input type="text" name="impressiontext">
-    <input type="submit" value="Add Impression">
+    <button class="btn btn-default" id="impression-button" type="submit">
+      <i id="plusicon" class="fa fa-plus fa-lg" aria-hidden="true"></i>
+    </button>
   </form>
 </template>

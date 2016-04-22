@@ -136,7 +136,6 @@ if (Meteor.isClient) {
   Meteor.subscribe('theImpressions');
   Template.addImpressionForm.events({
     'submit form': function(){
-        console.log("check");
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
         Meteor.call('createImpression', impVar);

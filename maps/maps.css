@@ -42,11 +42,23 @@ form input[type=text] {
 }
 
 /* impressions */
-#impression-input {
+#impressiontext {
+	margin-bottom: 0px;
+}
+#impressioninput {
 	height: 28px;
 }
 #impression-button {
 	height: 28px;
+	margin-bottom: 10px;
+}
+#plusicon {
+	margin-left: 240px;
+	margin-bottom: 50px;
+}
+.imp-panel-body {
+	height: 130px;
+	overflow-y: scroll;
 }
 
 /* map */
@@ -63,13 +75,16 @@ form input[type=text] {
 	margin-bottom: 1px;
 }
 #searchbarid {
-	width: 157px !important;
+	width: 166px !important;
 }
 #search-button {
 	height: 28px;
 	width: 22px;
 	margin-top: 1px;
 	margin-bottom: 1px;
+}
+#defaultoption {
+	color: #289464;
 }
 
 /* navbar buttons */
