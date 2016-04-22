@@ -24,6 +24,11 @@ i {
 	left: 5px;
 	bottom: 5px;
 }
+.container {
+}
+form input[type=text] {
+	height: 28px !important;
+}
 
 /* data */
 .time{
@@ -51,18 +56,18 @@ i {
 }
 
 /* search bar */
-.input-group .search-bar {
-	width: 200px !important;
+.search-bar {
+	width: 152px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
 }
 #searchbarid {
-	width: 230px !important;
+	width: 147px !important;
 }
 #search-button {
 	height: 28px;
-	width: 30px;
+	width: 28px;
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
@@ -85,6 +90,7 @@ i {
 }
 .navbar {
 	margin-bottom: 5px;
+	height: 20px !important;
 }
 .panel-body{
 	height: 450px;
@@ -93,23 +99,43 @@ i {
 	height: 380px;
 }
 
-/* date */
+/* date selection */
 .form-inline {
 	display: inline;
 }
-#inputMonth #inputDay #inputYear {
-	height: 28px;
-	width: 20px;
-} 
+.datetimepicker {
+	width: 175px;
+	padding-top: 5px;
+}
+#calendarIcon1 {
+	padding-left: 149px;
+	margin-bottom: 3px;
+	width: 28px;
+}
+#calendarinput {
+	height: 28px !important;
+	width: 50px !important;
+}
+
 #dateSelect {
+	height: 10px;
+	padding-top: 5px;
 	padding-right: 20px;
 }
+#date-button {
+	height: 28px;
+	width: 28px;
+	margin-top: 5px;
+	margin-bottom: 2px;
+}
+
 
 /* analytics */
 #chartTitle {
 	font-size: 210%;
 	text-align: center;
 }
+
 
 
 /********************************************************************/

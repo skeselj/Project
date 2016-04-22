@@ -38,3 +38,6 @@ easy:search
 iron:router
 u2622:persistent-session
 chart:chart
+tsega:bootstrap3-datetimepicker
+chriswessels:glyphicons-halflings
+momentjs:moment

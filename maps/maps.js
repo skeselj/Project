@@ -1,12 +1,23 @@
 Markers = new Mongo.Collection('markers');
 Impressions = new Mongo.Collection('impression');
-var query = {year: 2014, month: 2, day: 13};
 
 Router.route("/", {
   name: "/",
   template: "homepage",
   waitOn: function(){
     // waitOn makes sure that this publication is ready before rendering your template
+    date = Session.get('date');
+    if (date != null) {
+      dates = date.split(" ");
+      date1 = dates[0].split("/");
+      month = parseInt(date1[0]);
+      day = parseInt(date1[1]);
+      year = parseInt(date1[2]);
+      query = {year: year, month: month, day: day}
+    }
+    else {
+      query = {year: 2014, month: 2, day: 13}
+    }
     return Meteor.subscribe("subsets", query);
   }
 });
@@ -16,7 +27,7 @@ if (Meteor.isClient) {
   // initialization 
   Meteor.startup(function() {
     GoogleMaps.load();
-    //Session.set('city', 'NewYork');
+    Session.setPersistent('city', 'NewYork');
   });
 
   // map functionality
@@ -96,7 +107,21 @@ if (Meteor.isClient) {
   // search bar
   Template.search.events({
     'submit form': function(event) {
-      Session.setPersistent('city', event.target.city.value);
+      //Session.setPersistent('city', event.target.city.value);
+      var date = $('.datetimepicker').datetimepicker().data().date;
+      Session.setPersistent('date', date);
+      //console.log(Session.get('date'));
+    }
+  })
+
+  // date selector
+  Template.date.onRendered(function() {
+    this.$('.datetimepicker').datetimepicker();
+  });
+
+  Template.date.events({
+    'submit form': function(event) {
+      //console.log(date);
     }
   })
 
@@ -331,19 +356,19 @@ if (Meteor.isClient) {
 
 // ****************************************************************************************
 
-  Meteor.methods({
-    'createImpression': function(impVar){
-      var currentUser = Meteor.user().emails[0].address;
-      var date = new Date();
-      if(currentUser && impVar.replace(/\s+/, "")){
-          Impressions.insert({
-            impsn: impVar,
-            time: date.toString().substring(4, 21),
-            createdBy: currentUser
-        });
-      }
+Meteor.methods({
+  'createImpression': function(impVar){
+    var currentUser = Meteor.user().emails[0].address;
+    var date = new Date();
+    if(currentUser && impVar.replace(/\s+/, "")){
+        Impressions.insert({
+          impsn: impVar,
+          time: date.toString().substring(4, 21),
+          createdBy: currentUser
+      });
     }
-  });
+  }
+});
 
 // ****************************************************************************************
 
