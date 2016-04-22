@@ -2,6 +2,7 @@ Markers = new Mongo.Collection('markers');
 Impressions = new Mongo.Collection('impression');
 var query = {year: 2014, month: 2, day: 13};
 
+
 Router.route("/", {
   name: "/",
   template: "homepage",
@@ -12,6 +13,9 @@ Router.route("/", {
 });
 
 if (Meteor.isClient) {
+  
+  Session.setDefaultPersistent('city', "NewYork");
+
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
       city = $("#search-input" ).val();
@@ -101,8 +105,6 @@ if (Meteor.isClient) {
   
   Meteor.startup(function() {
     GoogleMaps.load();
-    Session.setPersistent('city', 'NewYork');
-
   });
 
   // Map style
