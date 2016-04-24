@@ -301,28 +301,23 @@ if (Meteor.isClient) {
           value: Markers.find({"offense": "Grand Larceny"}).count(),
           color:"#FF9933",
           label: "Grand Larceny"
-      },
-      {
+      }, {
           value: Markers.find({"offense": "Motor Larceny"}).count(),
           color:"#E3DA96",
           label: "Motor Larceny"
-      },
-      {
+      }, {
           value: Markers.find({"offense": "Robbery"}).count(),
           color:"#ADD681",
           label: "Robbery"
-      },
-      {
+      }, {
           value: Markers.find({"offense": "Burglary"}).count(),
           color:"#81D6BE",
           label: "Burglary"
-      },
-      {
+      }, {
           value: Markers.find({"offense": "Felony Assault"}).count(),
           color:"#B781D6",
           label: "Felony Assault"
-      },
-      {
+      }, {
           value: Markers.find({"offense": "Rape"}).count(),
           color:"#D4576E",
           label: "Rape"
@@ -330,31 +325,22 @@ if (Meteor.isClient) {
       var options = {
         //Boolean - Whether we should show a stroke on each segment
         segmentShowStroke : true,
-
         //String - The colour of each segment stroke
         segmentStrokeColor : "#fff",
-
         //Number - The width of each segment stroke
         segmentStrokeWidth : 2,
-
         //Number - The percentage of the chart that we cut out of the middle
         percentageInnerCutout : 50, // This is 0 for Pie charts
-
         //Number - Amount of animation steps
         animationSteps : 100,
-
         //String - Animation easing effect
         animationEasing : "easeOutBounce",
-
         //Boolean - Whether we animate the rotation of the Doughnut
         animateRotate : true,
-
         //Boolean - Whether we animate scaling the Doughnut from the centre
         animateScale : false,
-
         //String - A legend template
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-
       }
       var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
       myDoughnutChart.update();

@@ -1,7 +1,7 @@
 /* structure */
 body {
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 th {
 	display: inline;
@@ -85,6 +85,9 @@ form input[type=text] {
 }
 #defaultoption {
 	color: #289464;
+}
+.fa-location-arrow {
+	margin-left: -1px;
 }
 
 /* navbar buttons */
