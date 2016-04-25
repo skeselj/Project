@@ -32,14 +32,14 @@ BEGIN {
 
 }' 'ny15.csv' > 'processedny15.csv'
 
-#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedny15.csv' --headerline
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedny15.csv' --headerline
 
 ### Chicago ###
 
 # core mechanism #
 python import_chicago.py 'chicago15.csv' > 'processedchicago15.csv'
 
-#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedchicago15.csv' --headerline
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedchicago15.csv' --headerline
 
 ### LA ###
 awk '
@@ -72,7 +72,7 @@ BEGIN {
 
 }' 'la15.csv' > 'processedla15.csv'
 
-#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedla15.csv' --headerline
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedla15.csv' --headerline
 
 
 
