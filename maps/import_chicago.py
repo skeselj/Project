@@ -4,9 +4,9 @@ with open(str(sys.argv[1]),'r') as f:
 	c = 0
 	for line in f: 
 		c += 1
-		if c == 1:
-			print("latitude,longitude,offense,time,month,day,year,magnitude,city")
-			continue;
+		# if c == 1:
+			# print("latitude,longitude,offense,time,month,day,year,magnitude,city")
+			# continue;
 		splitLine = line.split(",")
 		latitude = splitLine[19]
 		# hack to weed out corrupt data
