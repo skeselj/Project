@@ -1,11 +1,19 @@
-Markers = new Mongo.Collection('markers');
-Impressions = new Mongo.Collection('impression');
+Markers = new Mongo.Collection("markers");
+Impressions = new Mongo.Collection("impression");
+Cities = new Mongo.Collection("cities");
+Cities.attachSchema(new SimpleSchema({
+  city: {
+    type: String,
+    label: "Title",
+    max: 200
+  },
+}));
 
 Router.route("/", {
   name: "/",
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
-  waitOn: function(){
+  waitOn: function() {
     city = Router.current().params.query.city;
     if (city == null) {city = "New York"}
     
@@ -117,6 +125,21 @@ if (Meteor.isClient) {
       var date = $('.datetimepicker').datetimepicker().data().date;
       Session.setPersistent('date', date);
       //console.log(Session.get('date'));
+    }
+  })
+  Template.search.helpers({
+    typesSchema1: function() {
+      return {
+        typeTest: {
+          type: String,
+          optional: true,
+          autoform: {
+            afFieldInput: {
+              type: "bootstrap-datepicker"
+            }
+          }
+        }
+      }
     }
   })
 
@@ -401,7 +424,7 @@ if (Meteor.isServer) {
       return data;
     }
     return this.read();
-    });
+  });
 
 
   // Debugging helper as we figure out how to insert data points

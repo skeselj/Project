@@ -79,8 +79,9 @@
 <template name="date">
   <form role="select">
     <div class="input-group datetimepicker" id="calendarinput1">
-      <input name="date" class="set-due-date form-control" type="text" color="black">
-      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+
+      
+
     </div>
   </form>
 </template>
@@ -90,14 +91,9 @@
   <form class="navbar-form" role="search">
     <div class="input-group">
       <div class="search-bar">
-        <script type="text/javascript">
-          $(".js-example-basic-single").select2();
-        </script>
-        <select class="js-example-basic-single" id="searchbarid" name="city">
-          <option value="New York">New York, NY</option>
-          <option value="Chicago">Chicago, IL</option>
-          <option value="Los Angeles">Los Angeles, CA</option>
-        </select>
+
+      {{> quickForm collection="Cities" id="searchCityForm" type="insert"}}
+      
       </div>
       <div class="input-group-btn navbar-button">
         <button class="btn btn-default" id="search-button" type="submit">
@@ -194,3 +190,44 @@
     </button>
   </form>
 </template>
+
+
+<!-- STORAGE
+
+<template name="date">
+  <form role="select">
+    <div class="input-group datetimepicker" id="calendarinput1">
+
+      <input name="date" class="set-due-date form-control" type="text" color="black">
+      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+      
+    </div>
+  </form>
+</template>
+
+<template name="search">
+  <form class="navbar-form" role="search">
+    <div class="input-group">
+      <div class="search-bar">
+        
+        <script type="text/javascript">
+          $(".js-example-basic-single").select2();
+        </script>
+        <select class="js-example-basic-single" id="searchbarid" name="city">
+          <option value="New York">New York, NY</option>
+          <option value="Chicago">Chicago, IL</option>
+          <option value="Los Angeles">Los Angeles, CA</option>
+        </select>
+      
+      </div>
+      <div class="input-group-btn navbar-button">
+        <button class="btn btn-default" id="search-button" type="submit">
+          <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</template>
+
+-->
+

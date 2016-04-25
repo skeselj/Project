@@ -69,7 +69,7 @@ form input[type=text] {
 
 /* search bar */
 .search-bar {
-	width: 142px !important;
+	width: 242px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
@@ -116,6 +116,9 @@ form input[type=text] {
 .imp-panel-body{
 	height: 380px;
 }
+.navbar-left {
+	margin-right: 0px !important;
+}
 
 /* date selection */
 .form-inline {
@@ -153,7 +156,6 @@ form input[type=text] {
 	font-size: 210%;
 	text-align: center;
 }
-
 
 
 /********************************************************************/
@@ -198,7 +200,7 @@ form input[type=text] {
 	color: #777;
 	text-align:right;
 	margin-top: 12px;
-	margin-right: 10px;
+	margin-right: 0px;
 }
 
 /********************************************************************/
