@@ -4,8 +4,6 @@ with open(str(sys.argv[1]),'r') as f:
 	c = 0
 	for line in f: 
 		c += 1
-		if c > 200:
-			break;
 		if c == 1:
 			print("latitude,longitude,offense,time,month,day,year,magnitude,city")
 			continue;

@@ -22,7 +22,7 @@ Router.route("/", {
       markerQuery = {year: year, month: month, day: day, city: city}
     }
     else {
-      markerQuery = {year: 1914, month: 2, day: 13, city: city}
+      markerQuery = {year: 2015, month: 1, day: 13, city: city}
     }
     return Meteor.subscribe("subsetMarkers", markerQuery);
   }

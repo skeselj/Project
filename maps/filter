@@ -1,0 +1,11 @@
+awk '
+BEGIN {
+	FS = ","
+}
+{
+	if (NR > 1) {
+		if ($20 != "")
+			print;
+	}
+}
+' 'chicago15.csv' > 'ching.csv'

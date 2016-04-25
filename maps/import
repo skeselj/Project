@@ -28,36 +28,16 @@ BEGIN {
 		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3,New York\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
 	}
 
-}' 'rawNewYork.csv' > 'processedNewYork.csv'
+}' 'ny15.csv' > 'processedny15.csv'
 
-# additional formating for Motor Larceny #
-#awk '
-#BEGIN {
-#	FS = ","
-#	print(#"latitude,longitude,offense,time,month,day,year,magnitude")
-#}
-#{
-#	if (NR > 1) {
-#		if ($3 == "Grand Larceny Of Motor Vehicle") {
-#			$3 = "Motor Larceny"
-#		}
-#		printf("%s,%s,%s,%s,%s,%s,%s,%s\n", #$1,$2,$3,$4,$5,$6,$7,$8)
-#	}
-#}' 'partialNewYork.csv' > 'completeNewYork.csv'
-
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file processedNewYork.csv --headerline
-
-# some relics
-#mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file idealny14-15.csv --headerline
-#}' 'ny14-15.csv' > 'idealny14-15.csv'
-
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedny15.csv' --headerline
 
 ### Chicago ###
 
 # core mechanism #
-python import_chicago.py ../../rawChicago.csv > 'processedChicago.csv'
+python import_chicago.py 'chicago15.csv' > 'processedchicago15.csv'
 
-mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file processedChicago.csv --headerline
+mongoimport -h localhost:3001 --db meteor --collection markers --type csv --file 'processedchicago15.csv' --headerline
 
 
 
