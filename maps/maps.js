@@ -1,13 +1,5 @@
 Markers = new Mongo.Collection("markers");
 Impressions = new Mongo.Collection("impression");
-Cities = new Mongo.Collection("cities");
-Cities.attachSchema(new SimpleSchema({
-  city: {
-    type: String,
-    label: "Title",
-    max: 200
-  },
-}));
 
 Router.route("/", {
   name: "/",
