@@ -69,13 +69,13 @@ form input {
 
 /* search bar */
 .search-bar {
-	width: 242px !important;
+	width: 142px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
 }
 #searchbarid {
-	width: 166px !important;
+	width: 146px !important;
 }
 #search-button {
 	height: 28px;

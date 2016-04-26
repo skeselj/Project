@@ -22,6 +22,7 @@
             <ul class="nav navbar-nav navbar-left">
               <li id="search">{{>search}}</li>
               <li id="dateSelect">{{>date}}</li>
+              <li id="go">{{go}}</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <!--<li id="contact"><a href="#">Contact</a></li> -->
@@ -75,18 +76,6 @@
 
 <!-- ********************************************** -->
 
-<!-- date -->
-<template name="date">
-  <form role="select">
-    <div class="input-group datetimepicker" id="calendarinput1">
-
-      <input name="date" class="set-due-date form-control" type="text" color="black">
-      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
-      
-    </div>
-  </form>
-</template>
-
 <!-- search -->
 <template name="search">
   <form class="navbar-form" role="search">
@@ -98,19 +87,44 @@
           if (city == null) {city = "New York, NY"}
           $(".js-example-basic-single").select2();
           $("#searchbarid").val(city);
+          $('#searchbarid').attr('placeholder', 'New Placeholder Text').select2();
         </script>
-        <select class="js-example-basic-single" placeholder="PLACEHOLDER"id="searchbarid" name="city">
+        <select class="js-example-basic-single" id="searchbarid" name="city">
           <option value="New York, NY">New York, NY</option>
           <option value="Chicago, IL">Chicago, IL</option>
           <option value="Los Angeles, CA">Los Angeles, CA</option>
         </select>
       
       </div>
+    </div>
+  </form>
+</template>
+
+<!-- date -->
+<template name="date">
+  <form role="select">
+    <div class="input-group datetimepicker" id="calendarinput1">
+
+      <input name="date" class="set-due-date form-control" type="text" color="black">
+      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+      
       <div class="input-group-btn navbar-button">
         <button class="btn btn-default" id="search-button" type="submit">
           <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
         </button>
       </div>
+
+    </div>
+
+  </form>
+</template>
+
+<template name="go">
+  <form role="submit">
+    <div class="input-group-btn navbar-button">
+      <button class="btn btn-default" id="search-button" type="submit">
+        <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+      </button>
     </div>
   </form>
 </template>
