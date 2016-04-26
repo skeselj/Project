@@ -49,8 +49,8 @@ with open(str(sys.argv[1]),'r') as f:
 		hour = int(time12[0])
 		minute = time12[1]
 		am_pm = date_time_m[2]
-		if (am_pm=="PM" and hour != 12):
-			hour += 12
+		if (am_pm=="PM"):
+			hour = (hour + 12) % 24
 		hour_s = str(hour)
 		if hour < 10:
 			hour_s = "0"+hour_s
