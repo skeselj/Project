@@ -7,7 +7,12 @@ Router.route("/", {
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
     city = Router.current().params.query.city;
+<<<<<<< HEAD
     if (city == null) {city = "New York, NY"}
+=======
+    if (city == null) {city = "New York"; Session.setPersistent('city', "New York");}
+    else {Session.setPersistent('city', city);}
+>>>>>>> b5e30f4526f51537d82f2e7b3cea6827d7cf0803
     
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
@@ -47,13 +52,42 @@ if (Meteor.isClient) {
         return zoom*zoom*zoom/12/12/10
       };
       function getColor(offense) {
-        if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
-        if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
-        if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
-        if (offense.localeCompare("Burglary")==0) {return '#81D6BE'}
-        if (offense.localeCompare("Felony Assault")==0) {return '#B781D6'}
-        if (offense.localeCompare("Rape")==0) {return '#D4576E'}
-        return "#CCFF66"
+        if (Session.get('city').localeCompare("New York") == 0) {
+          if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
+          if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
+          if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
+          if (offense.localeCompare("Burglary")==0) {return '#81D6BE'}
+          if (offense.localeCompare("Felony Assault")==0) {return '#B781D6'}
+          if (offense.localeCompare("Rape")==0) {return '#D4576E'}
+          if (offense.localeCompare("Murder")==0) {return '#3399ff'}
+        }
+        if (Session.get('city').localeCompare("Chicago") == 0) {
+          if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
+          if (offense.localeCompare("Theft")==0) {return '#E3DA96'}
+          if (offense.localeCompare("Criminal Damage")==0) {return '#ADD681'}
+          if (offense.localeCompare("Minor Offense")==0) {return '#81D6BE'}
+          if (offense.localeCompare("Assault")==0) {return '#B781D6'}
+          if (offense.localeCompare("Weapons Violation")==0) {return '#D4576E'}
+          if (offense.localeCompare("Fraud")==0) {return '#3399ff'}
+          if (offense.localeCompare("Offense Involving Children")==0) {return '#33cc33'}
+          if (offense.localeCompare("Sexual Assault")==0) {return '#ffff00'}
+          if (offense.localeCompare("Sex/Prostitution")==0) {return '#996600'}
+          if (offense.localeCompare("Trafficking")==0) {return '#ff33cc'}
+          if (offense.localeCompare("Homicide")==0) {return '#a6a6a6'}
+
+        }
+        if (Session.get('city').localeCompare("Los Angeles") == 0) {
+          if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
+          if (offense.localeCompare("Assault")==0) {return '#E3DA96'}
+          if (offense.localeCompare("Minor Offense")==0) {return '#ADD681'}
+          if (offense.localeCompare("Theft")==0) {return '#81D6BE'}
+          if (offense.localeCompare("Fraud")==0) {return '#B781D6'}
+          if (offense.localeCompare("Sex/Prostitution")==0) {return '#D4576E'}
+          if (offense.localeCompare("Rape")==0) {return '#3399ff'}
+          if (offense.localeCompare("Homicide")==0) {return '#33cc33'}
+        }
+        else
+          return "#CCFF66"
       }
       Markers.find().observe({
         added: function (document) {
@@ -303,32 +337,126 @@ if (Meteor.isClient) {
   Template.charts.onRendered(function() {
     Tracker.autorun(function() {
       var ctx = document.getElementById("doughnutChart").getContext("2d");
-      var data = [
-      {
-          value: Markers.find({"offense": "Grand Larceny"}).count(),
-          color:"#FF9933",
-          label: "Grand Larceny"
-      }, {
-          value: Markers.find({"offense": "Motor Larceny"}).count(),
-          color:"#E3DA96",
-          label: "Motor Larceny"
-      }, {
-          value: Markers.find({"offense": "Robbery"}).count(),
-          color:"#ADD681",
-          label: "Robbery"
-      }, {
-          value: Markers.find({"offense": "Burglary"}).count(),
-          color:"#81D6BE",
-          label: "Burglary"
-      }, {
-          value: Markers.find({"offense": "Felony Assault"}).count(),
-          color:"#B781D6",
-          label: "Felony Assault"
-      }, {
-          value: Markers.find({"offense": "Rape"}).count(),
-          color:"#D4576E",
-          label: "Rape"
-      }]
+      if (Session.get('city').localeCompare("New York") == 0) {
+        var data = [
+        {
+            value: Markers.find({"offense": "Grand Larceny"}).count(),
+            color: "#FF9933",
+            label: "Grand Larceny"
+        }, {
+            value: Markers.find({"offense": "Motor Larceny"}).count(),
+            color: "#E3DA96",
+            label: "Motor Larceny"
+        }, {
+            value: Markers.find({"offense": "Robbery"}).count(),
+            color: "#ADD681",
+            label: "Robbery"
+        }, {
+            value: Markers.find({"offense": "Burglary"}).count(),
+            color: "#81D6BE",
+            label: "Burglary"
+        }, {
+            value: Markers.find({"offense": "Felony Assault"}).count(),
+            color: "#B781D6",
+            label: "Felony Assault"
+        }, {
+            value: Markers.find({"offense": "Rape"}).count(),
+            color: "#D4576E",
+            label: "Rape"
+        }, {
+            value: Markers.find({"offense": "Murder"}).count(),
+            color: "#3399ff",
+            label: "Murder"
+        }]
+      }
+      else if (Session.get('city').localeCompare("Chicago") == 0) {
+        var data = [
+        {
+            value: Markers.find({"offense": "Drug/Alcohol Violation"}).count(),
+            color: "#FF9933",
+            label: "Drug/Alcohol Violation"
+        }, {
+            value: Markers.find({"offense": "Theft"}).count(),
+            color: "#E3DA96",
+            label: "Theft"
+        }, {
+            value: Markers.find({"offense": "Criminal Damage"}).count(),
+            color: "#ADD681",
+            label: "Criminal Damage"
+        }, {
+            value: Markers.find({"offense": "Minor Offense"}).count(),
+            color: "#81D6BE",
+            label: "Minor Offense"
+        }, {
+            value: Markers.find({"offense": "Assault"}).count(),
+            color: "#B781D6",
+            label: "Assault"
+        }, {
+            value: Markers.find({"offense": "Weapons Violation"}).count(),
+            color: "#D4576E",
+            label: "Weapons Violation"
+        }, {
+            value: Markers.find({"offense": "Fraud"}).count(),
+            color: "#3399ff",
+            label: "Fraud"
+        }, {
+            value: Markers.find({"offense": "Offense Involving Children"}).count(),
+            color: "#33cc33",
+            label: "Offense Involving Children"
+        }, {
+            value: Markers.find({"offense": "Sexual Assault"}).count(),
+            color: "#ffff00",
+            label: "Sexual Assault"
+        }, {
+            value: Markers.find({"offense":"Sex/Prostitution"}).count(),
+            color: "#996600",
+            label: "Sex/Prostitution"
+        }, {
+            value: Markers.find({"offense": "Trafficking"}).count(),
+            color: "#ff33cc",
+            label: "Trafficking"
+        }, {
+            value: Markers.find({"offense": "Homicide"}).count(),
+            color: "#a6a6a6",
+            label: "Homicide"
+        }]
+      }
+      else if (Session.get('city').localeCompare("Los Angeles") == 0) {
+        var data = [
+        {
+            value: Markers.find({"offense": "Drug/Alcohol Violation"}).count(),
+            color:"#FF9933",
+            label: "Drug/Alcohol Violation"
+        }, {
+            value: Markers.find({"offense": "Assault"}).count(),
+            color:"#E3DA96",
+            label: "Assault"
+        }, {
+            value: Markers.find({"offense": "Minor Offense"}).count(),
+            color:"#ADD681",
+            label: "Minor Offense"
+        }, {
+            value: Markers.find({"offense": "Theft"}).count(),
+            color:"#81D6BE",
+            label: "Theft"
+        }, {
+            value: Markers.find({"offense": "Fraud"}).count(),
+            color:"#B781D6",
+            label: "Fraud"
+        }, {
+            value: Markers.find({"offense": "Sex/Prostitution"}).count(),
+            color:"#D4576E",
+            label: "Sex/Prostitution"
+        }, {
+            value: Markers.find({"offense": "Rape"}).count(),
+            color:"#3399ff",
+            label: "Rape"
+        }, {
+            value: Markers.find({"offense": "Homicide"}).count(),
+            color: "#33cc33",
+            label: "Homicide"
+        }]
+      }
       var options = {
         //Boolean - Whether we should show a stroke on each segment
         segmentShowStroke : true,
