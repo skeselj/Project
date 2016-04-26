@@ -480,7 +480,7 @@ if (Meteor.isClient) {
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
       }
       var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
-      myDoughnutChart.update();
+      document.getElementById('js-legend').innerHTML = myDoughnutChart.generateLegend();
     });
   });
 }
