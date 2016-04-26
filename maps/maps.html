@@ -76,6 +76,18 @@
 
 <!-- ********************************************** -->
 
+<!-- date -->
+<template name="date">
+  <form role="select">
+    <div class="input-group datetimepicker" id="calendarinput1">
+
+      <input name="date" class="set-due-date form-control" type="text" color="black">
+      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+      
+    </div>
+  </form>
+</template>
+
 <!-- search -->
 <template name="search">
   <form class="navbar-form" role="search">
@@ -96,35 +108,11 @@
         </select>
       
       </div>
-    </div>
-  </form>
-</template>
-
-<!-- date -->
-<template name="date">
-  <form role="select">
-    <div class="input-group datetimepicker" id="calendarinput1">
-
-      <input name="date" class="set-due-date form-control" type="text" color="black">
-      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
-      
       <div class="input-group-btn navbar-button">
         <button class="btn btn-default" id="search-button" type="submit">
           <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
         </button>
       </div>
-
-    </div>
-
-  </form>
-</template>
-
-<template name="go">
-  <form role="submit">
-    <div class="input-group-btn navbar-button">
-      <button class="btn btn-default" id="search-button" type="submit">
-        <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
-      </button>
     </div>
   </form>
 </template>
