@@ -47,11 +47,14 @@ with open(str(sys.argv[1]),'r') as f:
 		year = date_time_m[0].split('/')[2]
 		time12 = date_time_m[1].split(':')
 		hour = int(time12[0])
+		hour_s = str(hour)
+		if hour < 10:
+			hour_s = "0"+hour_s
 		minute = time12[1]
 		am_pm = date_time_m[2]
 		if (am_pm=="PM"):
 			hour += 12
-		time = str(hour) + ":" + minute
+		time = hour_s + ":" + minute
 		magnitude = "3"
 		city = "Chicago"
 

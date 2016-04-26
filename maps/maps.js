@@ -7,12 +7,8 @@ Router.route("/", {
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
     city = Router.current().params.query.city;
-<<<<<<< HEAD
-    if (city == null) {city = "New York, NY"}
-=======
-    if (city == null) {city = "New York"; Session.setPersistent('city', "New York");}
+    if (city == null) {city = "New York< NY"; Session.setPersistent('city', "New York, NY");}
     else {Session.setPersistent('city', city);}
->>>>>>> b5e30f4526f51537d82f2e7b3cea6827d7cf0803
     
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
