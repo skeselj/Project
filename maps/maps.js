@@ -377,7 +377,7 @@ Meteor.methods({
 if (Meteor.isServer) {
   Meteor.publish('subsetMarkers', function(parameters) {
     data = [
-      Markers.find({"year": parameters.year, "month": parameters.month, "day": parameters.day}, {
+      Markers.find({"year": parameters.year, "month": parameters.month, "day": parameters.day, "city": parameters.city}, {
         fields: {
           "year": 1,
           "month": 1,
