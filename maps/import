@@ -53,7 +53,7 @@ BEGIN {
 			if ($11 == "Robbery" || $11 == "Larceny" || $11 == "Burglary" || $11 == "Vehicle Theft" || $11 == "Receive Stolen Property")
 				crime = "Theft"
 			else if ($11 == "Driving Under Influence" || $11 == "Narcotic Drug Laws" || $11 == "Liquor Laws" || $11 == "Drunkeness") 
-				crime = "Drug/Alcohol Violation"
+				crime = "Drug/Alcohol"
 			else if ($11 == "Aggravated Assault" || $11 == "Other Assaults" || $11 == "Against Family/Child")
 				crime = "Assault"
 			else if ($11 == "Moving Traffic Violations" || $11 ==  "Miscellaneous Other Violations" || $11 == "Disturbing the Peace" || $11 == "Disorderly Conduct" || $11 == "Non-Criminal Detention" || $11 == "Pre-Delinquency" || $11 == "Gambling" || $11 == "Weapon (carry/poss)")

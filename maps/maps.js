@@ -64,7 +64,7 @@ if (Meteor.isClient) {
           if (offense.localeCompare("Murder")==0) {return '#3399ff'}
         }
         if (Session.get('city').localeCompare("Chicago") == 0) {
-          if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
+          if (offense.localeCompare("Drug/Alcohol")==0) {return '#FF9933'}
           if (offense.localeCompare("Theft")==0) {return '#E3DA96'}
           if (offense.localeCompare("Criminal Damage")==0) {return '#ADD681'}
           if (offense.localeCompare("Minor Offense")==0) {return '#81D6BE'}
@@ -79,7 +79,7 @@ if (Meteor.isClient) {
 
         }
         if (Session.get('city').localeCompare("Los Angeles") == 0) {
-          if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
+          if (offense.localeCompare("Drug/Alcohol")==0) {return '#FF9933'}
           if (offense.localeCompare("Assault")==0) {return '#E3DA96'}
           if (offense.localeCompare("Minor Offense")==0) {return '#ADD681'}
           if (offense.localeCompare("Theft")==0) {return '#81D6BE'}
@@ -374,9 +374,9 @@ if (Meteor.isClient) {
       else if (Session.get('city').localeCompare("Chicago") == 0) {
         var data = [
         {
-            value: Markers.find({"offense": "Drug/Alcohol Violation"}).count(),
+            value: Markers.find({"offense": "Drug/Alcohol"}).count(),
             color: "#FF9933",
-            label: "Drug/Alcohol Violation"
+            label: "Drug/Alcohol"
         }, {
             value: Markers.find({"offense": "Theft"}).count(),
             color: "#E3DA96",
@@ -426,9 +426,9 @@ if (Meteor.isClient) {
       else if (Session.get('city').localeCompare("Los Angeles") == 0) {
         var data = [
         {
-            value: Markers.find({"offense": "Drug/Alcohol Violation"}).count(),
+            value: Markers.find({"offense": "Drug/Alcohol"}).count(),
             color:"#FF9933",
-            label: "Drug/Alcohol Violation"
+            label: "Drug/Alcohol"
         }, {
             value: Markers.find({"offense": "Assault"}).count(),
             color:"#E3DA96",

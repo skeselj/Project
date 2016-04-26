@@ -17,7 +17,7 @@ with open(str(sys.argv[1]),'r') as f:
 		x = splitLine[5].title();
 
 		if (x == "Narcotics" or x == "Liquor Law Violation" or x == "Other Narcotic Violation"):
-			offense = "Drug/Alcohol Violation"
+			offense = "Drug/Alcohol"
 		elif (x == "Theft" or x == "Robbery" or x == "Burglary" or x == "Motor Vehicle Theft"):
 			offense = "Theft"
 		elif (x == "Other Offense" or x == "Criminal Trespass" or x == "Interference With Public Officer" or x == "Public Peace Violation" or x == "Public Indecency" or x == "Non - Criminal" or x == "Intimidation" or x == "Non-Criminal" or x == "Obscenity" or x == "Gambling"):
@@ -47,11 +47,11 @@ with open(str(sys.argv[1]),'r') as f:
 		year = date_time_m[0].split('/')[2]
 		time12 = date_time_m[1].split(':')
 		hour = int(time12[0])
-		hour_s = str(hour)
 		minute = time12[1]
 		am_pm = date_time_m[2]
-		if (am_pm=="PM"):
+		if (am_pm=="PM" and hour != 12):
 			hour += 12
+		hour_s = str(hour)
 		if hour < 10:
 			hour_s = "0"+hour_s
 		time = hour_s + ":" + minute
