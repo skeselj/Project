@@ -53,7 +53,7 @@ if (Meteor.isClient) {
         return zoom*zoom*zoom/12/12/10
       };
       function getColor(offense) {
-        if (Session.get('city').localeCompare("New York") == 0) {
+        if (Session.get('city').localeCompare("New York, NY") == 0) {
           if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
           if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
           if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
@@ -62,7 +62,7 @@ if (Meteor.isClient) {
           if (offense.localeCompare("Rape")==0) {return '#D4576E'}
           if (offense.localeCompare("Murder")==0) {return '#3399ff'}
         }
-        if (Session.get('city').localeCompare("Chicago") == 0) {
+        if (Session.get('city').localeCompare("Chicago, IL") == 0) {
           if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
           if (offense.localeCompare("Theft")==0) {return '#E3DA96'}
           if (offense.localeCompare("Criminal Damage")==0) {return '#ADD681'}
@@ -77,7 +77,7 @@ if (Meteor.isClient) {
           if (offense.localeCompare("Homicide")==0) {return '#a6a6a6'}
 
         }
-        if (Session.get('city').localeCompare("Los Angeles") == 0) {
+        if (Session.get('city').localeCompare("Los Angeles, CA") == 0) {
           if (offense.localeCompare("Drug/Alcohol Violation")==0) {return '#FF9933'}
           if (offense.localeCompare("Assault")==0) {return '#E3DA96'}
           if (offense.localeCompare("Minor Offense")==0) {return '#ADD681'}
