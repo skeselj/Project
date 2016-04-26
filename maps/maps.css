@@ -26,7 +26,7 @@ i {
 }
 .container {
 }
-form input[type=text] {
+form input {
 	height: 28px !important;
 }
 

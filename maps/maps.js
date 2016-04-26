@@ -7,7 +7,7 @@ Router.route("/", {
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
     city = Router.current().params.query.city;
-    if (city == null) {city = "New York"}
+    if (city == null) {city = "New York, NY"}
     
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
@@ -40,7 +40,7 @@ if (Meteor.isClient) {
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
       city = Router.current().params.query.city;
-      if (city == null) {city = "New York"}
+      if (city == null) {city = "New York, NY"}
       map.instance.setCenter(getCityLocation(city));
       var markers = {};
       function getScaleFactor(zoom) {
@@ -120,18 +120,10 @@ if (Meteor.isClient) {
     }
   })
   Template.search.helpers({
-    typesSchema1: function() {
-      return {
-        typeTest: {
-          type: String,
-          optional: true,
-          autoform: {
-            afFieldInput: {
-              type: "bootstrap-datepicker"
-            }
-          }
-        }
-      }
+    currentCity: function() {
+      city = Router.current().params.query.city;
+      if (city == null) {city = "New York, NY"}
+      return city
     }
   })
 
@@ -150,7 +142,7 @@ if (Meteor.isClient) {
   Template.board.helpers({
     'marker': function() {
       //var city = Router.current().params.query.city;  
-      //if (city == null) {city = "New York"}
+      //if (city == null) {city = "New York, NY"}
       return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:-1}});
     }
   });
@@ -161,7 +153,7 @@ if (Meteor.isClient) {
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
         var city = Router.current().params.query.city;  
-        if (city == null) {city = "New York"}
+        if (city == null) {city = "New York, NY"}
         Meteor.call('createImpression', impVar, city);
         event.target.impressiontext.value = "";
     }
@@ -175,14 +167,14 @@ if (Meteor.isClient) {
 
   // map styling
   function getCityLocation(name) {
-    if (name.localeCompare("New York")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
-    if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
-    if (name.localeCompare("Los Angeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
+    if (name.localeCompare("New York, NY")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
+    if (name.localeCompare("Chicago, IL")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
+    if (name.localeCompare("Los Angeles, CA")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
   }
   Template.map.helpers({
     mapOptions: function() {
       var city = Router.current().params.query.city;  
-      if (city == null) {city = "New York"}
+      if (city == null) {city = "New York, NY"}
       if (GoogleMaps.loaded()) {
         return {
           center: getCityLocation(city),
