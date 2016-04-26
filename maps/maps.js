@@ -7,8 +7,12 @@ Router.route("/", {
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
     city = Router.current().params.query.city;
-    if (city == null) {city = "New York< NY"; Session.setPersistent('city', "New York, NY");}
-    else {Session.setPersistent('city', city);}
+    if (city==null) {city = "New York"};
+    if (city.localeCompare("New York, NY")==0) {city = "New York"}; 
+    if (city.localeCompare("Chicago, IL")==0) {city = "Chicago"};
+    if (city.localeCompare("Los Angeles, CA")==0) {city = "Los Angeles"}
+    //if (city == null) {city = "New York"; Session.setPersistent('city', "New York, NY");}
+    //else {Session.setPersistent('city', city);}
     
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
@@ -20,10 +24,11 @@ Router.route("/", {
       month = parseInt(date1[0]);
       day = parseInt(date1[1]);
       year = parseInt(date1[2]);
-      markerQuery = {year: year, month: month, day: day, city: city}
+      markerQuery = {month: month, day: day, year: year, city: city}
     }
     else {
-      markerQuery = {year: 2015, month: 1, day: 13, city: city}
+      markerQuery = {month: 9, day: 6, year: 2015, city: city}
+      console.log(markerQuery);
     }
     return Meteor.subscribe("subsetMarkers", markerQuery);
   }
