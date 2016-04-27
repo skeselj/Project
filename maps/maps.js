@@ -6,16 +6,9 @@ Router.route("/", {
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
-    city = Router.current().params.query.city;
-    if (city==null || city.localeCompare("New York, NY")==0) {
-      city = "New York"; Session.setPersistent('city', city)};
-    if (city.localeCompare("Chicago, IL")==0) {
-      city = "Chicago"; Session.setPersistent('city', city)};
-    if (city.localeCompare("Los Angeles, CA")==0) {
-      city = "Los Angeles"; Session.setPersistent('city', city)};
-    //if (city == null) {city = "New York"; Session.setPersistent('city', "New York, NY");}
-    //else {Session.setPersistent('city', city);}
-    
+    city = Session.get('city')
+    if (city==null) {city = "New York"; Session.setPersistent('city', city)}
+
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
 
@@ -46,15 +39,15 @@ if (Meteor.isClient) {
   // map functionality
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
-      city = Router.current().params.query.city;
-      if (city == null) {city = "New York, NY"}
+      city = Session.get('city')
       map.instance.setCenter(getCityLocation(city));
       var markers = {};
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
       };
       function getColor(offense) {
-        if (Session.get('city').localeCompare("New York") == 0) {
+        city = Session.get('city')
+        if (city.localeCompare("New York") == 0) {
           if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
           if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
           if (offense.localeCompare("Robbery")==0) {return '#ADD681'}
@@ -63,7 +56,7 @@ if (Meteor.isClient) {
           if (offense.localeCompare("Rape")==0) {return '#D4576E'}
           if (offense.localeCompare("Murder")==0) {return '#3399ff'}
         }
-        if (Session.get('city').localeCompare("Chicago") == 0) {
+        if (city.localeCompare("Chicago") == 0) {
           if (offense.localeCompare("Drug/Alcohol")==0) {return '#FF9933'}
           if (offense.localeCompare("Theft")==0) {return '#E3DA96'}
           if (offense.localeCompare("Criminal Damage")==0) {return '#ADD681'}
@@ -78,7 +71,7 @@ if (Meteor.isClient) {
           if (offense.localeCompare("Homicide")==0) {return '#a6a6a6'}
 
         }
-        if (Session.get('city').localeCompare("Los Angeles") == 0) {
+        if (city.localeCompare("Los Angeles") == 0) {
           if (offense.localeCompare("Drug/Alcohol")==0) {return '#FF9933'}
           if (offense.localeCompare("Assault")==0) {return '#E3DA96'}
           if (offense.localeCompare("Minor Offense")==0) {return '#ADD681'}
@@ -147,18 +140,9 @@ if (Meteor.isClient) {
   });
 
   // search bar
-  Template.search.events({
-    'submit form': function(event) {
-      //Session.setPersistent('city', event.target.city.value);
-      var date = $('.datetimepicker').datetimepicker().data().date;
-      Session.setPersistent('date', date);
-      //console.log(Session.get('date'));
-    }
-  })
   Template.search.helpers({
     currentCity: function() {
-      city = Router.current().params.query.city;
-      if (city == null) {city = "New York, NY"}
+      city = Session.get('city')
       return city
     }
   })
@@ -170,7 +154,16 @@ if (Meteor.isClient) {
 
   Template.date.events({
     'submit form': function(event) {
-      //console.log(date);
+    }
+  })
+
+  // go (submit button)
+  Template.go.events({
+    'submit form': function(event) {
+      var date = $('.datetimepicker').datetimepicker().data().date;
+      Session.setPersistent('date', date);
+      city = $("#searchbarid").val();
+      Session.setPersistent('city', city);
     }
   })
 
@@ -188,8 +181,7 @@ if (Meteor.isClient) {
     'submit form': function(){
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
-        var city = Router.current().params.query.city;  
-        if (city == null) {city = "New York, NY"}
+        var city = Session.get('city')
         Meteor.call('createImpression', impVar, city);
         event.target.impressiontext.value = "";
     }
@@ -203,15 +195,14 @@ if (Meteor.isClient) {
 
   // map styling
   function getCityLocation(name) {
-    if (name.localeCompare("New York, NY")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
-    if (name.localeCompare("Chicago, IL")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
-    if (name.localeCompare("Los Angeles, CA")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
+    if (name.localeCompare("New York")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
+    if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
+    if (name.localeCompare("Los Angeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
   }
   Template.map.helpers({
     mapOptions: function() {
-      var city = Router.current().params.query.city;  
-      if (city == null) {city = "New York, NY"}
       if (GoogleMaps.loaded()) {
+        var city = Session.get('city') 
         return {
           center: getCityLocation(city),
           zoom: 12,
@@ -337,9 +328,10 @@ if (Meteor.isClient) {
 
   // analytics
   Template.charts.onRendered(function() {
-    Tracker.autorun(function() {
-      var ctx = document.getElementById("doughnutChart").getContext("2d");
-      if (Session.get('city').localeCompare("New York") == 0) {
+    //Tracker.autorun(function() {
+      city = Session.get('city')
+      var ctx = document.getElementById("doughnutChart").getContext("2d")
+      if (city.localeCompare("New York") == 0) {
         var data = [
         {
             value: Markers.find({"offense": "Grand Larceny"}).count(),
@@ -371,7 +363,7 @@ if (Meteor.isClient) {
             label: "Murder"
         }]
       }
-      else if (Session.get('city').localeCompare("Chicago") == 0) {
+      else if (city.localeCompare("Chicago") == 0) {
         var data = [
         {
             value: Markers.find({"offense": "Drug/Alcohol"}).count(),
@@ -423,7 +415,7 @@ if (Meteor.isClient) {
             label: "Homicide"
         }]
       }
-      else if (Session.get('city').localeCompare("Los Angeles") == 0) {
+      else if (city.localeCompare("Los Angeles") == 0) {
         var data = [
         {
             value: Markers.find({"offense": "Drug/Alcohol"}).count(),
@@ -481,7 +473,7 @@ if (Meteor.isClient) {
       }
       var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
       document.getElementById('js-legend').innerHTML = myDoughnutChart.generateLegend();
-    });
+    //});
   });
 }
 
@@ -525,7 +517,6 @@ if (Meteor.isServer) {
     if (data) {
       return data;
     }
-    //console.log(this.ready());
     return this.ready();
   });
 

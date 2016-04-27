@@ -67,9 +67,25 @@ form input {
 	height: 500px;
 }
 
+/* go */
+#submitButton {
+	padding-top: 9px;
+	margin-bottom: 0px;
+	height: 28px;
+	width: 50px;
+}
+#goForm {
+	margin-bottom: 50px;
+	height: 10px;
+}
+#go {
+	height: 20px !important; 
+	margin-bottom: 0px !important;
+}
+
 /* search bar */
 .search-bar {
-	width: 142px !important;
+	width: 168px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
@@ -179,7 +195,7 @@ form input {
 }
 .panel.with-nav-tabs .nav-justified{
 	margin-bottom: -1px;
-	height: 500px;
+	height: 100%;
 }
 
 /*** PANEL DEFAULT ***/
