@@ -21,7 +21,8 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
               <li id="search">{{>search}}</li>
-              <li id="dateSelect">{{>date}}</li>
+              <li id="dateSelect1">{{>from_date}}</li>
+              <li id="dateSelect2">{{>to_date}}</li>
               <li id="go">{{>go}}</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -76,13 +77,25 @@
 
 <!-- ********************************************** -->
 
-<!-- date -->
-<template name="date">
+<!-- from date -->
+<template name="from_date">
   <form role="select">
-    <div class="input-group datetimepicker" id="calendarinput1">
+    <div class="input-group datetimepicker1" id="calendarinput1">
+
+      <input name="date" class="set-due-date form-control" type="text"/>
+      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+      
+    </div>
+  </form>
+</template>
+
+<!-- to date -->
+<template name="to_date">
+  <form role="select">
+    <div class="input-group datetimepicker2" id="calendarinput2">
 
       <input name="date" class="set-due-date form-control" type="text" color="black">
-      <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
+      <span class="input-group-addon"><i id="calendarIcon2" class="fa fa-calendar fa-lg"></i></span>
       
     </div>
   </form>

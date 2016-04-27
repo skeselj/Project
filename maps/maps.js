@@ -12,7 +12,7 @@ Router.route("/", {
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
 
-    date = Session.get('date');
+    date = Session.get('from_date');
     if (date != null) {
       dates = date.split(" ");
       date1 = dates[0].split("/");
@@ -147,12 +147,20 @@ if (Meteor.isClient) {
     }
   })
 
-  // date selector
-  Template.date.onRendered(function() {
-    this.$('.datetimepicker').datetimepicker();
+  // from selector
+  Template.from_date.onRendered(function() {
+    this.$('.datetimepicker1').datetimepicker({
+      format: "MM/DD/YYYY"
+    });
+  });
+  // to selector 
+  Template.to_date.onRendered(function() {
+    this.$('.datetimepicker2').datetimepicker({
+      format: "MM/DD/YYYY"
+    });
   });
 
-  Template.date.events({
+  Template.from_date.events({
     'submit form': function(event) {
     }
   })
@@ -160,8 +168,10 @@ if (Meteor.isClient) {
   // go (submit button)
   Template.go.events({
     'submit form': function(event) {
-      var date = $('.datetimepicker').datetimepicker().data().date;
-      Session.setPersistent('date', date);
+      var from_date = $('.datetimepicker1').datetimepicker().data().date;
+      Session.setPersistent('from_date', from_date);
+      var to_date = $('.datetimepicker2').datetimepicker().data().date;
+      Session.setPersistent('to_date', to_date);
       city = $("#searchbarid").val();
       Session.setPersistent('city', city);
     }
