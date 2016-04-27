@@ -34,6 +34,11 @@ form input {
 	width: 203px !important;
 }
 
+/* general */
+.wrapper {
+	position: relative;
+}
+
 /* data */
 .time{
 	min-width: 30px;
