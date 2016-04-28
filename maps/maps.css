@@ -29,7 +29,7 @@ i {
 form input {
 	height: 28px !important;
 }
-#dateSelect1 > .dropdown-menu {
+#dateSelect1 .dropdown-menu, #dateSelect2 .dropdown-menu {
 	height: 230px !important;
 	width: 203px !important;
 }
