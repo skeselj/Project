@@ -30,6 +30,20 @@ Router.route("/", {
       month2 = parseInt(dates2[0]);
       day2 = parseInt(dates2[1]);
 
+      Session.setDefault('heat', 'false');
+      Session.setDefault('from_date', '01/01/2015');
+      Session.setDefault('to_date', '01/01/2015')
+
+      if (dayDist(day1, month1, day2, month2) < 3) {
+        Session.set('heat', 'false');
+      }
+      else if (dayDist(day1, month1, day2, month2) < 8) {
+        Session.set('heat', 'true');
+      }
+      else {
+        return Meteor.subscribe("subsetMarkers", {city: city, w1: 101, w2: 101});
+      }
+
       if (day1 < 10)
         d1 = "0" + day1
       else 
@@ -55,7 +69,9 @@ if (Meteor.isClient) {
 
   // initialization 
   Meteor.startup(function() {
-    GoogleMaps.load();
+    GoogleMaps.load({
+      libraries: 'places,visualization'
+    });
     //Session.setPersistent('city', 'NewYork');
   });
 
@@ -65,6 +81,9 @@ if (Meteor.isClient) {
       city = Session.get('city')
       map.instance.setCenter(getCityLocation(city));
       var markers = {};
+      var allData = [];
+
+
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
       };
@@ -109,41 +128,46 @@ if (Meteor.isClient) {
       }
       Markers.find().observe({
         added: function (document) {
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(document.latitude, document.longitude),
-            map: map.instance,
-            draggable: false,
-            magnitude: document.magnitude,
-            id: document._id,
-            infowindow: new google.maps.InfoWindow({
-              content: document.offense.concat(" at ",document.time," on ",document.month,"/",document.day,"/",document.year)
-            }),
-            // icon:
-            opacity: 0.73,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
-              strokeColor: getColor(document.offense),
-              fillColor: getColor(document.offense),
-              fillOpacity: 1,  
-            },
-          });
-          // every time the zoom is changed, adjust marker sizes
-          google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
-            marker.setIcon({
+          if (Session.get('heat').localeCompare('false') == 0) {
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(document.latitude, document.longitude),
+              map: map.instance,
+              draggable: false,
+              magnitude: document.magnitude,
+              id: document._id,
+              infowindow: new google.maps.InfoWindow({
+                content: document.offense.concat(" at ",document.time," on ",document.month,"/",document.day,"/",document.year)
+              }),
+              // icon:
+              opacity: 0.73,
+              icon: {
                 path: google.maps.SymbolPath.CIRCLE,
-                scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
+                scale: getScaleFactor(map.instance.getZoom())*document.magnitude,
                 strokeColor: getColor(document.offense),
                 fillColor: getColor(document.offense),
-                fillOpacity: 1,   
+                fillOpacity: 1,  
+              },
             });
-          });
-          // if a marker is clicked, display information about it
-          google.maps.event.addListener(marker, 'click', function(event) {
-            marker.infowindow.open(map.instance, marker);
-          });
+            // every time the zoom is changed, adjust marker sizes
+            google.maps.event.addListener(map.instance, 'zoom_changed', function(event) {
+              marker.setIcon({
+                  path: google.maps.SymbolPath.CIRCLE,
+                  scale: getScaleFactor(map.instance.getZoom())*marker.magnitude,
+                  strokeColor: getColor(document.offense),
+                  fillColor: getColor(document.offense),
+                  fillOpacity: 1,   
+              });
+            });
+            // if a marker is clicked, display information about it
+            google.maps.event.addListener(marker, 'click', function(event) {
+              marker.infowindow.open(map.instance, marker);
+            });
 
-          markers[document._id] = marker;
+            markers[document._id] = marker;
+          }
+          else if (Session.get('heat').localeCompare('true') == 0) {
+            allData.push(new google.maps.LatLng(document.latitude, document.longitude));
+          }
         },
 
         changed: function(newDocument, oldDocument) {
@@ -159,6 +183,15 @@ if (Meteor.isClient) {
           delete markers[oldDocument._id];
         }
       });
+
+      if (Session.get('heat').localeCompare('true') == 0) {
+        var Xdata = new google.maps.MVCArray(allData);
+        var heatMapLayer = new google.maps.visualization.HeatmapLayer({
+          data: Xdata,
+          radius: 20
+        });
+        heatMapLayer.setMap(map.instance);
+      }
     });
   });
 
@@ -173,12 +206,14 @@ if (Meteor.isClient) {
   // from selector
   Template.from_date.onRendered(function() {
     this.$('.datetimepicker1').datetimepicker({
+      defaultDate: Session.get('from_date'),
       format: "MM/DD/YYYY"
     });
   });
   // to selector 
   Template.to_date.onRendered(function() {
     this.$('.datetimepicker2').datetimepicker({
+      defaultDate: Session.get('to_date'),
       format: "MM/DD/YYYY"
     });
   });
