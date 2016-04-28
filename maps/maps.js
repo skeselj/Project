@@ -22,15 +22,19 @@ Router.route("/", {
       month2 = parseInt(dates2[0]);
       day2 = parseInt(dates2[1]);
 
-      if (day1 < 10) {d1 = "0" + day1}
-      else {d1 = day1}
-      if (day2 < 10) {d2 = "0" + day2}
-      else {d2 = day2}
+      if (day1 < 10)
+        d1 = "0" + day1
+      else 
+        d1 = day1
+      if (day2 < 10)
+        d2 = "0" + day2
+      else 
+        d2 = day2
 
       measure1 = parseInt("" + month1 + d1)
       measure2 = parseInt("" + month2 + d2)
 
-      markerQuery = {city:city, w1: measure1, w2: measure2}
+      markerQuery = {city: city, w1: measure1, w2: measure2}
     }
     else {
       markerQuery = {city: city, w1: 101, w2: 101}
