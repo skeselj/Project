@@ -21,7 +21,9 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
               <li id="search">{{>search}}</li>
-              <li id="dateSelect">{{>date}}</li>
+              <li id="dateSelect1">{{>from_date}}</li>
+              <li id="dateSelect2">{{>to_date}}</li>
+              <li id="go">{{>go}}</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <!--<li id="contact"><a href="#">Contact</a></li> -->
@@ -77,19 +79,33 @@
   </body>
 </template>
 
-<!-- ************************************************* -->
+<!-- ********************************************** -->
 
-<template name="date">
+<!-- from date -->
+<template name="from_date">
   <form role="select">
-    <div class="input-group datetimepicker" id="calendarinput1">
+    <div class="input-group datetimepicker1" id="calendarinput1">
 
-      <input name="date" class="set-due-date form-control" type="text" color="black">
+      <input name="date" class="set-due-date form-control" type="text"/>
       <span class="input-group-addon"><i id="calendarIcon1" class="fa fa-calendar fa-lg"></i></span>
       
     </div>
   </form>
 </template>
 
+<!-- to date -->
+<template name="to_date">
+  <form role="select">
+    <div class="input-group datetimepicker2" id="calendarinput2">
+
+      <input name="date" class="set-due-date form-control" type="text" color="black">
+      <span class="input-group-addon"><i id="calendarIcon2" class="fa fa-calendar fa-lg"></i></span>
+      
+    </div>
+  </form>
+</template>
+
+<!-- search -->
 <template name="search">
   <form class="navbar-form" role="search">
     <div class="input-group">
@@ -97,6 +113,9 @@
         
         <script type="text/javascript">
           $(".js-example-basic-single").select2();
+          $("#searchbarid").val(Session.get('city'));
+          
+          $('#searchbarid').attr('placeholder', 'New Placeholder Text').select2();
         </script>
         <select class="js-example-basic-single" id="searchbarid" name="city">
           <option value="New York">New York, NY</option>
@@ -105,12 +124,20 @@
         </select>
       
       </div>
-      <div class="input-group-btn navbar-button">
+    </div>
+  </form>
+</template>
+
+<!-- go template -->
+<template name="go">
+  <form role="submit" id="goForm">
+
+      <div class="input-group-btn navbar-button" id="submitButton">
         <button class="btn btn-default" id="search-button" type="submit">
           <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
         </button>
       </div>
-    </div>
+      
   </form>
 </template>
 
@@ -190,12 +217,11 @@
 
 <!-- doughnut chart template -->
 <template name="charts">
-  {{#if Template.subscriptionsReady}}
+
     <h1 id= "chartTitle">Types of Crimes</h1>
     <canvas id="doughnutChart" width='248' height='248'></canvas>
-  {{else}}
-      <p>Loading...</p>
-  {{/if}}
+    <div id="js-legend" class="chart-legend"></div>
+
 
 </template>
 
@@ -248,8 +274,6 @@
   <form role="select">
     <div class="input-group datetimepicker" id="calendarinput1">
 
-      
-
     </div>
   </form>
 </template>
@@ -274,6 +298,12 @@
     </div>
   </form>
 </template>
+
+      <div class="input-group-btn navbar-button">
+        <button class="btn btn-default" id="search-button" type="submit">
+          <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
 
 -->
 

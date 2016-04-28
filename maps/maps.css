@@ -26,8 +26,17 @@ i {
 }
 .container {
 }
-form input[type=text] {
+form input {
 	height: 28px !important;
+}
+.dropdown-menu {
+	height: 230px !important;
+	width: 203px !important;
+}
+
+/* general */
+.wrapper {
+	position: relative;
 }
 
 /* data */
@@ -67,9 +76,25 @@ form input[type=text] {
 	height: 500px;
 }
 
+/* go */
+#submitButton {
+	padding-top: 9px;
+	margin-bottom: 0px;
+	height: 28px;
+	width: 50px;
+}
+#goForm {
+	margin-bottom: 50px;
+	height: 10px;
+}
+#go {
+	height: 20px !important; 
+	margin-bottom: 0px !important;
+}
+
 /* search bar */
 .search-bar {
-	width: 242px !important;
+	width: 168px !important;
 	height: 30px !important;
 	margin-top: 2px;
 	margin-bottom: 1px;
@@ -124,30 +149,24 @@ form input[type=text] {
 .form-inline {
 	display: inline;
 }
-.datetimepicker {
-	width: 175px;
+.datetimepicker1, .datetimepicker2 {
 	padding-top: 5px;
 }
-#calendarIcon1 {
-	padding-left: 149px;
+#calendarIcon1, #calendarIcon2 {
+	padding-left: 83px;
 	margin-bottom: 3px;
 	width: 28px;
 }
-#calendarinput {
+#calendarinput1, #calendarinput2 {
 	height: 28px !important;
-	width: 50px !important;
+	width: 110px !important;
 }
 
-#dateSelect {
+#dateSelect1, #dateSelect2 {
+	width: 128px !important;
 	height: 10px;
 	padding-top: 5px;
 	padding-right: 20px;
-}
-#date-button {
-	height: 28px;
-	width: 28px;
-	margin-top: 5px;
-	margin-bottom: 2px;
 }
 
 
@@ -157,6 +176,16 @@ form input[type=text] {
 	text-align: center;
 }
 
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+.chart-legend li{
+	list-style: none;
+}
 
 /********************************************************************/
 
@@ -169,7 +198,7 @@ form input[type=text] {
 }
 .panel.with-nav-tabs .nav-justified{
 	margin-bottom: -1px;
-	height: 500px;
+	height: 100%;
 }
 
 /*** PANEL DEFAULT ***/
