@@ -7,7 +7,7 @@
 awk '
 BEGIN {
 	FS = ","
-	print("latitude,longitude,offense,time,month,day,year,magnitude,city")
+	print("latitude,longitude,offense,time,month,day,year,magnitude,city,weight")
 } 
 {
 	if (NR > 1) {
@@ -27,7 +27,7 @@ BEGIN {
 			crime = "Murder"
 		else
 			crime = substr(adjoff,1,length(adjoff)-1)
-		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3,New York\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3])
+		printf("%s,%s,%s,%02d:%02d,%s,%s,%s,3,New York,%d%s\n",substr($20,3),substr($21,2,length($21)-3),crime,parts[1],parts[2],date[1],date[2],date[3],date[1],date[2])
 	}
 
 }' 'ny15.csv' > 'alldata15.csv'
@@ -64,7 +64,7 @@ BEGIN {
 				crime = "Sex/Prostitution"
 			else
 				crime = $11;
-			printf("%s,%s,%s,%s:%s,%s,%s,%s,3,Los Angeles\n",substr($17, 3),substr($18,2,length($18)-3),crime,substr($2,1,2),substr($2,3),date[1],date[2],date[3])
+			printf("%s,%s,%s,%s:%s,%s,%s,%s,3,Los Angeles,%d%s\n",substr($17, 3),substr($18,2,length($18)-3),crime,substr($2,1,2),substr($2,3),date[1],date[2],date[3],date[1],date[2])
 		}
 	}
 

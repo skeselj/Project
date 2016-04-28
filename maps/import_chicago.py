@@ -58,4 +58,4 @@ with open(str(sys.argv[1]),'r') as f:
 		magnitude = "3"
 		city = "Chicago"
 
-		print latitude+","+longitude+","+offense+","+time+","+month+","+day+","+year+","+magnitude+","+city;
+		print latitude+","+longitude+","+offense+","+time+","+month+","+day+","+year+","+magnitude+","+city+","+str(int(month+day));

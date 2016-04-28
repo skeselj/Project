@@ -12,18 +12,32 @@ Router.route("/", {
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
 
-    date = Session.get('from_date');
-    if (date != null) {
-      dates = date.split(" ");
-      date1 = dates[0].split("/");
-      month = parseInt(date1[0]);
-      day = parseInt(date1[1]);
-      year = parseInt(date1[2]);
-      markerQuery = {month: month, day: day, year: year, city: city}
+    date1 = Session.get('from_date');
+    date2 = Session.get('to_date');
+    if (date1 != null && date2 != null) {
+      dates1 = date1.split("/");
+      dates2 = date2.split("/")
+      month1 = parseInt(dates1[0]);
+      day1 = parseInt(dates1[1]);
+      month2 = parseInt(dates2[0]);
+      day2 = parseInt(dates2[1]);
+
+      if (day1 < 10)
+        d1 = "0" + day1
+      else 
+        d1 = day1
+      if (day2 < 10)
+        d2 = "0" + day2
+      else 
+        d2 = day2
+
+      measure1 = parseInt("" + month1 + d1)
+      measure2 = parseInt("" + month2 + d2)
+
+      markerQuery = {city:city, w1: measure1, w2: measure2}
     }
     else {
-      //markerQuery = {month: 9, day: 6, year: 2015, city: city}
-      markerQuery = {month: 3, day: {$gte: 1, $lte: 2}}
+      markerQuery = {city: city, w1: 101, w2: 101}
     }
     return Meteor.subscribe("subsetMarkers", markerQuery);
   }
@@ -183,7 +197,7 @@ if (Meteor.isClient) {
     'marker': function() {
       //var city = Router.current().params.query.city;  
       //if (city == null) {city = "New York, NY"}
-      return Markers.find({}, {sort: {year:-1, month:-1, day:-1, time:1}});
+      return Markers.find({}, {sort: {year:1, month:1, day:1, time:1}});
     }
   });
 
@@ -510,7 +524,7 @@ Meteor.methods({
 if (Meteor.isServer) {
   Meteor.publish('subsetMarkers', function(parameters) {
     data = [
-      Markers.find({"year": parameters.year, "month": parameters.month, "day": parameters.day, "city": parameters.city}, {
+      Markers.find({"city": parameters.city, "weight": {$gte: parameters.w1, $lte: parameters.w2}}, {
         fields: {
           "year": 1,
           "month": 1,
@@ -521,6 +535,7 @@ if (Meteor.isServer) {
           "magnitude": 1,
           "time": 1,
           "city": 1,
+          "weight": 1
         }   
       })
       //Markers.find({})
