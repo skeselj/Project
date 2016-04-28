@@ -218,6 +218,33 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.newlogin.events({
+    'click .btnLogin': function() {
+      event.preventDefault();
+      var logEmail = document.loginform.logemail.value;
+      var logPassword = document.loginform.logpassword.value;
+      Meteor.loginWithPassword(logEmail, logPassword);
+    },
+    'click .btnSignUp': function() {
+      event.preventDefault();
+      var regEmail = document.registerform.regemail.value;
+      var regUsername = document.registerform.regusername.value;
+      var regPassword = document.registerform.regpassword.value;
+      Accounts.createUser({
+        email: regEmail,
+        password: regPassword, 
+        username: regUsername
+      })
+    }
+  });
+
+  Template.dashboard.events({
+    'click .logout': function(event){
+      event.preventDefault();
+      Meteor.logout();
+    }
+  });
+
   // map styling
   function getCityLocation(name) {
     if (name.localeCompare("New York")==0) {return new google.maps.LatLng(40.7148544,-74.0166855)}
@@ -506,7 +533,7 @@ if (Meteor.isClient) {
 
 Meteor.methods({
   'createImpression': function(impVar, cityVar){
-    var currentUser = Meteor.user().emails[0].address;
+    var currentUser = Meteor.user().username;
     var date = new Date();
     if(currentUser && impVar.replace(/\s+/, "")){
         Impressions.insert({
