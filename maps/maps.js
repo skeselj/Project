@@ -6,6 +6,14 @@ Router.route("/", {
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
+    function dayDist(f_day, f_mon, s_day, s_mon) {
+      if (f_mon > s_mon) {return -1}
+      counts = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31]
+      count = 0
+      for (i = f_mon; i < s_mon; i++) {count += counts[i]}
+      return count + s_day - f_day
+    }
+
     city = Session.get('city')
     if (city==null) {city = "New York"; Session.setPersistent('city', city)}
 
