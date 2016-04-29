@@ -22,7 +22,6 @@ twbs:bootstrap
 mrt:bootstrap-3
 standard-minifier-css
 standard-minifier-js
-harrison:papa-parse
 themeteorchef:bert
 reactive-var
 rafaelhdr:google-charts

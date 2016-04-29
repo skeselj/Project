@@ -1,6 +1,14 @@
 Markers = new Mongo.Collection("markers");
 Impressions = new Mongo.Collection("impression");
 
+function dayDist(f_day, f_mon, s_day, s_mon) {
+  if (f_mon > s_mon) {return -1}
+  counts = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31]
+  count = 0
+  for (i = f_mon; i < s_mon; i++) {count += counts[i]}
+    return count + s_day - f_day
+}
+
 Router.route('/', {
   name: '/',
   template: 'homepage',
@@ -10,7 +18,7 @@ Router.route('/', {
     Session.set('from_date', '01/01/2015')
     Session.set('to_date', '01/01/2015')
     Session.set('heat', 'false')
-    Meteor.subscribe('subsetImpressions', {city: "New York", w1: 101, w2: 101})
+    Meteor.subscribe('subsetImpressions', {city: "New York"})
     return Meteor.subscribe("subsetMarkers", {city: "New York", w1: 101, w2: 101});
   }
 });
@@ -20,13 +28,6 @@ Router.route('/:city/:m1/:d1/:m2/:d2', {
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
-    function dayDist(f_day, f_mon, s_day, s_mon) {
-      if (f_mon > s_mon) {return -1}
-      counts = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31]
-      count = 0
-      for (i = f_mon; i < s_mon; i++) {count += counts[i]}
-      return count + s_day - f_day
-    }
 
     var city = this.params.city;
     var m1 = parseInt(this.params.m1)
@@ -207,12 +208,23 @@ if (Meteor.isClient) {
       defaultDate: Session.get('from_date'),
       format: "MM/DD/YYYY"
     });
+    $(".datetimepicker1").data("DateTimePicker").minDate('1/1/2015')
+    $(".datetimepicker1").data("DateTimePicker").maxDate('12/31/2015')
   });
   // to selector 
   Template.to_date.onRendered(function() {
     this.$('.datetimepicker2').datetimepicker({
       defaultDate: Session.get('to_date'),
-      format: "MM/DD/YYYY"
+      format: "MM/DD/YYYY",
+      useCurrent: false
+    });
+    $(".datetimepicker2").data("DateTimePicker").minDate('1/1/2015')
+    $(".datetimepicker2").data("DateTimePicker").maxDate('12/31/2015')
+    $(".datetimepicker1").on("dp.change", function (e) {
+       $('.datetimepicker2').data("DateTimePicker").minDate(e.date);
+    });
+    $(".datetimepicker2").on("dp.change", function (e) {
+      $('.datetimepicker1').data("DateTimePicker").maxDate(e.date);
     });
   });
 
@@ -227,12 +239,12 @@ if (Meteor.isClient) {
       event.preventDefault();
       date1 = $('.datetimepicker1').datetimepicker().data().date
       date2 = $('.datetimepicker2').datetimepicker().data().date
-      if (date1 == undefined || date2 == undefined) {
-        Router.go('/');
+      d1 = date1.split("/")
+      d2 = date2.split("/")
+      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1)) {
+        return 
       }
       else {
-        d1 = date1.split("/")
-        d2 = date2.split("/")
         Router.go('custom', {city: $("#searchbarid").val(), m1: d1[0], d1: d1[1], m2: d2[0], d2: d2[1]})
       }
       /**
