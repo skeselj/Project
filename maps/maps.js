@@ -50,10 +50,6 @@ Router.route('/city/:city/startday/:m1/:d1/endday/:m2/:d2', {
     else if (dayDist(d1, m1 - 1, d2, m2 - 1) < 8) {
       Session.set('heat', 'true');
     }
-    else {
-      Session.set('heat', 'false')
-      return;
-    }
     
     return [Meteor.subscribe("subsetMarkers", markerQuery = {city: city, w1: measure1, w2: measure2}), Meteor.subscribe('subsetImpressions', impressionsQuery)];
   }
@@ -240,7 +236,7 @@ if (Meteor.isClient) {
       date2 = $('.datetimepicker2').datetimepicker().data().date
       d1 = date1.split("/")
       d2 = date2.split("/")
-      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0) {
+      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0 || dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) >= 8) {
         return 
       }
       else {
