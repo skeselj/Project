@@ -18,12 +18,12 @@ Router.route('/', {
     Session.set('from_date', '01/01/2015')
     Session.set('to_date', '01/01/2015')
     Session.set('heat', 'false')
-    Meteor.subscribe('subsetImpressions', {city: "New York"})
-    return Meteor.subscribe("subsetMarkers", {city: "New York", w1: 101, w2: 101});
+
+    return [Meteor.subscribe("subsetMarkers", {city: "New York", w1: 101, w2: 101}), Meteor.subscribe('subsetImpressions', {city: "New York"})];
   }
 });
 
-Router.route('/:city/:m1/:d1/:m2/:d2', {
+Router.route('/city/:city/startday/:m1/:d1/endday/:m2/:d2', {
   name: 'custom',
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
@@ -40,7 +40,7 @@ Router.route('/:city/:m1/:d1/:m2/:d2', {
     Session.set('to_date', "" + this.params.m2 + "/" + this.params.d2 + "/2015")
 
     impressionsQuery = {city: city}
-    Meteor.subscribe('subsetImpressions', impressionsQuery)
+    
     measure1 = parseInt("" + this.params.m1 + this.params.d1)
     measure2 = parseInt("" + this.params.m2 + this.params.d2)
     
@@ -50,15 +50,10 @@ Router.route('/:city/:m1/:d1/:m2/:d2', {
     else if (dayDist(d1, m1 - 1, d2, m2 - 1) < 8) {
       Session.set('heat', 'true');
     }
-    else {
-      Session.set('heat', 'false')
-      return;
-    }
     
-    return Meteor.subscribe("subsetMarkers", markerQuery = {city: city, w1: measure1, w2: measure2}
-    );
+    return [Meteor.subscribe("subsetMarkers", markerQuery = {city: city, w1: measure1, w2: measure2}), Meteor.subscribe('subsetImpressions', impressionsQuery)];
   }
-});
+});  
 
 if (Meteor.isClient) {
 
@@ -241,7 +236,7 @@ if (Meteor.isClient) {
       date2 = $('.datetimepicker2').datetimepicker().data().date
       d1 = date1.split("/")
       d2 = date2.split("/")
-      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0) {
+      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0 || dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) >= 8) {
         return 
       }
       else {
@@ -445,7 +440,7 @@ if (Meteor.isClient) {
   });
 
   // analytics
-  Template.charts.onRendered(function() {
+  Template.homepage.onRendered(function() {
     //Tracker.autorun(function() {
       city = Session.get('city')
       var ctx = document.getElementById("doughnutChart").getContext("2d")

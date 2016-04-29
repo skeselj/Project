@@ -1,82 +1,88 @@
  <template name="homepage">
-  <head>
-    <title>Pre-Alpha</title>
-  </head>
+  {{#if Template.subscriptionsReady}}
+    <head>
+      <title>Pre-Alpha</title>
+    </head>
 
-  <body>
-      <div class="container">
+    <body>
+        <div class="container">
 
-        <nav class="navbar navbar-default" role="navigation">
-          <!-- brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">SafeCity</a>
-          </div>
-          <!-- collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-left">
-              <li id="search">{{>search}}</li>
-              <li id="dateSelect1">{{>from_date}}</li>
-              <li id="dateSelect2">{{>to_date}}</li>
-              <li id="go">{{>go}}</li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <!--<li id="contact"><a href="#">Contact</a></li> -->
-              <li id="about"><a href="#">About</a></li>
-              {{#if currentUser}}
-              {{>dashboard}}
-              {{else}}
-              {{>newlogin}}
-              {{/if}}
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </nav>
+          <nav class="navbar navbar-default" role="navigation">
+            <!-- brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">SafeCity</a>
+            </div>
+            <!-- collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-left">
+                <li id="search">{{>search}}</li>
+                <li id="dateSelect1">{{>from_date}}</li>
+                <li id="dateSelect2">{{>to_date}}</li>
+                <li id="go">{{>go}}</li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <!--<li id="contact"><a href="#">Contact</a></li> -->
+                <li id="about"><a href="#">About</a></li>
+                {{#if currentUser}}
+                {{>dashboard}}
+                {{else}}
+                {{>newlogin}}
+                {{/if}}
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </nav>
 
-        <!-- page content -->
-        <div id="page-content-wrapper">
-          <div class="container-fluid">
-            <div class="row">
+          <!-- page content -->
+          <div id="page-content-wrapper">
+            <div class="container-fluid">
+              <div class="row">
 
-              <!-- panel --> 
-              <div class="col-sm-4">
-                <div class="panel with-nav-tabs panel-default">
-                  <div class="panel-heading">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
-                      <li><a href="#tab2default" data-toggle="tab">Analytics</a></li>
-                      <li><a href="#tab3default" data-toggle="tab">Impressions</a></li>
-                    </ul>
-                  </div>
-                  <div class="panel-body">
-                    <div class="tab-content">
-                      <div class="tab-pane fade in active" id="tab1default">
-                        {{ >board }}
-                      </div>
-                      <div class="tab-pane fade" id="tab2default">
-                        {{ > charts}}
-                      </div>
-                      <div class="tab-pane fade" id="tab3default">
-                        {{ >impressions }}
+                <!-- panel --> 
+                <div class="col-sm-4">
+                  <div class="panel with-nav-tabs panel-default">
+                    <div class="panel-heading">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
+                        <li><a href="#tab2default" data-toggle="tab">Analytics</a></li>
+                        <li><a href="#tab3default" data-toggle="tab">Impressions</a></li>
+                      </ul>
+                    </div>
+                    <div class="panel-body">
+                      <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1default">
+                          {{ >board }}
+                        </div>
+                        <div class="tab-pane fade" id="tab2default">
+                          <h1 id= "chartTitle">Types of Crimes</h1>
+                          <canvas id="doughnutChart" width='248' height='248'></canvas>
+                          <div id="js-legend" class="chart-legend"></div>
+                        </div>
+                        <div class="tab-pane fade" id="tab3default">
+                          {{ >impressions }}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-8">
-                {{> map}}
-              </div>
+                <div class="col-md-8">
+                  {{> map}}
+                </div>
 
+              </div>
             </div>
           </div>
         </div>
-      </div>
-  </body>
+    </body>
+  {{else}}
+    <p>Loading...</p>
+  {{/if}}
 </template>
 
 <!-- ********************************************** -->
@@ -208,16 +214,6 @@
       </tbody>
     </table>
   </div>
-</template>
-
-<!-- doughnut chart template -->
-<template name="charts">
-
-    <h1 id= "chartTitle">Types of Crimes</h1>
-    <canvas id="doughnutChart" width='248' height='248'></canvas>
-    <div id="js-legend" class="chart-legend"></div>
-
-
 </template>
 
 <!-- impressions template -->
