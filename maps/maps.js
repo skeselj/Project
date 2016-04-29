@@ -650,4 +650,3 @@ if (Meteor.isServer) {
     });
   });
 }
-
