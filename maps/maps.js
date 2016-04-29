@@ -444,7 +444,7 @@ if (Meteor.isClient) {
   });
 
   // analytics
-  Template.homepage.onCreated(function() {
+  Template.homepage.onRendered(function() {
     //Tracker.autorun(function() {
       city = Session.get('city')
       var ctx = document.getElementById("doughnutChart").getContext("2d")
