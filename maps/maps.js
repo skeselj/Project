@@ -38,11 +38,10 @@ Router.route('/:city/:m1/:d1/:m2/:d2', {
     Session.set('to_date', "" + this.params.m2 + "/" + this.params.d2 + "/2015")
 
     impressionsQuery = {city: city}
-    Meteor.subscribe('subsetImpressions', impressionsQuery);
-
+    Meteor.subscribe('subsetImpressions', impressionsQuery)
     measure1 = parseInt("" + this.params.m1 + this.params.d1)
     measure2 = parseInt("" + this.params.m2 + this.params.d2)
-
+    
     if (dayDist(d1, m1 - 1, d2, m2 - 1) < 3) {
       Session.set('heat', 'false');
     }
@@ -165,7 +164,7 @@ if (Meteor.isClient) {
           }
         
         },
-
+        /*
         changed: function(newDocument, oldDocument) {
           markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
         },
@@ -178,6 +177,7 @@ if (Meteor.isClient) {
           // Remove the reference to this marker instance
           delete markers[oldDocument._id];
         }
+        */
       });
 
       
@@ -578,8 +578,8 @@ if (Meteor.isClient) {
       }
       var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
       document.getElementById('js-legend').innerHTML = myDoughnutChart.generateLegend();
-    //});
-  });
+    });
+  //});
 }
 
 // ****************************************************************************************
