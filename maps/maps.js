@@ -28,26 +28,25 @@ Router.route('/:city/:m1/:d1/:m2/:d2', {
     }
 
     var city = this.params.city;
-    var m1 = this.params.m1
-    var d1 = this.params.d1
-    var m2 = this.params.m2
-    var d2 = this.params.d2
+    var m1 = parseInt(this.params.m1)
+    var d1 = parseInt(this.params.d1)
+    var m2 = parseInt(this.params.m2)
+    var d2 = parseInt(this.params.d2)
     
     Session.set('city', city);
-    Session.set('from_date', "" + m1 + "/" + d1 + "/2015")
-    Session.set('to_date', "" + m2 + "/" + d2 + "/2015")
+    Session.set('from_date', "" + this.params.m1 + "/" + this.params.d1 + "/2015")
+    Session.set('to_date', "" + this.params.m2 + "/" + this.params.d2 + "/2015")
 
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
 
-    measure1 = parseInt("" + m1 + d1)
-    measure2 = parseInt("" + m2 + d2)
+    measure1 = parseInt("" + this.params.m1 + this.params.d1)
+    measure2 = parseInt("" + this.params.m2 + this.params.d2)
 
-      
-    if (dayDist(d1, m1, d2, m2) < 3) {
+    if (dayDist(d1, m1 - 1, d2, m2 - 1) < 3) {
       Session.set('heat', 'false');
     }
-    else if (dayDist(d1, m1, d2, m2) < 8) {
+    else if (dayDist(d1, m1 - 1, d2, m2 - 1) < 8) {
       Session.set('heat', 'true');
     }
     else {
