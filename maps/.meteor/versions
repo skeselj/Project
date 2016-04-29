@@ -7,7 +7,6 @@ aldeed:collection2@2.3.1
 aldeed:simple-schema@1.1.0
 aldeed:template-extension@3.4.3
 allow-deny@1.0.3
-amplify@1.0.0
 autoupdate@1.2.7
 babel-compiler@6.6.1
 babel-runtime@0.1.7
@@ -114,7 +113,6 @@ themeteorchef:bert@2.1.0
 tracker@1.0.12
 tsega:bootstrap3-datetimepicker@4.17.37_1
 twbs:bootstrap@3.3.6
-u2622:persistent-session@0.4.4
 ui@1.0.10
 underscore@1.0.7
 url@1.0.8
