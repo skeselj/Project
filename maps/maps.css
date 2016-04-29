@@ -146,6 +146,10 @@ form input {
 	margin-right: 0px !important;
 }
 
+#menuLogin {
+	padding-top: 5px;
+}
+
 /* date selection */
 .form-inline {
 	display: inline;
@@ -169,7 +173,6 @@ form input {
 	padding-top: 5px;
 	padding-right: 3px;
 }
-
 
 /* analytics */
 #chartTitle {
