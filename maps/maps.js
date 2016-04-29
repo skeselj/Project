@@ -10,6 +10,7 @@ Router.route('/', {
     Session.set('from_date', '01/01/2015')
     Session.set('to_date', '01/01/2015')
     Session.set('heat', 'false')
+    Meteor.subscribe('subsetImpressions', {city: "New York", w1: 101, w2: 101})
     return Meteor.subscribe("subsetMarkers", {city: "New York", w1: 101, w2: 101});
   }
 });
