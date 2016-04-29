@@ -128,6 +128,11 @@ form input {
 	margin-right: 20px;
 }
 
+#logoutlink {
+	padding-top: 15px;
+	padding-right: 30px;
+}
+
 /* navbar - lots of redundancy */
 .panel {
 	width: 280px;

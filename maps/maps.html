@@ -165,20 +165,15 @@
           <a data-toggle="modal" role="button" href="#contactModal"><small>Need help? Contact us</small></a>
         </div>
     </li>
-    <li class="dropdown hide" id="menuUser">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="See your Bootply collection and profile">
-        <i class='icon-user icon-xxlarge'> </i> <span id="lblUsername"></span>
-        <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">                   
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-    </li>
   </ul>
 </template>
 
 <template name="dashboard">
-  <p><a href="#" class="logout">Logout</a></p>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="logoutlink" id="logoutlink">
+      <p><a href="#" class="logout">Logout</a></p>
+    </li>
+  </ul>
 </template>
 
 <!-- map template -->
