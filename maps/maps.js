@@ -1,8 +1,21 @@
 Markers = new Mongo.Collection("markers");
 Impressions = new Mongo.Collection("impression");
 
-Router.route("/", {
-  name: "/",
+Router.route('/', {
+  name: '/',
+  template: 'homepage',
+
+  waitOn: function() {
+    Session.set('city', 'New York')
+    Session.set('from_date', '01/01/2015')
+    Session.set('to_date', '01/01/2015')
+    Session.set('heat', 'false')
+    return Meteor.subscribe("subsetMarkers", {city: "New York", w1: 101, w2: 101});
+  }
+});
+
+Router.route('/:city/:m1/:d1/:m2/:d2', {
+  name: 'custom',
   template: "homepage",
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
@@ -14,54 +27,36 @@ Router.route("/", {
       return count + s_day - f_day
     }
 
-    city = Session.get('city')
-    if (city==null) {city = "New York"; Session.setPersistent('city', city)}
+    var city = this.params.city;
+    var m1 = this.params.m1
+    var d1 = this.params.d1
+    var m2 = this.params.m2
+    var d2 = this.params.d2
+    
+    Session.set('city', city);
+    Session.set('from_date', "" + m1 + "/" + d1 + "/2015")
+    Session.set('to_date', "" + m2 + "/" + d2 + "/2015")
 
     impressionsQuery = {city: city}
     Meteor.subscribe('subsetImpressions', impressionsQuery);
 
-    date1 = Session.get('from_date');
-    date2 = Session.get('to_date');
-    if (date1 != null && date2 != null) {
-      dates1 = date1.split("/");
-      dates2 = date2.split("/")
-      month1 = parseInt(dates1[0]);
-      day1 = parseInt(dates1[1]);
-      month2 = parseInt(dates2[0]);
-      day2 = parseInt(dates2[1]);
+    measure1 = parseInt("" + m1 + d1)
+    measure2 = parseInt("" + m2 + d2)
 
-      Session.setDefault('heat', 'false');
-      Session.setDefault('from_date', '01/01/2015');
-      Session.setDefault('to_date', '01/01/2015')
-
-      if (dayDist(day1, month1, day2, month2) < 3) {
-        Session.set('heat', 'false');
-      }
-      else if (dayDist(day1, month1, day2, month2) < 8) {
-        Session.set('heat', 'true');
-      }
-      else {
-        return Meteor.subscribe("subsetMarkers", {city: city, w1: 101, w2: 101});
-      }
-
-      if (day1 < 10)
-        d1 = "0" + day1
-      else 
-        d1 = day1
-      if (day2 < 10)
-        d2 = "0" + day2
-      else 
-        d2 = day2
-
-      measure1 = parseInt("" + month1 + d1)
-      measure2 = parseInt("" + month2 + d2)
-
-      markerQuery = {city: city, w1: measure1, w2: measure2}
+      
+    if (dayDist(d1, m1, d2, m2) < 3) {
+      Session.set('heat', 'false');
+    }
+    else if (dayDist(d1, m1, d2, m2) < 8) {
+      Session.set('heat', 'true');
     }
     else {
-      markerQuery = {city: city, w1: 101, w2: 101}
+      Session.set('heat', 'false')
+      return;
     }
-    return Meteor.subscribe("subsetMarkers", markerQuery);
+    
+    return Meteor.subscribe("subsetMarkers", markerQuery = {city: city, w1: measure1, w2: measure2}
+    );
   }
 });
 
@@ -78,7 +73,7 @@ if (Meteor.isClient) {
   // map functionality
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
-      city = Session.get('city')
+      city = Session.get('city'); 
       map.instance.setCenter(getCityLocation(city));
       var markers = {};
       var allData = [];
@@ -88,7 +83,7 @@ if (Meteor.isClient) {
         return zoom*zoom*zoom/12/12/10
       };
       function getColor(offense) {
-        city = Session.get('city')
+        city = Session.get('city');
         if (city.localeCompare("New York") == 0) {
           if (offense.localeCompare("Grand Larceny")==0) {return '#FF9933'}
           if (offense.localeCompare("Motor Larceny")==0) {return '#E3DA96'}
@@ -165,9 +160,11 @@ if (Meteor.isClient) {
 
             markers[document._id] = marker;
           }
+          
           else if (Session.get('heat').localeCompare('true') == 0) {
             allData.push(new google.maps.LatLng(document.latitude, document.longitude));
           }
+        
         },
 
         changed: function(newDocument, oldDocument) {
@@ -184,6 +181,7 @@ if (Meteor.isClient) {
         }
       });
 
+      
       if (Session.get('heat').localeCompare('true') == 0) {
         var Xdata = new google.maps.MVCArray(allData);
         var heatMapLayer = new google.maps.visualization.HeatmapLayer({
@@ -192,14 +190,14 @@ if (Meteor.isClient) {
         });
         heatMapLayer.setMap(map.instance);
       }
+      
     });
   });
 
   // search bar
   Template.search.helpers({
     currentCity: function() {
-      city = Session.get('city')
-      return city
+      return Session.get('city')
     }
   })
 
@@ -226,12 +224,25 @@ if (Meteor.isClient) {
   // go (submit button)
   Template.go.events({
     'submit form': function(event) {
+      event.preventDefault();
+      date1 = $('.datetimepicker1').datetimepicker().data().date
+      date2 = $('.datetimepicker2').datetimepicker().data().date
+      if (date1 == undefined || date2 == undefined) {
+        Router.go('/');
+      }
+      else {
+        d1 = date1.split("/")
+        d2 = date2.split("/")
+        Router.go('custom', {city: $("#searchbarid").val(), m1: d1[0], d1: d1[1], m2: d2[0], d2: d2[1]})
+      }
+      /**
       var from_date = $('.datetimepicker1').datetimepicker().data().date;
       Session.setPersistent('from_date', from_date);
       var to_date = $('.datetimepicker2').datetimepicker().data().date;
       Session.setPersistent('to_date', to_date);
       city = $("#searchbarid").val();
       Session.setPersistent('city', city);
+      **/
     }
   })
 
@@ -249,7 +260,7 @@ if (Meteor.isClient) {
     'submit form': function(){
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
-        var city = Session.get('city')
+        var city = Session.get('city');
         Meteor.call('createImpression', impVar, city);
         event.target.impressiontext.value = "";
     }
@@ -297,7 +308,7 @@ if (Meteor.isClient) {
   Template.map.helpers({
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
-        var city = Session.get('city') 
+        city = Session.get('city')
         return {
           center: getCityLocation(city),
           zoom: 12,
