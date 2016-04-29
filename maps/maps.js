@@ -187,7 +187,7 @@ if (Meteor.isClient) {
         var Xdata = new google.maps.MVCArray(allData);
         var heatMapLayer = new google.maps.visualization.HeatmapLayer({
           data: Xdata,
-          radius: 20
+          radius: 15
         });
         heatMapLayer.setMap(map.instance);
       }
@@ -241,7 +241,7 @@ if (Meteor.isClient) {
       date2 = $('.datetimepicker2').datetimepicker().data().date
       d1 = date1.split("/")
       d2 = date2.split("/")
-      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1)) {
+      if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0) {
         return 
       }
       else {
