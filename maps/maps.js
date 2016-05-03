@@ -280,12 +280,19 @@ if (Meteor.isClient) {
     }
   });
 
+  function showDiv() {
+   document.getElementById('logintext').style.display = "block";
+  }
+
   Template.newlogin.events({
     'click .btnLogin': function() {
       event.preventDefault();
       var logEmail = document.loginform.logemail.value;
       var logPassword = document.loginform.logpassword.value;
       Meteor.loginWithPassword(logEmail, logPassword);
+      if (!Meteor.user()) {
+        showDiv();
+      }
     },
     'click .btnSignUp': function() {
       event.preventDefault();
