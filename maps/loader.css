@@ -14,10 +14,10 @@ body {
 }
 
 .cs-loader-inner {
-  transform: translateY(-50%);
+  transform: translateY(-70%);
   top: 50%;
   position: absolute;
-  width: calc(100% - 200px);
+  width: calc(100%); /* -200px */
   color: #000;
   padding: 0 100px;
   text-align: center;
