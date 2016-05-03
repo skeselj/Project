@@ -12,6 +12,7 @@ function dayDist(f_day, f_mon, s_day, s_mon) {
 Router.route('/', {
   name: '/',
   template: 'homepage',
+  loadingTemplate: 'loading',
 
   waitOn: function() {
     Session.set('city', 'New York')
@@ -26,6 +27,7 @@ Router.route('/', {
 Router.route('/city/:city/startday/:m1/:d1/endday/:m2/:d2', {
   name: 'custom',
   template: "homepage",
+  loadingTemplate: 'loading',
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
 
@@ -237,6 +239,7 @@ if (Meteor.isClient) {
       d1 = date1.split("/")
       d2 = date2.split("/")
       if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0 || dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) >= 8) {
+        $('div.errorMsg').text('date range must be less than eight days')
         return 
       }
       else {
