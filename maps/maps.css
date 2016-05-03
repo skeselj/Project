@@ -2,11 +2,20 @@
 body {
 	padding-top: 2.5px;
 	padding-bottom: 5px;
-	background: url("/greybackground2.jpg");
-	background-size: 100% 120%;
-	background-repeat: no-repeat;
+	background-color: #EEEEEE;
+	/*background: url("/greybackground2.jpg");
+	background-size: 100% 200%;
+	background-repeat: no-repeat;*/
 	padding-left: 0px;
 	padding-right: 0px;
+}
+#body.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#controlpanel.panel.with-nav-tabs.panel-default {
+	margin-right: 0px !important;
 }
 th {
 	display: inline;
@@ -16,7 +25,7 @@ tr {
 }
 table{
 	height:600px; 
-	width: 280px;
+	width: 270px;
 }
 tbody{
 	overflow-y: scroll;
@@ -69,8 +78,8 @@ form input {
 	width: 100%;
 }
 #controlpanel {
-	margin-right: 0px;
-	width: 283px;
+	margin-right: 0px !important;
+	width: 300px;
 }
 
 /* general */
@@ -83,7 +92,7 @@ form input {
 	min-width: 30px;
 }
 .date{
-	min-width: 90px;
+	min-width: 50px;
 }
 .offense{
 	min-width: 100px;
@@ -183,6 +192,7 @@ div.logintext {
 .navbar {
 	margin-bottom: 0px;
 	height: 20px !important;
+	background-color: #A4DBED;
 }
 .panel-body{
 	height: 550px;
@@ -193,6 +203,9 @@ div.logintext {
 }
 .navbar-left {
 	margin-right: 0px !important;
+}
+.navbar-brand {
+	color: black !important;
 }
 
 #menuLogin {
@@ -232,6 +245,7 @@ div.logintext {
 #chartTitle {
 	font-size: 110%;
 	text-align: center;
+	margin-top: 5px;
 }
 
 .chart-legend li span{
