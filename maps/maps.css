@@ -194,6 +194,11 @@ div.logintext {
 	height: 20px !important;
 	background-color: #C6D8F5;
 }
+
+.navbar-header {
+	width: 85px;
+}
+
 .panel-body{
 	height: 550px;
 }
@@ -206,6 +211,7 @@ div.logintext {
 }
 .navbar-brand {
 	color: black !important;
+	font-family: "Times New Roman";
 }
 
 #menuLogin {
@@ -245,6 +251,12 @@ div.logintext {
 .errorMsg {
 	margin-top: 15px !important;
 	color: red;
+}
+
+.logo {
+	margin-top: 3px;
+	width: 40px;
+	height: 40px;
 }
 
 /* analytics */

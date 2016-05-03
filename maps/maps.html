@@ -21,6 +21,7 @@
             <!-- collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
+                <li id="logo">{{>logo}}</li>
                 <li id="search">{{>search}}</li>
                 <li id="dateSelect1">{{>from_date}}</li>
                 <li id="dateSelect2">{{>to_date}}</li>
@@ -85,6 +86,12 @@
 </template>
 
 <!-- ********************************************** -->
+
+<template name = "logo">
+  <div class = "logo">
+    <img src ='buildings.png'/>
+  </div>
+</template>
 
 <!-- loading template -->
 <template name = "loading">
