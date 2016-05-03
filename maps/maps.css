@@ -179,6 +179,11 @@ form input {
 	padding-right: 3px;
 }
 
+.errorMsg {
+	margin-top: 15px !important;
+	color: red;
+}
+
 /* analytics */
 #chartTitle {
 	font-size: 210%;

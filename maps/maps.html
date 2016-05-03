@@ -25,6 +25,7 @@
                 <li id="dateSelect1">{{>from_date}}</li>
                 <li id="dateSelect2">{{>to_date}}</li>
                 <li id="go">{{>go}}</li>
+                <li id="errorMsg>">{{>errorMsg}}</li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <!--<li id="contact"><a href="#">Contact</a></li> -->
@@ -86,6 +87,12 @@
 </template>
 
 <!-- ********************************************** -->
+
+<!-- error message -->
+<template name="errorMsg">
+  <div class = "errorMsg">
+  </div>
+</template>
 
 <!-- from date -->
 <template name="from_date">
