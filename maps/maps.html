@@ -29,11 +29,10 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <!--<li id="contact"><a href="#">Contact</a></li> -->
-                <li id="about"><a href="#">About</a></li>
                 {{#if currentUser}}
-                {{>dashboard}}
+                <li id="dashboard">{{>dashboard}}</li>
                 {{else}}
-                {{>newlogin}}
+                <li id="newlogin">{{>newlogin}}</li>
                 {{/if}}
               </ul>
             </div><!-- /.navbar-collapse -->
