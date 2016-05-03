@@ -1,7 +1,10 @@
 /* structure */
 body {
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 2.5px;
+	padding-bottom: 5px;
+	background: url("/greybackground.jpg");
+	background-size: 100% 100%;
+	/*background-repeat: no-repeat;*/
 }
 th {
 	display: inline;
@@ -15,8 +18,8 @@ table{
 }
 tbody{
 	overflow-y: scroll;
-	height: 400px;
-	width: 280px;
+	height: 500px;
+	width: 250px;
 	position: absolute;
 }
 i {
@@ -32,33 +35,38 @@ form input {
 	width: 203px !important;
 }
 #main {
-	margin-left: 0px !important;
+	/*margin-left: 0px !important;
 	padding-left: 0px !important;
 	margin-top: 0px;
 	padding-right: 0px;
 	margin-right: 5px !important;
-	width: 100% !important;
+	width: 100% !important;*/
 }
 #body {
-	margin-left: 5px;
-	padding-left: 0px;
-	padding-right: 0px;
+	/*margin-left: 5px;
 	margin-right: 5px;
+	padding-left: 0px;
+	padding-right: 0px;*/
 }
 #panelcol {
-	padding-right: 0px;
+	/*padding-right: 0px;
 	padding-left: 0px;
-	margin-right: 0px !important;
-	width: 285px !important;
+	margin-right: 0px !important;*/
+	width: 310px !important;
 }
 #mapcol {
-	padding-right: 0px !important;
+	/*padding-right: 0px !important;
 	padding-left: 0px !important;
+	width: 75%;*/
 }
 .row {
-	margin-right: 0px !important;
-	margin-left: 0px !important;
+	/*margin-right: 0px !important;
+	margin-left: 0px !important;*/
 }
+#mainnav {
+	width: 100%;
+}
+
 
 /* general */
 .wrapper {
@@ -89,7 +97,7 @@ form input {
 }
 #plusicon {
 	margin-left: 241px;
-	margin-bottom: 49px;
+	margin-bottom: 69px;
 }
 .imp-panel-body {
 	height: 130px;
@@ -99,7 +107,7 @@ form input {
 /* map */
 .map-container {
 	width: 100%;
-	height: 500px;
+	height: 600px;
 }
 
 /* go */
@@ -168,10 +176,11 @@ form input {
 	height: 20px !important;
 }
 .panel-body{
-	height: 450px;
+	height: 550px;
 }
 .imp-panel-body{
-	height: 380px;
+	height: 450px;
+	margin-bottom: 10px;
 }
 .navbar-left {
 	margin-right: 0px !important;
@@ -212,7 +221,7 @@ form input {
 
 /* analytics */
 #chartTitle {
-	font-size: 210%;
+	font-size: 110%;
 	text-align: center;
 }
 
