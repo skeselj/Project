@@ -1,6 +1,6 @@
 /* structure */
 body {
-	padding-top: 2.5px;
+	padding-top: 5px;
 	padding-bottom: 5px;
 	background-color: #EEEEEE;
 	/*background: url("/greybackground2.jpg");
@@ -199,7 +199,7 @@ div.logintext {
 	width: 280px;
 }
 .navbar {
-	margin-bottom: 0px;
+	margin-bottom: 5px;
 	height: 20px !important;
 	background-color: #C6D8F5;
 }
@@ -289,6 +289,7 @@ div.logintext {
 /********************************************************************/
 
 .panel.with-nav-tabs .panel-heading{
+	background-color: #C6D8F5; 
     padding: 5px 5px 0 5px;
 }
 .panel.with-nav-tabs .nav-tabs{
