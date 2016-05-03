@@ -12,6 +12,7 @@ function dayDist(f_day, f_mon, s_day, s_mon) {
 Router.route('/', {
   name: '/',
   template: 'homepage',
+  loadingTemplate: 'loading',
 
   waitOn: function() {
     Session.set('city', 'New York')
@@ -26,6 +27,7 @@ Router.route('/', {
 Router.route('/city/:city/startday/:m1/:d1/endday/:m2/:d2', {
   name: 'custom',
   template: "homepage",
+  loadingTemplate: 'loading',
   // waitOn makes sure that this publication is ready before rendering your template
   waitOn: function() {
 

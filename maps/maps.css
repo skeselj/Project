@@ -167,6 +167,10 @@ form input {
 	padding-right: 30px;
 }
 
+div.logintext {
+	color: red;
+}
+
 /* navbar - lots of redundancy */
 .panel {
 	width: 280px;
