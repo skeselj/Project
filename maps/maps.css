@@ -27,6 +27,15 @@ table{
 	height:600px; 
 	width: 270px;
 }
+#datatab {
+	width:75px;
+}
+#analtab {
+	width:90px;
+}
+#imptab {
+	width:113px;
+}
 tbody{
 	overflow-y: scroll;
 	height: 500px;
