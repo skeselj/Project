@@ -237,6 +237,7 @@ if (Meteor.isClient) {
       d1 = date1.split("/")
       d2 = date2.split("/")
       if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0 || dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) >= 8) {
+        $('div.errorMsg').text('date range must be less than eight days')
         return 
       }
       else {
@@ -280,12 +281,19 @@ if (Meteor.isClient) {
     }
   });
 
+  function showDiv() {
+   document.getElementById('logintext').style.display = "block";
+  }
+
   Template.newlogin.events({
     'click .btnLogin': function() {
       event.preventDefault();
       var logEmail = document.loginform.logemail.value;
       var logPassword = document.loginform.logpassword.value;
       Meteor.loginWithPassword(logEmail, logPassword);
+      if (!Meteor.user()) {
+        showDiv();
+      }
     },
     'click .btnSignUp': function() {
       event.preventDefault();
