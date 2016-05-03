@@ -24,14 +24,21 @@ i {
 	left: 5px;
 	bottom: 5px;
 }
-.container {
-}
 form input {
 	height: 28px !important;
 }
 #dateSelect1 .dropdown-menu, #dateSelect2 .dropdown-menu {
 	height: 230px !important;
 	width: 203px !important;
+}
+#main {
+	margin-left: 5px !important;
+	padding-left: 0px !important;
+	margin-top: 5px;
+}
+#body {
+	margin-left: 0px;
+	padding-left: 0px;
 }
 
 /* general */
