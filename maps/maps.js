@@ -267,8 +267,9 @@ if (Meteor.isClient) {
     'submit form': function(){
         event.preventDefault();
         var impVar = event.target.impressiontext.value;
+        var neighVar = event.target.neighborhoodtext.value;
         var city = Session.get('city');
-        Meteor.call('createImpression', impVar, city);
+        Meteor.call('createImpression', impVar, neighVar, city);
         event.target.impressiontext.value = "";
     }
   });
@@ -593,12 +594,13 @@ if (Meteor.isClient) {
 // ****************************************************************************************
 
 Meteor.methods({
-  'createImpression': function(impVar, cityVar){
+  'createImpression': function(impVar, neighVar, cityVar){
     var currentUser = Meteor.user().username;
     var date = new Date();
     if(currentUser && impVar.replace(/\s+/, "")){
         Impressions.insert({
           impsn: impVar,
+          neighborhood: neighVar,
           time: date.toString().substring(4, 21),
           createdBy: currentUser,
           city: cityVar,

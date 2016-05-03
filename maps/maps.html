@@ -232,7 +232,7 @@
             </small>
           </div>
           <small class="pull-right text-muted">
-            {{city}}
+            {{neighborhood}}
           </small>
           <p>
           {{impsn}}
@@ -251,10 +251,11 @@
 
 <template name="addImpressionForm">
   <form>
-    <input id="impressioninput" type="text" name="impressiontext">
+    <input id="impressioninput" placeholder="impression" type="text" name="impressiontext">
     <button class="btn btn-default" id="impression-button" type="submit">
       <i id="plusicon" class="fa fa-plus fa-lg" aria-hidden="true"></i>
     </button>
+    <input id="neighborhoodinput" placeholder="neighborhood (optional)" type="text" name="neighborhoodtext">
   </form>
 </template>
 
