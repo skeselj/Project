@@ -194,6 +194,10 @@ div.logintext {
 	color: red;
 }
 
+div.newusertext {
+	color: red;
+}
+
 /* navbar - lots of redundancy */
 .panel {
 	width: 280px;
