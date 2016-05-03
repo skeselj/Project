@@ -192,7 +192,7 @@ div.logintext {
 .navbar {
 	margin-bottom: 0px;
 	height: 20px !important;
-	background-color: #A4DBED;
+	background-color: #C6D8F5;
 }
 .panel-body{
 	height: 550px;
@@ -210,6 +210,12 @@ div.logintext {
 
 #menuLogin {
 	padding-top: 5px;
+	color: black;
+	padding-right: 10px;
+}
+
+#navLogin {
+
 }
 
 /* date selection */
