@@ -239,7 +239,7 @@ if (Meteor.isClient) {
       d1 = date1.split("/")
       d2 = date2.split("/")
       if (dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) < 0 || dayDist(d1[1], d1[0] - 1, d2[1], d2[0] - 1) >= 8) {
-        $('div.errorMsg').text('date range must be less than eight days')
+        $('div.errorMsg').text('range must be less than 8 days')
         return 
       }
       else {

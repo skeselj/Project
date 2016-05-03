@@ -42,11 +42,11 @@
           <!-- page content -->
           <div id="page-content-wrapper">
             <div class="container-fluid" id="body">
-              <div class="row" id="contentrow">
+              <div class="row">
 
                 <!-- panel --> 
-                <div class="col-sm-4" id="panelcol">
-                  <div class="panel with-nav-tabs panel-default" id="panelnav">
+                <div class="col-sm-4">
+                  <div class="panel with-nav-tabs panel-default" id="controlpanel">
                     <div class="panel-heading">
                       <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
@@ -60,7 +60,7 @@
                           {{ >board }}
                         </div>
                         <div class="tab-pane fade" id="tab2default">
-                          <h5 id= "chartTitle">Types of Crimes</h5>
+                          <h1 id= "chartTitle">Types of Crimes</h1>
                           <canvas id="doughnutChart" width='248' height='248'></canvas>
                           <div id="js-legend" class="chart-legend"></div>
                         </div>
@@ -72,7 +72,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-8" id="mapcol">
+                <div class="col-md-8">
                   {{> map}}
                 </div>
               </div>
