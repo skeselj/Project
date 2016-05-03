@@ -42,11 +42,11 @@
           <!-- page content -->
           <div id="page-content-wrapper">
             <div class="container-fluid" id="body">
-              <div class="row">
+              <div class="row" id="contentrow">
 
                 <!-- panel --> 
-                <div class="col-sm-4">
-                  <div class="panel with-nav-tabs panel-default">
+                <div class="col-sm-4" id="panelcol">
+                  <div class="panel with-nav-tabs panel-default" id="panelnav">
                     <div class="panel-heading">
                       <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab1default" data-toggle="tab">Data</a></li>
@@ -72,7 +72,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-8" id="mapcol">
                   {{> map}}
                 </div>
 
