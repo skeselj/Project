@@ -21,7 +21,7 @@ table{
 tbody{
 	overflow-y: scroll;
 	height: 500px;
-	width: 250px;
+	width: 275px;
 	position: absolute;
 }
 i {
@@ -54,7 +54,7 @@ form input {
 	/*padding-right: 0px;
 	padding-left: 0px;
 	margin-right: 0px !important;*/
-	width: 310px !important;
+	/*width: 313px !important;*/
 }
 #mapcol {
 	/*padding-right: 0px !important;
@@ -69,9 +69,9 @@ form input {
 	width: 100%;
 }
 #controlpanel {
-	margin-right: 0px !important;
+	margin-right: 0px;
+	width: 283px;
 }
-
 
 /* general */
 .wrapper {
@@ -181,7 +181,7 @@ div.logintext {
 	width: 280px;
 }
 .navbar {
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 	height: 20px !important;
 }
 .panel-body{
