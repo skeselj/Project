@@ -203,7 +203,8 @@ if (Meteor.isClient) {
   Template.from_date.onRendered(function() {
     this.$('.datetimepicker1').datetimepicker({
       defaultDate: Session.get('from_date'),
-      format: "MM/DD/YYYY"
+      format: "MM/DD/YYYY",
+      debug: true
     });
     $(".datetimepicker1").data("DateTimePicker").minDate('1/1/2015')
     $(".datetimepicker1").data("DateTimePicker").maxDate('12/31/2015')
@@ -213,7 +214,8 @@ if (Meteor.isClient) {
     this.$('.datetimepicker2').datetimepicker({
       defaultDate: Session.get('to_date'),
       format: "MM/DD/YYYY",
-      useCurrent: false
+      useCurrent: false,
+      debug: true
     });
     $(".datetimepicker2").data("DateTimePicker").minDate('1/1/2015')
     $(".datetimepicker2").data("DateTimePicker").maxDate('12/31/2015')
