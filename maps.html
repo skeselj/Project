@@ -2,6 +2,7 @@
   {{#if Template.subscriptionsReady}}
     <head>
       <title>SafeCity</title>
+      <link rel="icon" sizes="16x16 32x32" href='/buildings.png'>
     </head>
 
     <body>
@@ -229,7 +230,7 @@
           <th class="date">&nbsp;Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
           <th class="offense">Type</th>
       </thead>
-      <tbody bgcolor>
+      <tbody bgcolor id="listTable">
       {{#each marker}}
         <tr>
           <td class="time">{{time}}</td>
