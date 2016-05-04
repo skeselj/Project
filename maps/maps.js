@@ -287,6 +287,10 @@ if (Meteor.isClient) {
     document.getElementById('logintext').style.display = "block";
   }
 
+  function showSecDiv() {
+    document.getElementById('newusertext').style.display = "block";
+  }
+
   Template.newlogin.events({
     'click .btnLogin': function() {
       event.preventDefault();
@@ -306,8 +310,13 @@ if (Meteor.isClient) {
       Accounts.createUser({
         email: regEmail,
         password: regPassword, 
-        username: regUsername
-      })
+        username: regUsername},
+        function(err) {
+          if (err) {
+            showSecDiv();
+          }
+        }
+      );
     }
   });
 
