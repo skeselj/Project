@@ -670,7 +670,7 @@ if (Meteor.isServer) {
   });
 
 
-  // Debugging helper as we figure out how to insert data points
+  // Debugging helpers, to be removed upon final deployment
   Meteor.startup(function() {
     return Meteor.methods({
       removeAllMarkers: function() {
