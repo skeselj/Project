@@ -59,6 +59,8 @@ Router.route('/city/:city/startday/:m1/:d1/endday/:m2/:d2', {
 
 if (Meteor.isClient) {
 
+  document.title = "SafeCity";
+
   // initialization 
   Meteor.startup(function() {
     GoogleMaps.load({
