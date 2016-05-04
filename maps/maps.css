@@ -40,7 +40,7 @@ table{
 .table {
 	height:550px;
 }
-tbody{
+#listTable{
 	overflow-y: scroll;
 	height: 500px;
 	width: 275px;
@@ -247,6 +247,15 @@ div.newusertext {
 }
 .datetimepicker1, .datetimepicker2 {
 	padding-top: 5px;
+}
+.list-unstyled .datepicker .datepicker-days  {
+	height:230px;
+}
+.picker-swtich.accordian-toggle {
+	height:0px;
+}
+.table-condensed {
+	height: 0px;
 }
 #calendarIcon1, #calendarIcon2 {
 	padding-left: 85px;
