@@ -9,6 +9,7 @@ body {
 	padding-left: 0px;
 	padding-right: 0px;
 }
+
 #body.container-fluid {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -270,9 +271,9 @@ div.logintext {
 
 /* analytics */
 #chartTitle {
-	font-size: 110%;
+	font-size: 180%;
 	text-align: center;
-	margin-top: 5px;
+	margin-top: 0px;
 }
 
 .chart-legend li span{
