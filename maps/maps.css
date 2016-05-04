@@ -26,7 +26,7 @@ tr {
 }
 table{
 	height:600px; 
-	width: 270px;
+	width: 275px;
 }
 #datatab {
 	width:75px;
@@ -36,6 +36,9 @@ table{
 }
 #imptab {
 	width:113px;
+}
+.table {
+	height:550px;
 }
 tbody{
 	overflow-y: scroll;
