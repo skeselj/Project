@@ -187,7 +187,7 @@ form input {
 }
 
 #logoutlink {
-	padding-top: 15px;
+	padding-top: 3px;
 	padding-right: 30px;
 }
 
@@ -229,9 +229,9 @@ div.newusertext {
 }
 
 #menuLogin {
-	padding-top: 5px;
+	padding-top: 2px;
 	color: black;
-	padding-right: 10px;
+	padding-right: 15px;
 }
 
 #navLogin {
