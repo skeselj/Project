@@ -66,7 +66,6 @@ if (Meteor.isClient) {
     GoogleMaps.load({
       libraries: 'places,visualization'
     });
-    //Session.setPersistent('city', 'NewYork');
   });
 
   // map functionality
@@ -81,6 +80,7 @@ if (Meteor.isClient) {
       function getScaleFactor(zoom) {
         return zoom*zoom*zoom/12/12/10
       };
+
       function getColor(offense) {
         city = Session.get('city');
         if (city.localeCompare("New York") == 0) {
@@ -120,6 +120,7 @@ if (Meteor.isClient) {
         else
           return "#CCFF66"
       }
+
       Markers.find().observe({
         added: function (document) {
           if (Session.get('heat').localeCompare('false') == 0) {
@@ -165,20 +166,6 @@ if (Meteor.isClient) {
           }
         
         },
-        /*
-        changed: function(newDocument, oldDocument) {
-          markers[newDocument._id].setPosition({ lat: newDocument.lat, lng: newDocument.lng });
-        },
-
-        removed: function(oldDocument) {
-          // Remove the marker from the map
-          markers[oldDocument._id].setMap(null);
-          // Clear the event listener
-          google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
-          // Remove the reference to this marker instance
-          delete markers[oldDocument._id];
-        }
-        */
       });
 
       
@@ -249,22 +236,12 @@ if (Meteor.isClient) {
       else {
         Router.go('custom', {city: $("#searchbarid").val(), m1: d1[0], d1: d1[1], m2: d2[0], d2: d2[1]})
       }
-      /**
-      var from_date = $('.datetimepicker1').datetimepicker().data().date;
-      Session.setPersistent('from_date', from_date);
-      var to_date = $('.datetimepicker2').datetimepicker().data().date;
-      Session.setPersistent('to_date', to_date);
-      city = $("#searchbarid").val();
-      Session.setPersistent('city', city);
-      **/
     }
   })
 
   // data
   Template.board.helpers({
     'marker': function() {
-      //var city = Router.current().params.query.city;  
-      //if (city == null) {city = "New York, NY"}
       return Markers.find({}, {sort: {year:1, month:1, day:1, time:1}});
     }
   });
@@ -280,6 +257,7 @@ if (Meteor.isClient) {
         event.target.impressiontext.value = "";
     }
   });
+
   Template.impressions.helpers({
     'implist': function(){
       var currentUserId = Meteor.userId();
@@ -337,6 +315,7 @@ if (Meteor.isClient) {
     if (name.localeCompare("Chicago")==0) {return new google.maps.LatLng(41.848739,-87.7596537)}
     if (name.localeCompare("Los Angeles")==0) {return new google.maps.LatLng(33.9800488,-118.349971)}  
   }
+
   Template.map.helpers({
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
@@ -669,18 +648,5 @@ if (Meteor.isServer) {
       return data;
     }
     return this.read();
-  });
-
-
-  // Debugging helpers, to be removed upon final deployment
-  Meteor.startup(function() {
-    return Meteor.methods({
-      removeAllMarkers: function() {
-        return Markers.remove({});
-      },
-      removeAllImpressions: function() {
-        return Impressions.remove({});
-      }
-    });
   });
 }
