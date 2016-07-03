@@ -1,6 +1,6 @@
 #SafeCity
 
-Eric He, Stefan Keselj, Kavinayan Sivakumar
+Stefan Keselj, Eric He, Kavinayan Sivakumar
 
 http://safe-city.herokuapp.com
 
