@@ -8,4 +8,4 @@ SafeCity is a crime mapping and analytics tool designed to deliver insights abou
 
 For more information, please consult the product guide as well as the other files listed in the documents section.
 
-![alt tag](https://github.com/skeselj/SafeCity/tree/master/documents/final.png)
+![alt tag](https://raw.githubusercontent.com/skeselj/SafeCity/master/documents/final.png)
